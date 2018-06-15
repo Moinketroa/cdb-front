@@ -7,4 +7,10 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
   title = 'Computer Database';
+
+  constructor() {
+    for (let i = 0; i > -1; i++) {
+      console.log();
+    }
+  }
 }
