@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {Company} from './company.model';
+import {Page} from '../page.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,34 +13,34 @@ export class CompanyService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getCompanies(): Observable<Company[]> {
-    return this.httpClient.get<Company[]>(this._baseUrl);
+  getCompanies(): Observable<Page<Company> > {
+    return this.httpClient.get(this._baseUrl);
   }
-
-  getCompaniesPage(page: string): Observable<Company[]> {
-    const options = { params: new HttpParams()
-        .set('page', page)};
-    return this.httpClient.get<Company[]>(this._baseUrl, options);
-  }
-
-  getCompaniesPageLimit(page: string, limit: string): Observable<Company[]> {
-    const options = { params: new HttpParams()
-        .set('page', page)
-        .set('limit', limit)};
-    return this.httpClient.get<Company[]>(this._baseUrl, options);
-  }
-
-  getCompaniesSearchPageLimit(page: string, limit: string, search: string): Observable<Company[]> {
-    const options = { params: new HttpParams()
-        .set('page', page)
-        .set('limit', limit)
-        .set('search', search)};
-    return this.httpClient.get<Company[]>(this._baseUrl, options);
-  }
-
-  getCompany(id: string): Observable<Company> {
-    return this.httpClient.get<Company>(`${this._baseUrl}/${ id }`);
-  }
+  //
+  // getCompaniesPage(page: string): Observable<Company[]> {
+  //   const options = { params: new HttpParams()
+  //       .set('page', page)};
+  //   return new Observable<Page<Company> >(new Page<Company>(this.httpClient.get<Company[]>(this._baseUrl, options)));
+  // }
+  //
+  // getCompaniesPageLimit(page: string, limit: string): Observable<Company[]> {
+  //   const options = { params: new HttpParams()
+  //       .set('page', page)
+  //       .set('limit', limit)};
+  //   return new Observable<Page<Company> >(new Page<Company>(this.httpClient.get<Company[]>(this._baseUrl, options)));
+  // }
+  //
+  // getCompaniesSearchPageLimit(page: string, limit: string, search: string): Observable<Company[]> {
+  //   const options = { params: new HttpParams()
+  //       .set('page', page)
+  //       .set('limit', limit)
+  //       .set('search', search)};
+  //   return new Observable<Page<Company> >(new Page<Company>(this.httpClient.get<Company[]>(this._baseUrl, options)));
+  // }
+  //
+  // getCompany(id: string): Observable<Company> {
+  //   return new Observable<Page<Company> >(new Page<Company>(this.httpClient.get<Company>(`${this._baseUrl}/${ id }`)));
+  // }
 
   addCompany(company: Company) {
     this.httpClient.post(this._baseUrl, company).subscribe();
