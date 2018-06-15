@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Company } from '../company.model';
+import { CompanyService } from '../company.service';
 
 @Component({
   selector: 'cdb-company',
@@ -7,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompanyComponent implements OnInit {
 
-  constructor() { }
+  @Input() company: Company;
+
+  constructor(private companyService: CompanyService) { }
 
   ngOnInit() {
   }
