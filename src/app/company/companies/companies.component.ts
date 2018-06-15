@@ -18,6 +18,14 @@ export class CompaniesComponent implements OnInit {
       {
         'id' : 1,
         'name' : 'Foo'
+      },
+      {
+        'id' : 2,
+        'name' : 'Boo'
+      },
+      {
+        'id' : 3,
+        'name' : 'Too'
       }
     ];
   }
