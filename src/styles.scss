@@ -1,0 +1,20 @@
+:root {
+  --title-color: white;
+}
+
+body {
+  margin: 0;
+}
+
+.loader {
+  position: absolute;
+  top: 50%; left: 50%;
+  font-family: "Source Code Pro", sans-serif;
+  transform: translate(-50%, -50%);
+  animation: opacity-transformation 1500ms;
+}
+
+@keyframes opacity-transformation {
+  from {opacity: 0;}
+  to {opacity: 100;}
+}

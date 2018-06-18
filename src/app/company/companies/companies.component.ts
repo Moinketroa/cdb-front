@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Company } from '../company.model';
+import { CompanyService } from '../company.service';
+import { Page } from '../../page.model';
 
 @Component({
   selector: 'cdb-companies',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompaniesComponent implements OnInit {
 
-  constructor() { }
+  companies: Page<Company>;
+
+  constructor(private companyService: CompanyService) { }
 
   ngOnInit() {
+    this.companyService.get({'page': 1, 'limit': 10}).subscribe( springDataPage => {
+      this.companies = new Page(springDataPage);
+    });
   }
 
 }
