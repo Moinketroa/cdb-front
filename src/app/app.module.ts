@@ -11,12 +11,14 @@ import {CompanyModule} from './company/company.module';
 import {HttpClientModule} from '@angular/common/http';
 import {CustomUtilModule} from './custom-util/custom-util.module';
 import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
