@@ -1,3 +1,9 @@
 <div *ngIf="companies" class="container">
+  <mat-paginator *ngIf="pageInfo" [length]="companies.totalElements"
+    [showFirstLastButtons]="true"
+    [pageSize]="pageInfo.pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    (page)="pageEvent($event)">
+  </mat-paginator>
   <cdb-company *ngFor=" let company of companies.content " [company] = "company" class="company-cards"></cdb-company>
 </div>
