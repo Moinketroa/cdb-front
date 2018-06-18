@@ -8,12 +8,9 @@ import { Company } from '../company.model';
   styleUrls: ['./company-add.component.css']
 })
 export class CompanyAddComponent implements OnInit {
-
   company: Company;
-  nbrIngredients: number;
 
   constructor(private companyService: CompanyService) {
-    this.nbrIngredients = 1;
     this.company = new Company();
   }
 
