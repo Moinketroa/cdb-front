@@ -4,12 +4,12 @@ import {CompanyService} from '../../company/company.service';
 @Component({
   selector: 'cdb-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
 
   constructor(private _companyService: CompanyService) {
-    this._companyService.getCompanies().subscribe(_ => console.log(_));
+    this._companyService.get({}).subscribe(_ => console.log(_));
   }
 
   ngOnInit() {

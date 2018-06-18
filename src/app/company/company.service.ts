@@ -12,7 +12,7 @@ export class CompanyService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getCompanies({page = 1, limit = 10}): Observable<any> {
+  get({page = 1, limit = 10}): Observable<any> {
     return this.httpClient.get(this._baseUrl + `?page=${ page }&limit=${ limit }`);
   }
   //

@@ -15,7 +15,7 @@ export class CompaniesComponent implements OnInit {
   constructor(private companyService: CompanyService) { }
 
   ngOnInit() {
-    this.companyService.getCompanies({'page': 1, 'limit': 10}).subscribe( springDataPage => {
+    this.companyService.get({'page': 1, 'limit': 10}).subscribe( springDataPage => {
       this.companies = new Page(springDataPage);
     });
   }

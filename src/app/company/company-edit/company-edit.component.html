@@ -7,7 +7,8 @@
   <mat-card-content *ngIf="editForm">
     <form class="example-form" [formGroup]="editForm">
 
-      <mat-form-field class="example-full-width">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Nom du fournisseur</mat-label>
         <input matInput placeholder="Nom du fournisseur"
         name="name" formControlName="name" value="{{ this.company.name }}">
       </mat-form-field>
