@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CompanyService } from '../company.service';
+import { Company } from '../company.model';
 
 @Component({
   selector: 'cdb-company-add',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompanyAddComponent implements OnInit {
 
-  constructor() { }
+  company: Company;
+  nbrIngredients: number;
+
+  constructor(private companyService: CompanyService) {
+    this.nbrIngredients = 1;
+    this.company = new Company();
+  }
 
   ngOnInit() {
+  }
+
+  ajouter() {
+    this.companyService.add(this.company).subscribe();
   }
 
 }
