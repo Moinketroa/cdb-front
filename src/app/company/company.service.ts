@@ -3,18 +3,17 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {Company} from './company.model';
 import {Page} from '../page.model';
-
 @Injectable({
   providedIn: 'root'
 })
 export class CompanyService {
 
-  private _baseUrl = 'htpp://localhost:8080/webservices/v1/company';
+  private _baseUrl = 'http://localhost:8090/webservices/company';
 
   constructor(private httpClient: HttpClient) { }
 
-  getCompanies(): Observable<any> {
-    return this.httpClient.get(this._baseUrl);
+  getCompanies({page = 1, limit = 10}): Observable<any> {
+    return this.httpClient.get(this._baseUrl + `?page=${ page }&limit=${ limit }`);
   }
   //
   // getCompaniesPage(page: string): Observable<Company[]> {
