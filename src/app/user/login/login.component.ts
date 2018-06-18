@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {CompanyService} from '../../company/company.service';
 
 @Component({
   selector: 'cdb-login',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _companyService: CompanyService) {
+    this._companyService.getCompanies().subscribe(_ => console.log(_));
+  }
 
   ngOnInit() {
   }
