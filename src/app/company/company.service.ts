@@ -16,20 +16,20 @@ export class CompanyService {
     return this.httpClient.get(this._baseUrl + `?page=${ page }&limit=${ limit }`);
   }
   //
-  // getCompaniesPage(page: string): Observable<Company[]> {
+  // getPage(page: string): Observable<Company[]> {
   //   const options = { params: new HttpParams()
   //       .set('page', page)};
   //   return new Observable<Page<Company> >(new Page<Company>(this.httpClient.get<Company[]>(this._baseUrl, options)));
   // }
   //
-  // getCompaniesPageLimit(page: string, limit: string): Observable<Company[]> {
+  // getPage(page: string, limit: string): Observable<Company[]> {
   //   const options = { params: new HttpParams()
   //       .set('page', page)
   //       .set('limit', limit)};
   //   return new Observable<Page<Company> >(new Page<Company>(this.httpClient.get<Company[]>(this._baseUrl, options)));
   // }
   //
-  // getCompaniesSearchPageLimit(page: string, limit: string, search: string): Observable<Company[]> {
+  // search(page: string, limit: string, search: string): Observable<Company[]> {
   //   const options = { params: new HttpParams()
   //       .set('page', page)
   //       .set('limit', limit)
@@ -37,19 +37,19 @@ export class CompanyService {
   //   return new Observable<Page<Company> >(new Page<Company>(this.httpClient.get<Company[]>(this._baseUrl, options)));
   // }
   //
-  // getCompany(id: string): Observable<Company> {
+  // get(id: string): Observable<Company> {
   //   return new Observable<Page<Company> >(new Page<Company>(this.httpClient.get<Company>(`${this._baseUrl}/${ id }`)));
   // }
 
-  addCompany(company: Company) {
+  add(company: Company) {
     this.httpClient.post(this._baseUrl, company).subscribe();
   }
 
-  updateCompany(company: Company, id: string) {
+  update(company: Company, id: string) {
     this.httpClient.put(`${this._baseUrl}/${ id }`, company).subscribe();
   }
 
-  deleteCompany(company: Company) {
+  delete(company: Company) {
     this.httpClient.delete(`${this._baseUrl}/${ company.id }`).subscribe();
   }
 }
