@@ -8,13 +8,13 @@ import {Page} from '../page.model';
 })
 export class CompanyService {
 
-  private _baseUrl = 'http://localhost:8090/webservices/company';
+  private _baseUrl = 'http://localhost:8080/webservices/v1/company';
 
   constructor(private httpClient: HttpClient) { }
 
-  get({page = 1, limit = 10}): Observable<any> {
-    return this.httpClient.get(this._baseUrl + `?page=${ page }&limit=${ limit }`);
-  }
+  // get({page = 1, limit = 10}): Observable<any> {
+  //   return this.httpClient.get(this._baseUrl + `?page=${ page }&limit=${ limit }`);
+  // }
   //
   // getPage(page: string): Observable<Company[]> {
   //   const options = { params: new HttpParams()
@@ -22,23 +22,23 @@ export class CompanyService {
   //   return new Observable<Page<Company> >(new Page<Company>(this.httpClient.get<Company[]>(this._baseUrl, options)));
   // }
   //
-  // getPage(page: string, limit: string): Observable<Company[]> {
-  //   const options = { params: new HttpParams()
-  //       .set('page', page)
-  //       .set('limit', limit)};
-  //   return new Observable<Page<Company> >(new Page<Company>(this.httpClient.get<Company[]>(this._baseUrl, options)));
-  // }
+  get({page = 1, limit = 10}): Observable<any> {
+    const options = { params: new HttpParams()
+        .set('page', page.toString())
+        .set('limit', limit.toString())};
+    return this.httpClient.get(this._baseUrl, options);
+  }
+
+  search({page = 1, limit = 10}, search: string): Observable<any> {
+    const options = { params: new HttpParams()
+        .set('page', page.toString())
+        .set('limit', limit.toString())
+        .set('search', search)};
+    return this.httpClient.get(this._baseUrl, options);
+  }
   //
-  // search(page: string, limit: string, search: string): Observable<Company[]> {
-  //   const options = { params: new HttpParams()
-  //       .set('page', page)
-  //       .set('limit', limit)
-  //       .set('search', search)};
-  //   return new Observable<Page<Company> >(new Page<Company>(this.httpClient.get<Company[]>(this._baseUrl, options)));
-  // }
-  //
-  // get(id: string): Observable<Company> {
-  //   return new Observable<Page<Company> >(new Page<Company>(this.httpClient.get<Company>(`${this._baseUrl}/${ id }`)));
+  // getById(id: string): Observable<Company> {
+  //   return this.httpClient.get<Company>(`${this._baseUrl}/${ id }`);
   // }
 
   add(company: Company): Observable<Company> {
