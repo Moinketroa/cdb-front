@@ -8,7 +8,7 @@ import {RequestOptions, Request, RequestMethod} from '@angular/http';
   providedIn: 'root'
 })
 export class CompanyService {
-  private _baseUrl = 'http://localhost:8080/webservices/v1/company';
+  private _baseUrl = 'http://localhost:8090/webservices/v1/company';
   constructor(private httpClient: HttpClient) { }
 
   get({page = 1, limit = 10}): Observable<any> {
