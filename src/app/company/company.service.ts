@@ -3,12 +3,13 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {Company} from './company.model';
 import {Page} from '../page.model';
+import {RequestOptions, Request, RequestMethod} from '@angular/http';
 @Injectable({
   providedIn: 'root'
 })
 export class CompanyService {
 
-  private _baseUrl = 'http://localhost:8090/webservices/company';
+  private _baseUrl = 'http://localhost:8090/webservices/v1/company';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -37,9 +38,9 @@ export class CompanyService {
   //   return new Observable<Page<Company> >(new Page<Company>(this.httpClient.get<Company[]>(this._baseUrl, options)));
   // }
   //
-  // get(id: string): Observable<Company> {
-  //   return new Observable<Page<Company> >(new Page<Company>(this.httpClient.get<Company>(`${this._baseUrl}/${ id }`)));
-  // }
+  getById(id: number): Observable<Company> {
+    return this.httpClient.get<Company>(`${this._baseUrl}/${ id }`);
+  }
 
   add(company: Company): Observable<Company> {
      return this.httpClient.post<Company>(this._baseUrl, company);

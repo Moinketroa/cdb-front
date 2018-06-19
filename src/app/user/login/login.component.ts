@@ -10,20 +10,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  public static token_key = 'token';
   private user: User;
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private userService: UserService, private router: Router) {
+    this.user = new User('', '');
+  }
 
   ngOnInit() {}
 
   login() {
-    this.userService.authenticate(this.user).subscribe(res => this.setSession);
+    localStorage.removeItem(UserService.token_key);
+    this.userService.authenticate(this.user).subscribe(res => this.setSession(res));
     this.router.navigateByUrl('/');
   }
 
-  private setSession(token) {
-    localStorage.setItem(LoginComponent.token_key, token);
-    console.log(localStorage.getItem(LoginComponent.token_key));
+  private setSession(res) {
+    localStorage.setItem(UserService.token_key, res.token);
+    console.log(localStorage.getItem(UserService.token_key));
   }
 }
