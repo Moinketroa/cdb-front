@@ -12,16 +12,6 @@ export class CompanyService {
 
   constructor(private httpClient: HttpClient) { }
 
-  // get({page = 1, limit = 10}): Observable<any> {
-  //   return this.httpClient.get(this._baseUrl + `?page=${ page }&limit=${ limit }`);
-  // }
-  //
-  // getPage(page: string): Observable<Company[]> {
-  //   const options = { params: new HttpParams()
-  //       .set('page', page)};
-  //   return new Observable<Page<Company> >(new Page<Company>(this.httpClient.get<Company[]>(this._baseUrl, options)));
-  // }
-  //
   get({page = 1, limit = 10}): Observable<any> {
     const options = { params: new HttpParams()
         .set('page', page.toString())
@@ -36,10 +26,10 @@ export class CompanyService {
         .set('search', search)};
     return this.httpClient.get(this._baseUrl, options);
   }
-  //
-  // getById(id: string): Observable<Company> {
-  //   return this.httpClient.get<Company>(`${this._baseUrl}/${ id }`);
-  // }
+
+  getById(id: string): Observable<Company> {
+    return this.httpClient.get<Company>(`${this._baseUrl}/${ id }`);
+  }
 
   add(company: Company): Observable<Company> {
      return this.httpClient.post<Company>(this._baseUrl, company);
