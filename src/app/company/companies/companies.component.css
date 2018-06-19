@@ -1,4 +1,11 @@
 .company-cards {
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: column wrap;
+  float: left;
+}
+::ng-deep .mat-paginator-container {
+  justify-content: center !important;
+}
+.container {
+  padding: 0 5%;
 }

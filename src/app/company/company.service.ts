@@ -8,37 +8,25 @@ import {RequestOptions, Request, RequestMethod} from '@angular/http';
   providedIn: 'root'
 })
 export class CompanyService {
-
-  private _baseUrl = 'http://localhost:8090/webservices/v1/company';
-
+  private _baseUrl = 'http://localhost:8080/webservices/v1/company';
   constructor(private httpClient: HttpClient) { }
 
   get({page = 1, limit = 10}): Observable<any> {
-    return this.httpClient.get(this._baseUrl + `?page=${ page }&limit=${ limit }`);
+    const options = { params: new HttpParams()
+        .set('page', page.toString())
+        .set('limit', limit.toString())};
+    return this.httpClient.get(this._baseUrl, options);
   }
-  //
-  // getPage(page: string): Observable<Company[]> {
-  //   const options = { params: new HttpParams()
-  //       .set('page', page)};
-  //   return new Observable<Page<Company> >(new Page<Company>(this.httpClient.get<Company[]>(this._baseUrl, options)));
-  // }
-  //
-  // getPage(page: string, limit: string): Observable<Company[]> {
-  //   const options = { params: new HttpParams()
-  //       .set('page', page)
-  //       .set('limit', limit)};
-  //   return new Observable<Page<Company> >(new Page<Company>(this.httpClient.get<Company[]>(this._baseUrl, options)));
-  // }
-  //
-  // search(page: string, limit: string, search: string): Observable<Company[]> {
-  //   const options = { params: new HttpParams()
-  //       .set('page', page)
-  //       .set('limit', limit)
-  //       .set('search', search)};
-  //   return new Observable<Page<Company> >(new Page<Company>(this.httpClient.get<Company[]>(this._baseUrl, options)));
-  // }
-  //
-  getById(id: number): Observable<Company> {
+
+  search({page = 1, limit = 10}, search: string): Observable<any> {
+    const options = { params: new HttpParams()
+        .set('page', page.toString())
+        .set('limit', limit.toString())
+        .set('search', search)};
+    return this.httpClient.get(this._baseUrl, options);
+  }
+
+  getById(id: string): Observable<Company> {
     return this.httpClient.get<Company>(`${this._baseUrl}/${ id }`);
   }
 
