@@ -37,16 +37,16 @@ export class CompanyService {
   //   return new Observable<Page<Company> >(new Page<Company>(this.httpClient.get<Company[]>(this._baseUrl, options)));
   // }
   //
-  // get(id: string): Observable<Company> {
-  //   return new Observable<Page<Company> >(new Page<Company>(this.httpClient.get<Company>(`${this._baseUrl}/${ id }`)));
-  // }
+  getSingle(id: number): Observable<Company> {
+    return this.httpClient.get<Company>(`${this._baseUrl}?id=${ id }`);
+  }
 
   add(company: Company): Observable<Company> {
      return this.httpClient.post<Company>(this._baseUrl, company);
   }
 
-  update(company: Company, id: string): Observable<Company> {
-     return this.httpClient.put<Company>(`${this._baseUrl}/${ id }`, company);
+  update(company: Company): Observable<Company> {
+     return this.httpClient.put<Company>(`${this._baseUrl}?id=${ company.id }`, company);
   }
 
   delete(company: Company): Observable<Company> {
