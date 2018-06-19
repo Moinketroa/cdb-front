@@ -8,7 +8,7 @@ import {Page} from '../page.model';
 })
 export class CompanyService {
 
-  private _baseUrl = 'http://localhost:8080/webservices/v1/company';
+  private _baseUrl = 'http://localhost:8090/webservices/v1/company';
 
   constructor(private httpClient: HttpClient) { }
 
