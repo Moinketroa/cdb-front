@@ -69,9 +69,6 @@ export class CompaniesComponent implements OnInit {
         'length' : this.companies.totalElements
       };
     });
-    this.companyService.getById(1).subscribe(s => console.log(s));
-
-    this.companyService.get({'page': 1, 'limit': 10}).subscribe(s => console.log(s));
   }
 
 }
