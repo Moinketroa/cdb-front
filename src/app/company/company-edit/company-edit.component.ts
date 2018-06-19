@@ -3,6 +3,7 @@ import { Company } from '../company.model';
 import { CompanyService } from '../company.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'cdb-company-edit',
@@ -13,16 +14,15 @@ export class CompanyEditComponent  implements OnInit {
 
   editForm: FormGroup;
 
-  wasEditedWithSuccess = false;
-
   company: Company;
 
-  constructor(private companyService: CompanyService, private router: Router, private route: ActivatedRoute) {}
+  constructor(private companyService: CompanyService, private router: Router, private route: ActivatedRoute,
+    private snackBar: MatSnackBar) {}
 
   ngOnInit() {
     this.company = {
-      'id': 1,
-      'name': 'Foo'
+      id: 1,
+      name: 'Foo'
     };
     this.editForm = new FormGroup({
       name : new FormControl(
@@ -36,9 +36,9 @@ export class CompanyEditComponent  implements OnInit {
   submit() {
     if (this.editForm.valid) {
       console.log(this.company);
-      this.wasEditedWithSuccess = true;
-    } else {
-      this.wasEditedWithSuccess = false;
+      this.snackBar.open('Success', undefined, {
+        duration: 1500,
+      });
     }
   }
 
