@@ -18,3 +18,12 @@ body {
   from {opacity: 0;}
   to {opacity: 100;}
 }
+
+.successSnackBar {
+  background: greenyellow !important;
+  color: #3f51b5 !important;
+}
+.oupsieSnackBar {
+  background: #673ab7 !important;
+  color: white !important;
+}

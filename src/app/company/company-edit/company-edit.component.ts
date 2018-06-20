@@ -3,6 +3,7 @@ import { Company } from '../company.model';
 import { CompanyService } from '../company.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition, MatSnackBarConfig } from '@angular/material';
 
 @Component({
   selector: 'cdb-company-edit',
@@ -12,34 +13,56 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class CompanyEditComponent  implements OnInit {
 
   editForm: FormGroup;
-
-  wasEditedWithSuccess = false;
+  snackBarOptions: MatSnackBarConfig;
 
   company: Company;
 
-  constructor(private companyService: CompanyService, private router: Router, private route: ActivatedRoute) {}
+  constructor(private companyService: CompanyService, private router: Router, private route: ActivatedRoute,
+    private snackBar: MatSnackBar) {
+      const hp: MatSnackBarHorizontalPosition = 'center';
+      const vp: MatSnackBarVerticalPosition = 'top';
+      this.snackBarOptions = {
+        duration: 1500,
+        horizontalPosition: hp,
+        verticalPosition: vp,
+      };
+    }
 
   ngOnInit() {
-    this.company = {
-      'id': 1,
-      'name': 'Foo'
-    };
-    this.editForm = new FormGroup({
+    this.companyService.getSingle(
+      +this.route.snapshot.paramMap.get('id')
+    ).subscribe( (company) => {
+      this.company = company;
+      this.editForm = new FormGroup({
       name : new FormControl(
         this.company.name, Validators.required
       ),
       id : new FormControl(
         this.company.id, Validators.required
       )});
+    });
   }
 
   submit() {
     if (this.editForm.valid) {
-      console.log(this.company);
-      this.wasEditedWithSuccess = true;
-    } else {
-      this.wasEditedWithSuccess = false;
+      this.company = this.editForm.value;
+      this.companyService.update(this.company).subscribe( isSuccess =>
+        isSuccess ? this.successSnackBar() : this.oupsieSnackBar()
+      );
     }
+  }
+
+  successSnackBar() {
+    this.snackBar.open('Success', undefined, {
+      ...this.snackBarOptions,
+      panelClass: 'successSnackBar'
+    });
+  }
+  oupsieSnackBar() {
+    this.snackBar.open('Oupsie', undefined, {
+      ...this.snackBarOptions,
+      panelClass: 'oupsieSnackBar'
+    });
   }
 
 }
