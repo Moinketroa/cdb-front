@@ -54,8 +54,7 @@ export class InscriptionComponent implements OnInit {
     const user = new User(this.userForm.get('username').value, this.userForm.get(['passwords', 'password']).value);
     console.log(user);
     localStorage.removeItem(UserService.token_key);
-    // TODO createNewUserService
-    this.userService.authenticate(user).subscribe(res => this.setSession(res));
+    this.userService.signUp(user).subscribe(res => this.setSession(res));
     this.router.navigate(['computer']).catch();
   }
 

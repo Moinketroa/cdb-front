@@ -11,6 +11,7 @@ export class UserService {
   private _baseUrl = 'http://localhost:8090/webservices/authenticate';
   private _authUrl = '/auth';
   private _refreshUrl = '/refresh';
+  private _signupUrl = '/signup';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -26,5 +27,9 @@ export class UserService {
 
   isLogIn() {
     return localStorage.getItem(UserService.token_key) != null;
+  }
+
+  signUp(user: User): Observable<string> {
+    return this.httpClient.post<string>(this._baseUrl + this._signupUrl, user, {withCredentials : true});
   }
 }
