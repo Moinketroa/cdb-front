@@ -12,7 +12,7 @@ export class CompanyComponent implements OnInit {
   @Input() company: Company;
   style: any;
 
-  step = 16;
+  step = 15;
 
   constructor(private companyService: CompanyService) { }
 
@@ -24,13 +24,11 @@ export class CompanyComponent implements OnInit {
 
   calculateWidth() {
     /* font-size is 14, font is monospace
-    * space between characters is Math.floor(14 * 0.6) = 8
-    * the average length of company names in database is around 15,
-    * we pick 16 (this.step) as it is a multiple of 8.
-    * note that there is also a 16px horizontal padding :
-    * 16 * 2 (left and right side) is sqrt(16) * 8px;
+    * space between characters is 14 * 0.6, we use Math.ceil(14 * 0.6) = 9
+    * the average length of company names in database is around 15 (and pgcd(15,9) = sqrt(9)),
+    * note that there is also a 18px horizontal padding.
     */
-    return 8 * this.step * (
+    return 9 * this.step * (
       Math.floor(this.company.name.length / this.step) +
       (this.company.name.length % this.step === 0 ? 0 : 1)
     );
