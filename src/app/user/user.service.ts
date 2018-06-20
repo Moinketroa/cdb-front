@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from './user.model';
 import { Observable } from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class UserService {
   private _authUrl = '/auth';
   private _refreshUrl = '/refresh';
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private jwtHelper: JwtHelperService) {}
 
   authenticate(user: User): Observable<string> {
     return this.httpClient.post<string>(this._baseUrl + this._authUrl, user, {withCredentials : true});
@@ -24,7 +25,12 @@ export class UserService {
     return this.httpClient.get<string>(this._baseUrl + this._refreshUrl, {headers: head, withCredentials: true});
   }
 
-  isLogIn() {
-    return localStorage.getItem(UserService.token_key) != null;
+  public isAuthenticated(): boolean {
+    const token = localStorage.getItem(UserService.token_key);
+    if (token == null) {
+      return false;
+    }
+    return !this.jwtHelper.isTokenExpired(token);
   }
+
 }
