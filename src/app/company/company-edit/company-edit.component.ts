@@ -29,8 +29,8 @@ export class CompanyEditComponent  implements OnInit {
     }
 
   ngOnInit() {
-    this.companyService.getSingle(
-      +this.route.snapshot.paramMap.get('id')
+    this.companyService.getById(
+      this.route.snapshot.paramMap.get('id')
     ).subscribe( (company) => {
       this.company = company;
       this.editForm = new FormGroup({

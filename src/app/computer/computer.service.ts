@@ -9,7 +9,7 @@ import {Computer} from './computer.model';
 })
 export class ComputerService {
 
-  private _baseUrl = 'http://localhost:8080/webservices/computer';
+  private _baseUrl = 'http://localhost:8090/webservices/v1/computer';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -29,7 +29,7 @@ export class ComputerService {
   }
 
   getById(id: string): Observable<Computer> {
-    return this.httpClient.get<Computer>(`${this._baseUrl}?id=${ id }`);
+    return this.httpClient.get<Computer>(`${this._baseUrl}/${ id }`);
   }
 
   add(computer: Computer): Observable<Computer> {
