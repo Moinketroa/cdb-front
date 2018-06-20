@@ -3,7 +3,6 @@ import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {CustomMaterialModule} from './custom-material/custom-material.module';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppRoutingModule} from './app-routing.module';
 import {UserModule} from './user/user.module';
 import {ComputerModule} from './computer/computer.module';

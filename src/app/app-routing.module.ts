@@ -9,6 +9,7 @@ import { CompanyAddComponent } from './company/company-add/company-add.component
 import { CompanyEditComponent } from './company/company-edit/company-edit.component';
 import { CompanyComponent } from './company/company/company.component';
 import { CompaniesComponent } from './company/companies/companies.component';
+import {ComputerComponent} from './computer/computer/computer.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'company', component: CompaniesComponent},
   { path: 'company/page/:page', component: CompaniesComponent},
   { path: 'company/page/:page/limit/:limit', component: CompaniesComponent},
+  { path: 'computer/:id', component: ComputerComponent},
   { path: '**', redirectTo: 'login' },
 ];
 
