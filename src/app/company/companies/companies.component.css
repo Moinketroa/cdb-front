@@ -14,3 +14,8 @@
 :host {
   align-self: flex-start;
 }
+
+#actionsBar > * {
+  display: inline-block !important;
+  margin: 10px 0 0 10px;
+}

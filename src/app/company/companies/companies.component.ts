@@ -18,6 +18,9 @@ import {
   trigger
 } from '@angular/animations';
 import { AppService } from '../../app.service';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 @Component({
   selector: 'cdb-companies',
   templateUrl: './companies.component.html',
@@ -58,6 +61,13 @@ export class CompaniesComponent implements OnInit, AfterViewChecked {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  myControl = new FormControl();
+  filteredOptions: Observable<Company[]>;
+  options = [
+    {id: 1, name: 'Foo'},
+    {id: 2, name: 'Boo'}
+  ];
+
   transition = 'init';
 
   pageEvent(pageInfo: PageEvent) {
@@ -81,6 +91,21 @@ export class CompaniesComponent implements OnInit, AfterViewChecked {
     private appService: AppService
   ) {
     this.appService.changeTitle('Companies');
+    this.filteredOptions = this.myControl.valueChanges
+    .pipe(
+      startWith<string | Company>(''),
+      map(value => typeof value === 'string' ? value : value.name),
+      map(name => name ? this.filter(name) : this.options.slice())
+    );
+  }
+
+  filter(name: string): Company[] {
+    return this.options.filter(option =>
+      option.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
+  }
+
+  displayFn(company?: Company): string | undefined {
+    return company ? company.name : undefined;
   }
 
   private readPageParameter() {
