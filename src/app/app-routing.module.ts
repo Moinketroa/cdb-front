@@ -13,9 +13,11 @@ import {ComputerAddComponent} from './computer/computer-add/computer-add.compone
 import {ComputerComponent} from './computer/computer/computer.component';
 import {ComputersComponent} from './computer/computers/computers.component';
 import {ComputerEditComponent} from './computer/computer-edit/computer-edit.component';
+import {InscriptionComponent} from './user/inscription/inscription.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'signup', component: InscriptionComponent },
   { path: 'company/add', component: CompanyAddComponent},
   { path: 'company/edit/:id', component: CompanyEditComponent},
   { path: 'company/:id', component: CompanyComponent},
