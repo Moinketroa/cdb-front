@@ -23,8 +23,6 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/form
   ]
 })
 export class InscriptionComponent implements OnInit {
-
-  user: User;
   userForm: FormGroup;
 
   constructor(private userService: UserService, private router: Router,  private fb: FormBuilder) {
@@ -53,7 +51,17 @@ export class InscriptionComponent implements OnInit {
   }
 
   signUp() {
+    const user = new User(this.userForm.get('username').value, this.userForm.get(['passwords', 'password']).value);
+    console.log(user);
+    localStorage.removeItem(UserService.token_key);
+    // TODO createNewUserService
+    this.userService.authenticate(user).subscribe(res => this.setSession(res));
+    this.router.navigate(['computer']).catch();
+  }
 
+  private setSession(res) {
+    localStorage.setItem(UserService.token_key, res.token);
+    console.log(localStorage.getItem(UserService.token_key));
   }
 
 }

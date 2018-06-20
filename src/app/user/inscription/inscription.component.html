@@ -12,7 +12,7 @@
       <form [formGroup]="userForm">
         <p>
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Username" formControlName="username" i18n-placeholder>
+            <input matInput placeholder="Username*" formControlName="username" i18n-placeholder>
             <mat-error>
               <div *ngIf="userForm.get('username').hasError('required') && userForm.get('username').touched" i18n>This field should be not empty</div>
               <div *ngIf="userForm.get('username').hasError('minlength') && userForm.get('username').touched" i18n>Must be at least 3 characters long.</div>
@@ -22,7 +22,7 @@
         <div formGroupName="passwords">
           <p>
             <mat-form-field class="example-full-width">
-              <input matInput type="password" placeholder="Password" formControlName="password" i18n-placeholder>
+              <input matInput type="password" placeholder="Password*" formControlName="password" i18n-placeholder>
               <mat-error>
                 <div *ngIf="userForm.get(['passwords','password']).hasError('required')
                 && userForm.get(['passwords','password']).touched" i18n>
@@ -37,7 +37,7 @@
           </p>
           <p>
             <mat-form-field class="example-full-width">
-              <input matInput type="password" placeholder="Confirm password" formControlName="confirm_password" i18n-placeholder>
+              <input matInput type="password" placeholder="Confirm password*" formControlName="confirm_password" i18n-placeholder>
             </mat-form-field>
             <mat-error>
               <div *ngIf="userForm.get(['passwords','confirm_password']).hasError('required')
