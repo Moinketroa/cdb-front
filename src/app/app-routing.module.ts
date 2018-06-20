@@ -9,14 +9,10 @@ import { CompanyAddComponent } from './company/company-add/company-add.component
 import { CompanyEditComponent } from './company/company-edit/company-edit.component';
 import { CompanyComponent } from './company/company/company.component';
 import { CompaniesComponent } from './company/companies/companies.component';
-<<<<<<< HEAD
 import {ComputerAddComponent} from './computer/computer-add/computer-add.component';
 import {ComputerComponent} from './computer/computer/computer.component';
 import {ComputersComponent} from './computer/computers/computers.component';
 import {ComputerEditComponent} from './computer/computer-edit/computer-edit.component';
-=======
-import {ComputerComponent} from './computer/computer/computer.component';
->>>>>>> computer
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },

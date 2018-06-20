@@ -17,7 +17,6 @@ export class ComputerComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('oninit');
     this.computerService.getById(this.route.snapshot.paramMap.get('id')).subscribe(computer => {
       this._computer = computer;
       console.log(computer);
