@@ -1,5 +1,4 @@
 <div *ngIf="companies" class="container">
-  <h1>Companies</h1>
   <mat-paginator #paginator *ngIf="pageInfo" [length]="companies.totalElements"
     [showFirstLastButtons]="true"
     [pageSize]="pageInfo.pageSize"
