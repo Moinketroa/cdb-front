@@ -6,10 +6,6 @@
     [pageSizeOptions]="pageSizeOptions"
     (page)="pageEvent($event)">
   </mat-paginator>
-<<<<<<< HEAD
   <hr>
-  <cdb-company *ngFor=" let company of companies.content " [company] = "company" class="company-cards"></cdb-company>
-=======
-  <cdb-company [@Animation]="transition"  *ngFor=" let company of companies.content " [company] = "company" class="company-cards"></cdb-company>
->>>>>>> equipe/develop
+  <cdb-company [@Animation]="transition" *ngFor=" let company of companies.content " [company] = "company" class="company-cards"></cdb-company>
 </div>
