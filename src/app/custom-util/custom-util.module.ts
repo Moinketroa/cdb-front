@@ -15,7 +15,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     RouterModule,
     ReactiveFormsModule,
     BrowserAnimationsModule
-  ],
-  declarations: []
+  ]
 })
 export class CustomUtilModule { }

@@ -1,20 +1,17 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {DatePipe} from './date.pipe';
 
 @Pipe({
   name: 'discontinuedDatePipe'
 })
-export class DiscontinuedDatePipe extends DatePipe {
+export class DiscontinuedDatePipe implements PipeTransform {
 
-  transform(discontinued: number[], args?: any): string {
+  transform(discontinued: Date, args?: any): string {
     if (discontinued == null) {
       return 'This computer is still in production or no discontinuation date were provided.';
     }
 
     let result = 'Discontinued in : ';
-    result += this.addZeroIfLessThanTen(discontinued[2]) + '/';
-    result += this.addZeroIfLessThanTen(discontinued[1]) + '/';
-    result += discontinued[0];
+    result += discontinued.toLocaleDateString();
 
     return result;
   }

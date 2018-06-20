@@ -1,20 +1,17 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {DatePipe} from './date.pipe';
 
 @Pipe({
   name: 'introducedDatePipe'
 })
-export class IntroducedDatePipe extends DatePipe {
+export class IntroducedDatePipe implements PipeTransform {
 
-  transform(introduced: number[], args?: any): any {
+  transform(introduced: Date, args?: any): any {
     if (introduced == null) {
       return 'This computer is not yet released or no introduction date were provided.';
     }
 
     let result = 'First introduced in : ';
-    result += this.addZeroIfLessThanTen(introduced[2]) + '/';
-    result += this.addZeroIfLessThanTen(introduced[1]) + '/';
-    result += introduced[0];
+    result += introduced.toLocaleDateString();
 
     return result;
   }

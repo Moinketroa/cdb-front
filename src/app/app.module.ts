@@ -12,6 +12,7 @@ import {CustomUtilModule} from './custom-util/custom-util.module';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { AuthInterceptor } from './http-interceptor';
+import {DialogModule} from './dialog/dialog.module';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { AuthInterceptor } from './http-interceptor';
     AppRoutingModule,
     UserModule,
     ComputerModule,
-    CompanyModule
+    CompanyModule,
+    DialogModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
