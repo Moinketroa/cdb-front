@@ -68,7 +68,6 @@ export class CompaniesComponent implements OnInit {
         'pageSize' : limit,
         'length' : this.companies.totalElements
       };
-      console.log(this.pageInfo);
     });
   }
 
