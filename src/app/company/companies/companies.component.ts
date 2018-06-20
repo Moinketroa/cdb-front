@@ -7,13 +7,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'cdb-companies',
   templateUrl: './companies.component.html',
-  styleUrls: ['./companies.component.css']
+  styleUrls: ['./companies.component.css'],
 })
 export class CompaniesComponent implements OnInit, AfterViewChecked {
 
   companies: Page<Company>;
   pageInfo: PageEvent;
-  pageSizeOptions = [10, 15, 20];
+  pageSizeOptions = [15, 20, 30];
 
   @ViewChild(MatPaginator)
   paginator: MatPaginator;
@@ -50,7 +50,6 @@ export class CompaniesComponent implements OnInit, AfterViewChecked {
   }
 
   loadContent(page, limit) {
-    console.log(page + '/' + limit);
     this.companyService.get({page, limit}).subscribe( springDataPage => {
       this.companies = new Page(springDataPage);
       this.pageInfo = {
