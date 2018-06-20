@@ -7,10 +7,11 @@ import {AppRoutingModule} from './app-routing.module';
 import {UserModule} from './user/user.module';
 import {ComputerModule} from './computer/computer.module';
 import {CompanyModule} from './company/company.module';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {CustomUtilModule} from './custom-util/custom-util.module';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { AuthInterceptor } from './http-interceptor';
 
 
 @NgModule({
@@ -29,7 +30,11 @@ import { FooterComponent } from './footer/footer.component';
     ComputerModule,
     CompanyModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

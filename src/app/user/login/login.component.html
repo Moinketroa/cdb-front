@@ -1,3 +1,23 @@
-<p>
-  login works!
-</p>
+<div class="container">
+  <mat-card [@Animation]="'init'" class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title i18n>LOGIN</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Username" [(ngModel)]="user.username" i18n-placeholder>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Password" [(ngModel)]="user.password" i18n-placeholder>
+        </mat-form-field>
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="login()" i18n>Sign in</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

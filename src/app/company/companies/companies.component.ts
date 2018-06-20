@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {PageEvent} from '@angular/material';
+import { Component, OnInit, ViewChild, AfterContentInit, AfterViewChecked } from '@angular/core';
+import {PageEvent, MatPaginator} from '@angular/material';
 import { Company } from '../company.model';
 import { CompanyService } from '../company.service';
 import { Page } from '../../page.model';
+import { Router, ActivatedRoute } from '@angular/router';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 @Component({
   selector: 'cdb-companies',
@@ -37,30 +38,54 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
     ])
   ]
 })
-export class CompaniesComponent implements OnInit {
+export class CompaniesComponent implements OnInit, AfterViewChecked {
 
   companies: Page<Company>;
   pageInfo: PageEvent;
-  pageSizeOptions = [10, 15, 20];
+  pageSizeOptions = [15, 20, 30];
+
+  @ViewChild(MatPaginator)
+  paginator: MatPaginator;
+
   transition = 'init';
 
   pageEvent(pageInfo: PageEvent) {
-    this.loadContent({ 'page' : pageInfo.pageIndex + 1, 'limit' : pageInfo.pageSize});
+    this.loadContent(pageInfo.pageIndex + 1, pageInfo.pageSize);
     if (pageInfo.pageSize !== this.pageInfo.pageSize) {
       this.transition = 'init';
     } else {
       this.transition = this.pageInfo.pageIndex > pageInfo.pageIndex ? 'left' : 'right';
     }
     this.pageInfo = pageInfo;
+    this.router.navigateByUrl(`/company/page/${pageInfo.pageIndex + 1}/limit/${pageInfo.pageSize}`, );
   }
 
-  constructor(private companyService: CompanyService) { }
+  constructor(private companyService: CompanyService, private router: Router, private route: ActivatedRoute) { }
+
+  private readPageParameter() {
+    const page = this.route.snapshot.paramMap.get('page');
+    return page === null ? 1 : +page;
+  }
 
   ngOnInit() {
-    this.loadContent({});
+    let limit = +this.route.snapshot.paramMap.get('limit');
+    if (this.pageSizeOptions.indexOf(limit) === -1) {
+      limit = this.pageSizeOptions[0];
+    }
+    this.loadContent(this.readPageParameter(), limit);
   }
 
-  loadContent({page = 1, limit = 10}) {
+  ngAfterViewChecked() {
+    if ( this.paginator != null) {
+      if (this.pageInfo != null) {
+        this.paginator._pageIndex = this.pageInfo.pageIndex;
+      } else {
+        this.paginator._pageIndex = this.readPageParameter();
+      }
+    }
+  }
+
+  loadContent(page, limit) {
     this.companyService.get({page, limit}).subscribe( springDataPage => {
       this.companies = new Page(springDataPage);
       this.pageInfo = {
@@ -68,7 +93,6 @@ export class CompaniesComponent implements OnInit {
         'pageSize' : limit,
         'length' : this.companies.totalElements
       };
-      console.log(this.pageInfo);
     });
   }
 

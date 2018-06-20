@@ -7,7 +7,11 @@ import {
   MatFormFieldModule,
   MatProgressSpinnerModule,
   MatPaginatorModule,
-  MatInputModule, MatIconModule
+  MatInputModule,
+  MatTableModule,
+  MatSortModule,
+  MatSnackBarModule,
+  MatIconModule
 } from '@angular/material';
 
 @NgModule({
@@ -19,7 +23,11 @@ import {
     MatCardModule,
     MatFormFieldModule,
     MatProgressSpinnerModule,
+    MatTableModule,
     MatPaginatorModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatSnackBarModule,
     MatIconModule
   ],
   exports: [
@@ -29,7 +37,11 @@ import {
     MatCardModule,
     MatFormFieldModule,
     MatProgressSpinnerModule,
+    MatTableModule,
     MatPaginatorModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatSnackBarModule,
     MatIconModule
   ],
   declarations: []
