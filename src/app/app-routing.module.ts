@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {RouterModule, Routes} from '@angular/router';
+import {RouterModule, Routes, CanActivate } from '@angular/router';
 import {UserModule} from './user/user.module';
 import {ComputerModule} from './computer/computer.module';
 import {CompanyModule} from './company/company.module';
@@ -14,26 +14,28 @@ import {ComputerComponent} from './computer/computer/computer.component';
 import {ComputersComponent} from './computer/computers/computers.component';
 import {ComputerEditComponent} from './computer/computer-edit/computer-edit.component';
 import {InscriptionComponent} from './user/inscription/inscription.component';
+import { AuthGuardService } from './auth-guard.service';
 
 const routes: Routes = [
+  { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: InscriptionComponent },
-  { path: 'company/add', component: CompanyAddComponent},
-  { path: 'company/edit/:id', component: CompanyEditComponent},
-  { path: 'company/:id', component: CompanyComponent},
-  { path: 'company/search/:search', component: CompaniesComponent},
-  { path: 'company/search/:search/page/:page', component: CompaniesComponent},
-  { path: 'company/search/:search/page/:page/limit/:limit', component: CompaniesComponent},
-  { path: 'company', component: CompaniesComponent},
-  { path: 'company/page/:page', component: CompaniesComponent},
-  { path: 'company/page/:page/limit/:limit', component: CompaniesComponent},
-  { path: 'computer/add', component: ComputerAddComponent},
-  { path: 'computer/edit/:id', component: ComputerEditComponent},
-  { path: 'computer/:id', component: ComputerComponent},
-  { path: 'computer/search/:search', component: ComputersComponent},
-  { path: 'computer/search/:search/page/:page', component: ComputersComponent},
-  { path: 'computer/search/:search/page/:page/limit/:limit', component: ComputersComponent},
-  { path: 'computer', component: ComputersComponent},
+  { path: 'computer/add', component: ComputerAddComponent, canActivate: [AuthGuardService]},
+  { path: 'computer/edit/:id', component: ComputerEditComponent, canActivate: [AuthGuardService]},
+  { path: 'computer/:id', component: ComputerComponent, canActivate: [AuthGuardService]},
+  { path: 'computer/search/:search', component: ComputersComponent, canActivate: [AuthGuardService]},
+  { path: 'computer/search/:search/page/:page', component: ComputersComponent, canActivate: [AuthGuardService]},
+  { path: 'computer/search/:search/page/:page/limit/:limit', component: ComputersComponent, canActivate: [AuthGuardService]},
+  { path: 'computer', component: ComputersComponent, canActivate: [AuthGuardService]},
+  { path: 'company/add', component: CompanyAddComponent, canActivate: [AuthGuardService]},
+  { path: 'company/edit/:id', component: CompanyEditComponent, canActivate: [AuthGuardService]},
+  { path: 'company/:id', component: CompanyComponent, canActivate: [AuthGuardService]},
+  { path: 'company/search/:search', component: CompaniesComponent, canActivate: [AuthGuardService]},
+  { path: 'company/search/:search/page/:page', component: CompaniesComponent, canActivate: [AuthGuardService]},
+  { path: 'company/search/:search/page/:page/limit/:limit', component: CompaniesComponent, canActivate: [AuthGuardService]},
+  { path: 'company', component: CompaniesComponent, canActivate: [AuthGuardService]},
+  { path: 'company/page/:page', component: CompaniesComponent, canActivate: [AuthGuardService]},
+  { path: 'company/page/:page/limit/:limit', component: CompaniesComponent, canActivate: [AuthGuardService]},
   { path: '**', redirectTo: 'login' },
 ];
 

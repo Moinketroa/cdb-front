@@ -9,7 +9,7 @@ import {Computer} from './computer.model';
 })
 export class ComputerService {
 
-  private _baseUrl = 'http://localhost:8080/webservices/v1/computer';
+  private _baseUrl = 'http://localhost:8090/webservices/v1/computer';
 
   constructor(private httpClient: HttpClient) { }
 
