@@ -2,7 +2,7 @@
   display: flex;
   flex-flow: column wrap;
   float: left;
-  padding: 10px;
+  padding: 9px;
 }
 ::ng-deep .mat-paginator-container {
   justify-content: center !important;
