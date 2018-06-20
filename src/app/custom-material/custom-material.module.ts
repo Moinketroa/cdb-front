@@ -7,7 +7,9 @@ import {
   MatFormFieldModule,
   MatProgressSpinnerModule,
   MatPaginatorModule,
-  MatInputModule, MatTableModule, MatSortModule,
+  MatInputModule,
+  MatTableModule,
+  MatSortModule,
   MatSnackBarModule,
   MatIconModule, MatMenuModule
 } from '@angular/material';

@@ -7,6 +7,9 @@ import { ComputersComponent } from './computers/computers.component';
 import { ComputerDetailComponent } from './computer-detail/computer-detail.component';
 import { ComputerAddComponent } from './computer-add/computer-add.component';
 import { ComputerEditComponent } from './computer-edit/computer-edit.component';
+import {DiscontinuedDatePipe} from './pipe/discontinued-date.pipe';
+import {IntroducedDatePipe} from './pipe/introduced-date.pipe';
+import { CompanyPipe } from './pipe/company.pipe';
 
 @NgModule({
   imports: [
@@ -14,6 +17,15 @@ import { ComputerEditComponent } from './computer-edit/computer-edit.component';
     CustomMaterialModule,
     CustomUtilModule
   ],
-  declarations: [ComputerComponent, ComputersComponent, ComputerDetailComponent, ComputerAddComponent, ComputerEditComponent]
+  declarations: [
+    ComputerComponent,
+    ComputersComponent,
+    ComputerDetailComponent,
+    ComputerAddComponent,
+    ComputerEditComponent,
+    DiscontinuedDatePipe,
+    IntroducedDatePipe,
+    CompanyPipe
+  ]
 })
 export class ComputerModule { }
