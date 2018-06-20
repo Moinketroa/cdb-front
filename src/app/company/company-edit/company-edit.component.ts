@@ -4,6 +4,7 @@ import { CompanyService } from '../company.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition, MatSnackBarConfig } from '@angular/material';
+import { AppService } from '../../app.service';
 
 @Component({
   selector: 'cdb-company-edit',
@@ -18,7 +19,8 @@ export class CompanyEditComponent  implements OnInit {
   company: Company;
 
   constructor(private companyService: CompanyService, private router: Router, private route: ActivatedRoute,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar, private appService: AppService) {
+      this.appService.changeTitle('Company Edition');
       const hp: MatSnackBarHorizontalPosition = 'center';
       const vp: MatSnackBarVerticalPosition = 'top';
       this.snackBarOptions = {
@@ -29,8 +31,8 @@ export class CompanyEditComponent  implements OnInit {
     }
 
   ngOnInit() {
-    this.companyService.getSingle(
-      +this.route.snapshot.paramMap.get('id')
+    this.companyService.getById(
+      this.route.snapshot.paramMap.get('id')
     ).subscribe( (company) => {
       this.company = company;
       this.editForm = new FormGroup({

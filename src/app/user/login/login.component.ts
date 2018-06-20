@@ -4,6 +4,7 @@ import { User } from '../user.model';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import { AppService } from '../../app.service';
 
 @Component({
   selector: 'cdb-login',
@@ -25,8 +26,9 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 export class LoginComponent implements OnInit {
   user: User;
 
-  constructor(private userService: UserService, private router: Router) {
+  constructor(private userService: UserService, private router: Router, private appService: AppService) {
     this.user = new User('', '');
+    this.appService.changeTitle('Login');
   }
 
   ngOnInit() {}

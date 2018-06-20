@@ -37,4 +37,7 @@
     </mat-menu>
   </div>
   <a href="#" class="menu-title" [routerLink]="['/']"> Computer Database</a>
+  <ul *ngIf="title">
+    <li>{{ this.title }}</li>
+  </ul>
 </mat-toolbar>
