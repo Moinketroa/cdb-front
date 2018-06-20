@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {CompanyService} from '../../company/company.service';
+import { CompanyService } from '../../company/company.service';
+import { User } from '../user.model';
+import { UserService } from '../user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'cdb-login',
@@ -7,12 +10,22 @@ import {CompanyService} from '../../company/company.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  private user: User;
 
-  constructor(private _companyService: CompanyService) {
-    this._companyService.get({}).subscribe(_ => console.log(_));
+  constructor(private userService: UserService, private router: Router) {
+    this.user = new User('', '');
   }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  login() {
+    localStorage.removeItem(UserService.token_key);
+    this.userService.authenticate(this.user).subscribe(res => this.setSession(res));
+    this.router.navigateByUrl('/');
   }
 
+  private setSession(res) {
+    localStorage.setItem(UserService.token_key, res.token);
+    console.log(localStorage.getItem(UserService.token_key));
+  }
 }
