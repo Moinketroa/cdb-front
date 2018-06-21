@@ -28,6 +28,9 @@ export class LoginComponent implements OnInit {
   constructor(private userService: UserService, private router: Router, private appService: AppService) {
     this.user = new User('', '');
     this.appService.changeTitle('Login');
+    if (localStorage.getItem(UserService.token_key) !== null) {
+      this.router.navigate(['/computer']).catch();
+    }
   }
 
   ngOnInit() {}
@@ -35,11 +38,11 @@ export class LoginComponent implements OnInit {
   login() {
     localStorage.removeItem(UserService.token_key);
     this.userService.authenticate(this.user).subscribe(res => this.setSession(res));
-    this.router.navigateByUrl('/');
   }
 
   private setSession(res) {
     localStorage.setItem(UserService.token_key, res.token);
     console.log(localStorage.getItem(UserService.token_key));
+    this.router.navigate(['/computer']).catch();
   }
 }

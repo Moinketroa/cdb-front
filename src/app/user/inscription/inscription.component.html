@@ -52,11 +52,10 @@
           </p>
         </div>
         <mat-card-actions>
-          <button class="mat-button" mat-raised-button (click)="signUp()" type="submit" [disabled]="!userForm.valid" i18n>Sign up</button>
           <button class="mat-button" color="warn" mat-flat-button routerLink="/login" i18n>Cancel</button>
+          <button class="mat-button" mat-raised-button (click)="signUp()" type="submit" [disabled]="!userForm.valid" i18n>Sign up</button>
         </mat-card-actions>
       </form>
     </mat-card-content>
-
   </mat-card>
 </div>
