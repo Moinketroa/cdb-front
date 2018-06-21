@@ -36,5 +36,8 @@
       <button mat-menu-item routerLink="company" i18n>Check all companies</button>
     </mat-menu>
   </div>
-  <a href="#" class="menu-title" [routerLink]="['computer/']"> Computer Database</a>
+  <a href="#" class="menu-title" [routerLink]="['/computer/']"> Computer Database</a>
+  <ul *ngIf="title">
+    <li>{{ this.title }}</li>
+  </ul>
 </mat-toolbar>
