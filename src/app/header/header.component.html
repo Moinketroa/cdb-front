@@ -3,7 +3,13 @@
   <ul *ngIf="title">
     <li>{{ this.title }}</li>
   </ul>
-  <div class="nav-right">
+  <div class="nav-right" *ngIf="!isConnected()">
+    <button mat-button mat-raised-button *ngIf="!isConnected()" (click)="logout()">
+      <mat-icon>
+        <i class="material-icons">power_settings_new</i>
+      </mat-icon>
+      <span i18n>Logout</span>
+    </button>
     <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>
         <i class="material-icons">view_headline</i>
@@ -18,12 +24,6 @@
       </button>
       <button mat-menu-item [matMenuTriggerFor]="company">
         <span i18n>Company</span>
-      </button>
-      <button *ngIf="!isConnected()" (click)="logout()" mat-menu-item>
-        <mat-icon>
-          <i class="material-icons">power_settings_new</i>
-        </mat-icon>
-        <span i18n>Logout</span>
       </button>
     </mat-menu>
 

@@ -12,5 +12,7 @@ li {
 }
 
 .nav-right {
-  float: right;
+  display: flex;
+  justify-content: right;
+  flex: 1 1 auto;
 }

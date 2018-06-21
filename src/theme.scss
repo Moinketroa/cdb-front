@@ -1,19 +1,21 @@
 @import '~@angular/material/theming';
 @include mat-core();
 
-$cdb-primary: mat-palette($mat-red);
+$cdb-primary: mat-palette($mat-indigo);
 $cdb-accent:  mat-palette($mat-pink);
 $cdb-warn:    mat-palette($mat-deep-orange);
 
-$cdb-theme: mat-light-theme($cdb-primary, $cdb-accent, $cdb-warn);
+$cdb-theme: mat-dark-theme($cdb-primary, $cdb-accent, $cdb-warn);
 
 @include angular-material-theme($cdb-theme);
 
-.alternate-theme {
-  $alternate-primary: mat-palette($mat-amber);
-  $alternate-accent:  mat-palette($mat-orange);
 
-  $alternate-theme: mat-light-theme($alternate-primary, $alternate-accent);
+.alternate-theme {
+  $alternate-primary: mat-palette($mat-blue-grey);
+  $alternate-accent:  mat-palette($mat-red);
+
+  $alternate-theme: mat-dark-theme($alternate-primary, $alternate-accent);
 
   @include angular-material-theme($alternate-theme);
+  @include mat-card-theme($alternate-theme);
 }

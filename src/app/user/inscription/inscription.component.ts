@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {User} from '../user.model';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AppService} from '../../app.service';
 
 @Component({
   selector: 'cdb-inscription',
@@ -25,8 +26,9 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/form
 export class InscriptionComponent implements OnInit {
   userForm: FormGroup;
 
-  constructor(private userService: UserService, private router: Router,  private fb: FormBuilder) {
+  constructor(private userService: UserService, private router: Router,  private fb: FormBuilder, private appService: AppService) {
     this.createForm();
+    this.appService.changeTitle('Signup');
   }
 
   ngOnInit() {
