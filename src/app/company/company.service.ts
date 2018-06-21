@@ -24,7 +24,7 @@ export class CompanyService {
         .set('page', page.toString())
         .set('limit', limit.toString())
         .set('search', search)};
-    return this.httpClient.get(this._baseUrl, options);
+    return this.httpClient.get(this._baseUrl + '/filter', options);
   }
 
   getById(id: string): Observable<Company> {

@@ -2,7 +2,6 @@ import {
   Component,
   OnInit,
   ViewChild,
-  AfterContentInit,
   AfterViewChecked
 } from '@angular/core';
 import { PageEvent, MatPaginator } from '@angular/material';
@@ -18,9 +17,8 @@ import {
   trigger
 } from '@angular/animations';
 import { AppService } from '../../app.service';
-import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
+import { FormControl, Validators } from '@angular/forms';
+import { Observable, of } from 'rxjs';
 @Component({
   selector: 'cdb-companies',
   templateUrl: './companies.component.html',
@@ -61,27 +59,25 @@ export class CompaniesComponent implements OnInit, AfterViewChecked {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  myControl = new FormControl();
-  filteredOptions: Observable<Company[]>;
-  options = [
-    {id: 1, name: 'Foo'},
-    {id: 2, name: 'Boo'}
-  ];
+  searchControl: FormControl;
+  filteredCompanies$: Observable<Company[]>;
 
   transition = 'init';
 
   pageEvent(pageInfo: PageEvent) {
-    this.loadContent(pageInfo.pageIndex + 1, pageInfo.pageSize);
     if (pageInfo.pageSize !== this.pageInfo.pageSize) {
       this.transition = 'init';
     } else {
       this.transition =
         this.pageInfo.pageIndex > pageInfo.pageIndex ? 'left' : 'right';
     }
-    this.pageInfo = pageInfo;
     this.router.navigateByUrl(
+      this.isInFilterMode() ?
       `/company/page/${pageInfo.pageIndex + 1}/limit/${pageInfo.pageSize}`
+      : `/company/search/${this.readSearchParameter()}/page/${pageInfo.pageIndex + 1}/limit/${pageInfo.pageSize}`
     );
+    this.loadContent(pageInfo.pageIndex + 1, pageInfo.pageSize);
+    this.pageInfo = pageInfo;
   }
 
   constructor(
@@ -91,17 +87,30 @@ export class CompaniesComponent implements OnInit, AfterViewChecked {
     private appService: AppService
   ) {
     this.appService.changeTitle('Companies');
-    this.filteredOptions = this.myControl.valueChanges
-    .pipe(
-      startWith<string | Company>(''),
-      map(value => typeof value === 'string' ? value : value.name),
-      map(name => name ? this.filter(name) : this.options.slice())
-    );
+    this.searchControl.valueChanges.subscribe( searchedKeywords => {
+      if (searchedKeywords.length > 2) {
+        companyService.search({page: 1, limit: 5}, searchedKeywords)
+        .subscribe(springDataPage => {
+          this.filteredCompanies$ = of(new Page<Company>(springDataPage).content);
+        });
+      } else {
+        this.filteredCompanies$ = undefined;
+      }
+    });
   }
 
-  filter(name: string): Company[] {
-    return this.options.filter(option =>
-      option.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
+  submitSearch() {
+    if (this.searchControl.valid) {
+      if ( typeof this.searchControl.value === 'string') {
+        this.router.navigateByUrl(
+          `/company/search/${ this.searchControl.value }`
+        );
+      } else {
+        this.router.navigateByUrl(
+          `/company/edit/${ this.searchControl.value.id }`
+        );
+      }
+    }
   }
 
   displayFn(company?: Company): string | undefined {
@@ -111,6 +120,14 @@ export class CompaniesComponent implements OnInit, AfterViewChecked {
   private readPageParameter() {
     const page = this.route.snapshot.paramMap.get('page');
     return page === null ? 1 : +page;
+  }
+
+  private readSearchParameter(): string {
+    return this.route.snapshot.paramMap.get('search');
+  }
+
+  isInFilterMode() {
+    return this.readSearchParameter() && this.readSearchParameter().length > 0;
   }
 
   ngOnInit() {
@@ -132,8 +149,11 @@ export class CompaniesComponent implements OnInit, AfterViewChecked {
   }
 
   loadContent(page, limit) {
-    this.companyService.get({ page, limit }).subscribe(springDataPage => {
-      this.companies = new Page(springDataPage);
+    const usedService = this.isInFilterMode()
+    ? this.companyService.search({page, limit}, this.readSearchParameter())
+    : this.companyService.get({ page, limit });
+    usedService.subscribe(springDataPage => {
+      this.companies = new Page<Company>(springDataPage);
       this.pageInfo = {
         pageIndex: page - 1,
         pageSize: limit,
