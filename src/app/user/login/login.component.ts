@@ -4,6 +4,7 @@ import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { AppService } from '../../app.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'cdb-login',
@@ -23,21 +24,37 @@ import { AppService } from '../../app.service';
   ]
 })
 export class LoginComponent implements OnInit {
-  user: User;
+  userForm: FormGroup;
+  getErrorLogin: boolean;
 
-  constructor(private userService: UserService, private router: Router, private appService: AppService) {
-    this.user = new User('', '');
-    this.appService.changeTitle('Login');
-    if (localStorage.getItem(UserService.token_key) !== null) {
+  constructor(private userService: UserService, private router: Router, private appService: AppService, private fb: FormBuilder) {
+    if (this.checkTokenIsValid()) {
       this.router.navigate(['/computer']).catch();
     }
+    this.createForm();
+    this.appService.changeTitle('Login');
+    this.getErrorLogin = false;
+  }
+
+  private checkTokenIsValid(): boolean {
+    return localStorage.getItem(UserService.token_key) !== null;
+  }
+
+  private createForm() {
+    this.userForm = this.fb.group({
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]]
+    });
   }
 
   ngOnInit() {}
 
   login() {
+    const user = new User(this.userForm.get('username').value, this.userForm.get('password').value);
     localStorage.removeItem(UserService.token_key);
-    this.userService.authenticate(this.user).subscribe(res => this.setSession(res));
+    this.userService.authenticate(user).subscribe(res => this.setSession(res), error => {
+      this.getErrorLogin = true;
+    });
   }
 
   private setSession(res) {
