@@ -9,6 +9,8 @@ import {Company} from './company.model';
 export class CompanyService {
 
   private _baseUrl = 'http://localhost:8090/webservices/v1/company';
+  private _googleUrl = 'https://www.googleapis.com/customsearch/v1';
+  private KEY = 'AIzaSyBOYe1ve3pr3OuOUBao-7R_xyROu1aBFhQ';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -41,5 +43,12 @@ export class CompanyService {
 
   delete(company: Company): Observable<Company> {
      return this.httpClient.delete<Company>(`${this._baseUrl}/${ company.id }`);
+  }
+
+  getDetails(name: string): Observable<any> {
+    const options = { params: new HttpParams()
+        .set('key', this.KEY)
+        .set('q', name)};
+    return this.httpClient.get(this._googleUrl, options);
   }
 }
