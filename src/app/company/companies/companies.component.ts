@@ -87,6 +87,7 @@ export class CompaniesComponent implements OnInit, AfterViewChecked {
     private appService: AppService
   ) {
     this.appService.changeTitle('Companies');
+    this.searchControl = new FormControl(this.readSearchParameter(), Validators.required);
     this.searchControl.valueChanges.subscribe( searchedKeywords => {
       if (searchedKeywords.length > 2) {
         companyService.search({page: 1, limit: 5}, searchedKeywords)
