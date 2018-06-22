@@ -4,6 +4,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {Company} from '../../company/company.model';
 import {CompanyService} from '../../company/company.service';
+import {DateAdapter} from '@angular/material';
 
 @Component({
   selector: 'cdb-computer-form',
@@ -23,7 +24,8 @@ export class ComputerFormComponent implements OnInit {
   private _title: string;
   private _companies: Company[] = new Array();
 
-  constructor(private router: Router, private formBuilder: FormBuilder, private companyService: CompanyService) {
+  constructor(private router: Router, private dateAdapter: DateAdapter<Date>, private formBuilder: FormBuilder, private companyService: CompanyService) {
+    this.dateAdapter.setLocale('fr');
     this._title = 'Add Computer';
     this._computer = new Computer();
     this.buildEmptyForm();

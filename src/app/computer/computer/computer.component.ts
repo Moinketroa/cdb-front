@@ -20,10 +20,8 @@ export class ComputerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.computerService.getById(this.route.snapshot.paramMap.get('id')).subscribe(_ => {
-      this._computer = new Computer(_);
-      console.log('From API');
-      console.log(_);
+    this.computerService.getById(this.route.snapshot.paramMap.get('id')).subscribe(computer => {
+      this._computer = new Computer(computer);
     });
   }
 

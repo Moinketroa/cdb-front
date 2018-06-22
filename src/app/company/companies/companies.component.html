@@ -1,11 +1,26 @@
 <div *ngIf="companies" class="container">
-  <h1>Companies</h1>
-  <mat-paginator #paginator *ngIf="pageInfo" [length]="companies.totalElements"
-    [showFirstLastButtons]="true"
-    [pageSize]="pageInfo.pageSize"
-    [pageSizeOptions]="pageSizeOptions"
-    (page)="pageEvent($event)">
-  </mat-paginator>
+  <div id="actionsBar">
+
+    <form (ngSubmit)="submitSearch()">
+        <mat-form-field>
+          <input type="text" value="{{ searchControl.value }}" placeholder="Name" aria-label="Name" matInput [formControl]="searchControl" [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let option of filteredCompanies$ | async" [value]="option">
+              {{ option.name }}
+            </mat-option>
+          </mat-autocomplete>
+          <mat-icon matSuffix [ngStyle]="{'cursor': 'pointer'}" (click)="submitSearch()">search</mat-icon>
+        </mat-form-field>
+      </form>
+
+    <mat-paginator #paginator *ngIf="pageInfo" [length]="companies.totalElements"
+      [showFirstLastButtons]="true"
+      [pageSize]="pageInfo.pageSize"
+      [pageSizeOptions]="pageSizeOptions"
+      (page)="pageEvent($event)">
+    </mat-paginator>
+
+  </div>
   <hr>
   <cdb-company [@Animation]="transition" *ngFor=" let company of companies.content " [company] = "company" class="company-cards"></cdb-company>
 </div>

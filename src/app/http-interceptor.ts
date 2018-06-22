@@ -23,7 +23,7 @@ export class AuthInterceptor implements HttpInterceptor {
     if (idToken) {
       // head = head.set('Content-Type', 'application/x-www-form-urlencoded');
       // head = head.append('Access-Control-Allow-Origin', '*');
-      console.log(idToken);
+      // console.log(idToken);
       head = head.set('Authorization', 'Bearer ' + idToken);
     }
 
@@ -31,7 +31,7 @@ export class AuthInterceptor implements HttpInterceptor {
       headers: head
     });
 
-    console.log(cloned);
+    // console.log(cloned);
     return next.handle(cloned);
   }
 }

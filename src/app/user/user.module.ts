@@ -4,6 +4,7 @@ import {CustomMaterialModule} from '../custom-material/custom-material.module';
 import {CustomUtilModule} from '../custom-util/custom-util.module';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
+import { InscriptionComponent } from './inscription/inscription.component';
 
 @NgModule({
   imports: [
@@ -12,6 +13,6 @@ import { FormsModule } from '@angular/forms';
     CustomUtilModule,
     FormsModule
   ],
-  declarations: [LoginComponent]
+  declarations: [LoginComponent, InscriptionComponent]
 })
 export class UserModule { }

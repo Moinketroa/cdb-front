@@ -1,3 +1,43 @@
 <mat-toolbar color="primary">
-  <a href="#" class="menu-title" [routerLink]="['/']">Computer Database</a>
+  <a href="#" class="menu-title" [routerLink]="['/computer/']">Cdb</a>
+  <ul *ngIf="title">
+    <li>{{ this.title }}</li>
+  </ul>
+  <div class="nav-right" *ngIf="!isConnected()">
+    <button mat-button mat-raised-button *ngIf="!isConnected()" (click)="logout()">
+      <mat-icon>
+        <i class="material-icons">power_settings_new</i>
+      </mat-icon>
+      <span i18n>Logout</span>
+    </button>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>
+        <i class="material-icons">view_headline</i>
+      </mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="computer/">
+        <span i18n>Dashboard</span>
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="computer">
+        <span i18n>Computer</span>
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="company">
+        <span i18n>Company</span>
+      </button>
+    </mat-menu>
+
+    <mat-menu #computer="matMenu">
+      <button mat-menu-item routerLink="computer/add">
+        <span i18n>Add a new computer</span>
+      </button>
+      <button mat-menu-item i18n routerLink="computer">Check all computers</button>
+    </mat-menu>
+    <mat-menu #company="matMenu">
+      <button mat-menu-item routerLink="company/add">
+        <span i18n>Add a new company</span>
+      </button>
+      <button mat-menu-item routerLink="company" i18n>Check all companies</button>
+    </mat-menu>
+  </div>
 </mat-toolbar>

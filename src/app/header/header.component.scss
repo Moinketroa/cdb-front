@@ -2,3 +2,17 @@
   color: var(--title-color);
   text-decoration: none;
 }
+
+ul {
+  list-style: none;
+}
+
+li {
+  float: left;
+}
+
+.nav-right {
+  display: flex;
+  justify-content: right;
+  flex: 1 1 auto;
+}

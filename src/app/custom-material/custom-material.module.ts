@@ -11,7 +11,8 @@ import {
   MatTableModule,
   MatSortModule,
   MatSnackBarModule,
-  MatIconModule, MatDialogModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule
+  MatDialogModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule,
+  MatIconModule, MatMenuModule, MatAutocompleteModule
 } from '@angular/material';
 
 @NgModule({
@@ -32,7 +33,9 @@ import {
     MatDialogModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatMenuModule,
+    MatAutocompleteModule
   ],
   exports: [
     MatToolbarModule,
@@ -49,7 +52,9 @@ import {
     MatIconModule,
     MatDialogModule,
     MatSelectModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatMenuModule,
+    MatAutocompleteModule
   ],
   declarations: []
 })
