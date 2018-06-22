@@ -15,6 +15,7 @@ import {ComputersComponent} from './computer/computers/computers.component';
 import {ComputerEditComponent} from './computer/computer-edit/computer-edit.component';
 import {InscriptionComponent} from './user/inscription/inscription.component';
 import { AuthGuardService } from './auth-guard.service';
+import { CompanyDetailComponent } from './company/company-detail/company-detail.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'computer/search/:search/page/:page/limit/:limit', component: ComputersComponent, canActivate: [AuthGuardService]},
   { path: 'computer', component: ComputersComponent, canActivate: [AuthGuardService]},
   { path: 'company/add', component: CompanyAddComponent, canActivate: [AuthGuardService]},
+  { path: 'company/details/:id', component: CompanyDetailComponent, canActivate: [AuthGuardService]},
   { path: 'company/edit/:id', component: CompanyEditComponent, canActivate: [AuthGuardService]},
   { path: 'company/:id', component: CompanyComponent, canActivate: [AuthGuardService]},
   { path: 'company/search/:search', component: CompaniesComponent, canActivate: [AuthGuardService]},

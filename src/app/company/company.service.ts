@@ -28,7 +28,9 @@ export class CompanyService {
   }
 
   getById(id: string): Observable<Company> {
-    return this.httpClient.get<Company>(`${this._baseUrl}/${ id }`);
+    const options = { params: new HttpParams()
+      .set('fetch', 'EAGER')};
+    return this.httpClient.get<Company>(`${this._baseUrl}/${ id }`, options);
   }
 
   add(company: Company): Observable<Company> {

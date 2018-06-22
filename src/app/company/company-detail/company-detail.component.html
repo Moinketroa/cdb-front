@@ -1,3 +1,37 @@
-<p>
-  company-detail works!
-</p>
+<div *ngIf="company">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image">
+        <img [src]="company.image" alt="">
+      </div>
+      <mat-card-title>{{company.name}}</mat-card-title>
+      <mat-card-subtitle>&nbsp;</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="{{company.image}}" alt="">
+    <mat-card-content>
+      <p class="description">
+        Description : {{company.description}}
+      </p>
+      <p *ngIf="this.expanded">
+        Name - Introduced - Discontinued
+      </p>
+      <ul *ngIf="this.expanded">
+        <li *ngFor="let computer of company.computers">
+          {{computer.name}} - {{computer.introduced}} - {{computer.discontinued}}
+        </li>
+      </ul>
+    </mat-card-content>
+    <mat-card-actions *ngIf="this.expanded; else elseBlock">
+      <button mat-raised-button color="primary" (click)="cacherComputers()">Voir computers</button>
+      <a mat-raised-button [routerLink]="['/company/edit/', company.id]">Modifier</a>
+      <a mat-raised-button [routerLink]="['/company']">Annuler</a>
+    </mat-card-actions>
+    <ng-template #elseBlock>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="voirComputers()">Voir computers</button>
+        <a mat-raised-button [routerLink]="['/company/edit/', company.id]">Modifier</a>
+        <a mat-raised-button [routerLink]="['/company']">Annuler</a>
+      </mat-card-actions>
+    </ng-template>
+  </mat-card>
+</div>
