@@ -2,9 +2,12 @@ import {
   Component,
   OnInit,
   ViewChild,
-  AfterViewChecked
+  AfterViewChecked,
+  Input,
+  AfterContentInit,
+  AfterViewInit
 } from '@angular/core';
-import { PageEvent, MatPaginator } from '@angular/material';
+import { PageEvent, MatPaginator, MatFormField } from '@angular/material';
 import { Company } from '../company.model';
 import { CompanyService } from '../company.service';
 import { Page } from '../../page.model';
@@ -19,6 +22,7 @@ import {
 import { AppService } from '../../app.service';
 import { FormControl, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
+import { isNullOrUndefined } from 'util';
 @Component({
   selector: 'cdb-companies',
   templateUrl: './companies.component.html',
@@ -52,14 +56,14 @@ import { Observable, of } from 'rxjs';
     ])
   ]
 })
-export class CompaniesComponent implements OnInit, AfterViewChecked {
+export class CompaniesComponent implements OnInit, AfterContentInit, AfterViewChecked {
   companies: Page<Company>;
   pageInfo: PageEvent;
   pageSizeOptions = [15, 20, 30];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  searchControl: FormControl;
+  searchControl = new FormControl();
   filteredCompanies$: Observable<Company[]>;
 
   transition = 'init';
@@ -73,9 +77,15 @@ export class CompaniesComponent implements OnInit, AfterViewChecked {
     }
     this.router.navigateByUrl(
       this.isInFilterMode() ?
-      `/company/page/${pageInfo.pageIndex + 1}/limit/${pageInfo.pageSize}`
-      : `/company/search/${this.readSearchParameter()}/page/${pageInfo.pageIndex + 1}/limit/${pageInfo.pageSize}`
-    );
+      `/company/search/${this.readSearchParameter()}/page/${pageInfo.pageIndex + 1}/limit/${pageInfo.pageSize}`
+      : `/company/page/${pageInfo.pageIndex + 1}/limit/${pageInfo.pageSize}`
+    ).then(navigationWasDone => {
+      if (navigationWasDone) {
+        setTimeout(() => {
+          this.searchControl.setValue(this.readSearchParameter());
+        });
+      }
+    });
     this.loadContent(pageInfo.pageIndex + 1, pageInfo.pageSize);
     this.pageInfo = pageInfo;
   }
@@ -85,12 +95,12 @@ export class CompaniesComponent implements OnInit, AfterViewChecked {
     private router: Router,
     private route: ActivatedRoute,
     private appService: AppService
-  ) {
-    this.appService.changeTitle('Companies');
-    this.searchControl = new FormControl(this.readSearchParameter(), Validators.required);
+  ) {}
+
+  ngOnInit() {
     this.searchControl.valueChanges.subscribe( searchedKeywords => {
-      if (searchedKeywords.length > 2) {
-        companyService.search({page: 1, limit: 5}, searchedKeywords)
+      if ( !isNullOrUndefined(searchedKeywords) && searchedKeywords.length > 2) {
+        this.companyService.search({page: 1, limit: 5}, searchedKeywords)
         .subscribe(springDataPage => {
           this.filteredCompanies$ = of(new Page<Company>(springDataPage).content);
         });
@@ -98,15 +108,39 @@ export class CompaniesComponent implements OnInit, AfterViewChecked {
         this.filteredCompanies$ = undefined;
       }
     });
+    let limit = +this.route.snapshot.paramMap.get('limit');
+    if (this.pageSizeOptions.indexOf(limit) === -1) {
+      limit = this.pageSizeOptions[0];
+    }
+    this.loadContent(this.readPageParameter(), limit);
+  }
+
+  ngAfterContentInit() {
+    setTimeout(() => {
+      this.appService.changeTitle('Companies');
+    });
+  }
+
+  ngAfterViewChecked() {
+    if (this.paginator != null) {
+      if (this.pageInfo != null) {
+        this.paginator._pageIndex = this.pageInfo.pageIndex;
+      } else {
+        this.paginator._pageIndex = this.readPageParameter();
+      }
+    }
   }
 
   submitSearch() {
     if (this.searchControl.valid) {
       if ( typeof this.searchControl.value === 'string') {
         this.router.navigateByUrl(
+          this.searchControl.value.length > 0 ?
           `/company/search/${ this.searchControl.value }`
+          : `/company/page/1/limit/${ this.pageInfo.pageSize }`
         );
-      } else {
+        this.loadContent(1, this.pageInfo.pageSize, this.searchControl.value);
+      } else if ( this.searchControl.value.id ) {
         this.router.navigateByUrl(
           `/company/edit/${ this.searchControl.value.id }`
         );
@@ -128,30 +162,15 @@ export class CompaniesComponent implements OnInit, AfterViewChecked {
   }
 
   isInFilterMode() {
-    return this.readSearchParameter() && this.readSearchParameter().length > 0;
+    return this.readSearchParameter() != null;
   }
 
-  ngOnInit() {
-    let limit = +this.route.snapshot.paramMap.get('limit');
-    if (this.pageSizeOptions.indexOf(limit) === -1) {
-      limit = this.pageSizeOptions[0];
+  loadContent(page, limit, searchedKeywords?: string) {
+    if (isNullOrUndefined(searchedKeywords)) {
+      searchedKeywords = this.readSearchParameter();
     }
-    this.loadContent(this.readPageParameter(), limit);
-  }
-
-  ngAfterViewChecked() {
-    if (this.paginator != null) {
-      if (this.pageInfo != null) {
-        this.paginator._pageIndex = this.pageInfo.pageIndex;
-      } else {
-        this.paginator._pageIndex = this.readPageParameter();
-      }
-    }
-  }
-
-  loadContent(page, limit) {
     const usedService = this.isInFilterMode()
-    ? this.companyService.search({page, limit}, this.readSearchParameter())
+    ? this.companyService.search({page, limit}, searchedKeywords)
     : this.companyService.get({ page, limit });
     usedService.subscribe(springDataPage => {
       this.companies = new Page<Company>(springDataPage);
