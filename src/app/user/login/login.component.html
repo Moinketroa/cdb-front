@@ -1,8 +1,10 @@
 <div class="container">
-  <mat-card [@Animation]="'init'" class="example-card">
-    <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title i18n>LOGIN</mat-card-title>
+  <mat-card [@Animation]="'init'">
+    <mat-card-header class="title-content">
+      <div mat-card-avatar><i class="material-icons">
+        person
+      </i></div>
+      <mat-card-title >Connexion</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <form [formGroup]="userForm">

@@ -5,7 +5,7 @@ $cdb-primary: mat-palette($mat-indigo);
 $cdb-accent:  mat-palette($mat-pink);
 $cdb-warn:    mat-palette($mat-deep-orange);
 
-$cdb-theme: mat-dark-theme($cdb-primary, $cdb-accent, $cdb-warn);
+$cdb-theme: mat-light-theme($cdb-primary, $cdb-accent, $cdb-warn);
 
 @include angular-material-theme($cdb-theme);
 
