@@ -1,15 +1,6 @@
 <mat-toolbar color="primary">
   <a href="#" class="menu-title" [routerLink]="['/computer/']">Cdb</a>
-  <ul *ngIf="title">
-    <li>{{ this.title }}</li>
-  </ul>
-  <div class="nav-right" *ngIf="!isConnected()">
-    <button mat-button mat-raised-button *ngIf="!isConnected()" (click)="logout()">
-      <mat-icon>
-        <i class="material-icons">power_settings_new</i>
-      </mat-icon>
-      <span i18n>Logout</span>
-    </button>
+  <div *ngIf="!isConnected()" >
     <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>
         <i class="material-icons">view_headline</i>
@@ -39,5 +30,20 @@
       </button>
       <button mat-menu-item routerLink="company" i18n>Check all companies</button>
     </mat-menu>
+  </div>
+  <div class="nav-center">
+    <ul *ngIf="title">
+      <li>{{ this.title }}</li>
+    </ul>
+  </div>
+  <div *ngIf="!isConnected()">
+    <div class="nav-right">
+      <button mat-button mat-raised-button *ngIf="!isConnected()" (click)="logout()">
+        <mat-icon>
+          <i class="material-icons">power_settings_new</i>
+        </mat-icon>
+        <span i18n>Logout</span>
+      </button>
+    </div>
   </div>
 </mat-toolbar>
