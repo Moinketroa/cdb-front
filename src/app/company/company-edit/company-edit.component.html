@@ -15,7 +15,7 @@
             <input matInput placeholder="Nom du fournisseur" name="name" formControlName="name" value="{{ company.name }}">
           </mat-form-field>
         </div>
-        <img mat-card-image src="{{company.image}}" alt="">
+        <img mat-card-image src="{{company.image}}" alt="" *ngIf="company.image">
 
         <div class="form-group">
           <mat-form-field class="example-full-width">
@@ -28,11 +28,36 @@
             <textarea matInput placeholder="Description" class="form-control" formControlName="description" value="{{company.description}}"></textarea>
           </mat-form-field>
         </div>
-
-        <button mat-raised-button color="primary" (click)="submit()">Confirmer</button>
-        <a mat-raised-button [routerLink]="['/company/details/', company.id]">Annuler</a>
       </form>
     </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="submit()">Confirmer</button>
+      <a mat-raised-button [routerLink]="['/company/details/', company.id]">Annuler</a>
+    </mat-card-actions>
     <mat-spinner *ngIf="editForm==null"></mat-spinner>
+
+  </mat-card>
+
+  <mat-card-actions *ngIf="this.expanded; else elseBlock">
+    <button mat-raised-button color="primary" (click)="cacherComputers()">Voir computers</button>
+  </mat-card-actions>
+  <ng-template #elseBlock>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="voirComputers()">Voir computers</button>
+    </mat-card-actions>
+  </ng-template>
+
+  <mat-card class="example-card" *ngIf="expanded">
+    <mat-card-header>
+      <mat-card-title>Computers</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <ul>
+        <li *ngFor="let computer of company.computers">
+          {{computer.name}} - {{computer.introduced}} - {{computer.discontinued}}
+          <button mat-raised-button color="primary" (click)="delete(computer.id)">Delete</button>
+        </li>
+      </ul>
+    </mat-card-content>
   </mat-card>
 </div>

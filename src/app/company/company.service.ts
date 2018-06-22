@@ -41,7 +41,7 @@ export class CompanyService {
      return this.httpClient.put<Company>(`${this._baseUrl}?id=${ company.id }`, company);
   }
 
-  delete(company: Company): Observable<Company> {
-     return this.httpClient.delete<Company>(`${this._baseUrl}/${ company.id }`);
+  delete(company: Company): Observable<Number> {
+     return this.httpClient.delete<Number>(`${this._baseUrl}/${ company.id }`);
   }
 }
