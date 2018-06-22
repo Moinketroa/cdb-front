@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 import {Company} from '../company/company.model';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Computer} from './computer.model';
+import {catchError} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -36,8 +37,8 @@ export class ComputerService {
     return this.httpClient.post<Computer>(this._baseUrl, computer);
   }
 
-  update(computer: Computer, id: string): Observable<Computer> {
-    return this.httpClient.put<Computer>(`${this._baseUrl}/${ id }`, computer);
+  update(computer: Computer): Observable<Computer> {
+    return this.httpClient.put<Computer>(`${this._baseUrl}`, computer);
   }
 
   delete(computer: Computer): Observable<Computer> {

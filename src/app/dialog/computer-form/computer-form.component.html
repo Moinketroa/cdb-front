@@ -6,26 +6,34 @@
       <div class="form-group">
         <mat-form-field hintLabel="Max {{ maxLength }} characters">
           <input matInput #inputName [attr.maxlength]="maxLength" class="form-control" formControlName="name" placeholder="Computer Name">
-          <mat-hint align="end">{{inputName.value?.length || 0}}/{{ maxLength }}</mat-hint>
+          <mat-hint align="end">{{ inputName.value?.length || 0 }}/{{ maxLength }}</mat-hint>
         </mat-form-field>
 
         <mat-form-field>
-          <input type="date" matInput class="form-control" formControlName="introduced" placeholder="Introduction Date">
+          <input [matDatepicker]="introductionDatepicker" matInput class="form-control" formControlName="introduced" placeholder="Introduction Date">
+          <mat-datepicker-toggle matSuffix [for]="introductionDatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #introductionDatepicker disabled="false"></mat-datepicker>
         </mat-form-field>
 
         <mat-form-field>
-          <input type="date" matInput class="form-control" formControlName="discontinued" placeholder="Discontinuation Date">
+          <input [matDatepicker]="discontinuedDatepicker" matInput class="form-control" formControlName="discontinued" placeholder="Discontinuation Date">
+          <mat-datepicker-toggle matSuffix [for]="discontinuedDatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #discontinuedDatepicker disabled="false"></mat-datepicker>
+          <mat-error>The discontinuation date is prior to the introduction date</mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <mat-select class="form-control" formControlName="company" placeholder="Manufacturer">
-            <mat-option value="company">Option</mat-option>
+          <mat-select class="form-control" formControlName="companyId" placeholder="Manufacturer">
+            <mat-option [value]="0">No company</mat-option>
+            <div *ngFor="let company of companies">
+              <mat-option [value]="company.id">{{ company.name }}</mat-option>
+            </div>
           </mat-select>
         </mat-form-field>
       </div>
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button color="primary" [disabled]="form.invalid" type="submit">SUBMIT</button>
-      <button mat-raised-button (click)="onCancel()">CANCEL</button>
+      <button mat-raised-button (click)="onCancel()" type="button">CANCEL</button>
     </mat-card-actions>
   </form>

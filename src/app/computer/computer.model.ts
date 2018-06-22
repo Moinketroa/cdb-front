@@ -12,8 +12,8 @@ export class Computer {
     const {
       id = 0,
       name = '',
-      introduced = new Date(),
-      discontinued = new Date(),
+      introduced = null,
+      discontinued = null,
       company = '',
       companyId = 0
     } = computer;
@@ -26,8 +26,10 @@ export class Computer {
   }
 
   private static fromArrayDate(arrayDate: number[]): Date {
-    const date = new Date();
-    date.setFullYear(arrayDate[0], arrayDate[1], arrayDate[2]);
-    return date;
+    if (arrayDate !== null) {
+      const date = new Date();
+      date.setFullYear(arrayDate[0], arrayDate[1] - 1, arrayDate[2]);
+      return date;
+    }
   }
 }

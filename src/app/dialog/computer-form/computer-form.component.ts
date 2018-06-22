@@ -1,7 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Computer} from '../../computer/computer.model';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import {Company} from '../../company/company.model';
+import {CompanyService} from '../../company/company.service';
 
 @Component({
   selector: 'cdb-computer-form',
@@ -10,15 +12,26 @@ import {Router} from '@angular/router';
 })
 export class ComputerFormComponent implements OnInit {
 
+  @Output()
+  public cancelEvent: EventEmitter<void> = new EventEmitter<void>();
+  @Output()
+  public submitEvent: EventEmitter<Computer> = new EventEmitter<Computer>();
+
   private _computer: Computer;
   private _form: FormGroup;
   private _maxLength = 250;
   private _title: string;
+  private _companies: Company[] = new Array();
 
-  constructor(private router: Router, private formBuilder: FormBuilder) {
+  constructor(private router: Router, private formBuilder: FormBuilder, private companyService: CompanyService) {
     this._title = 'Add Computer';
     this._computer = new Computer();
-    this.buildForm();
+    this.buildEmptyForm();
+    companyService.get({page: 0, limit: 100}).subscribe(
+      (page: any) => page.content.forEach(
+        (company: any, index: number) => this._companies[index] = new Company(company)
+      )
+    );
   }
 
   ngOnInit() {
@@ -47,20 +60,74 @@ export class ComputerFormComponent implements OnInit {
     return this._title;
   }
 
-  buildForm() {
+  get companies(): Company[] {
+    return this._companies;
+  }
+
+  checkDates(formControl: FormControl) {
+    const dataForm = formControl.parent;
+
+    if (!dataForm) {
+      return null;
+    }
+
+    const discontinuedForm = dataForm.get('discontinued');
+    const discontinuedControl = dataForm.controls['discontinued'];
+    const introducedDate = new Date(dataForm.get('introduced').value);
+    const discontinuedDate = new Date(discontinuedForm.value);
+
+    if (discontinuedDate < introducedDate) {
+      discontinuedControl.setErrors({prior: true});
+
+      if (discontinuedForm === formControl) {
+        return {
+          discontinued: {
+            prior: true
+          }
+        };
+      }
+    } else {
+      discontinuedControl.setErrors(null);
+    }
+
+    return null;
+  }
+
+  buildForm(): void {
     this._form = this.formBuilder.group({
+      id: [this._computer.id],
       name: [this._computer.name, Validators.required],
-      introduced: [this._computer.introduced],
-      discontinued: [this._computer.discontinued],
-      company: [this._computer.company.id]
+      introduced: [this._computer.introduced, this.checkDates],
+      discontinued: [this._computer.discontinued, this.checkDates],
+      companyId: [this._computer.company.id]
     });
   }
 
-  onSubmit() {
-
+  buildEmptyForm(): void {
+    this._form = this.formBuilder.group({
+      name: ['', Validators.required],
+      introduced: [''],
+      discontinued: [''],
+      companyId: [0]
+    });
   }
 
-  onCancel() {
+  onSubmit(): void {
+    console.log("SUBMIT");
+    console.log(this._form.get('discontinued').value);
+    console.log(this._form.get('introduced').value);
+    this.submitEvent.emit(this._form.value);
+  }
 
+  onCancel(): void {
+    this.cancelEvent.emit();
+  }
+
+  private transformDate(date: Date): string {
+    if (date == null) {
+      return null;
+    }
+
+    return date.toISOString().substring(0, 10);
   }
 }

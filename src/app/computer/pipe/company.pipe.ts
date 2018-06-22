@@ -7,7 +7,7 @@ import {Company} from '../../company/company.model';
 export class CompanyPipe implements PipeTransform {
 
   transform(company: Company, args?: any): String {
-    if (company === null || company.name === '') {
+    if (company == null || company.name == null || company.name === '') {
       return 'No company provided';
     } else {
       return company.name;

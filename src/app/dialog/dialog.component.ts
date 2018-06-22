@@ -11,7 +11,6 @@ import {Company} from '../company/company.model';
 export class DialogComponent implements OnInit {
 
   constructor(private _dialogRef: MatDialogRef<DialogComponent>, @Inject(MAT_DIALOG_DATA) private _data: any) {
-    console.log(this._data);
   }
 
   ngOnInit() {
