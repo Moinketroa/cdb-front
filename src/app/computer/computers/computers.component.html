@@ -1,3 +1,5 @@
-<p>
-  computers works!
-</p>
+<div *ngIf="computers" class="container">
+  <div class="computer-cards">
+    <cdb-computer-detail [@Animation]="transition" *ngFor=" let computer of computers.content " [computer] = "computer"></cdb-computer-detail>
+  </div>
+</div>

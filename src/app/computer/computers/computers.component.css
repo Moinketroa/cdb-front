@@ -1,0 +1,6 @@
+.computer-cards {
+  display: flex;
+  flex-flow: column wrap;
+  float: left;
+  padding: 9px;
+}

@@ -1,0 +1,28 @@
+.computer-card {
+  max-width: 400px;
+  margin: 8px;
+  width: 50vw;
+}
+
+.header-icon-image {
+  transform: translateY(-12.5%);
+}
+
+i {
+  margin-left: 25%;
+}
+
+.card-content-line {
+  padding-top: 1vh;
+  display: flex;
+}
+
+* {
+  vertical-align: middle;
+  padding-right: 5px;
+}
+
+span {
+  transform: translateY(3px);
+}
+

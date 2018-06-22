@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Computer} from '../computer.model';
 
 @Component({
   selector: 'cdb-computer-detail',
@@ -7,9 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ComputerDetailComponent implements OnInit {
 
+  @Input() computer: Computer;
   constructor() { }
 
   ngOnInit() {
   }
-
 }
