@@ -1,7 +1,7 @@
 @import '~@angular/material/theming';
 @include mat-core();
 
-$cdb-primary: mat-palette($mat-red);
+$cdb-primary: mat-palette($mat-blue-grey);
 $cdb-accent:  mat-palette($mat-pink);
 $cdb-warn:    mat-palette($mat-deep-orange);
 

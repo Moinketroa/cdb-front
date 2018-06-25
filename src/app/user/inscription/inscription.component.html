@@ -6,54 +6,54 @@
           perm_identity
         </i>
       </div>
-      <mat-card-title i18n>Create a new account</mat-card-title>
+      <mat-card-title>{{'SIGNUP.NAME'| translate}}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <form [formGroup]="userForm">
         <p>
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Username*" formControlName="username" i18n-placeholder>
+            <input matInput placeholder="{{'SIGNUP.USERNAME'| translate}}*" formControlName="username">
             <mat-error>
-              <div *ngIf="userForm.get('username').hasError('required') && userForm.get('username').touched" i18n>This field should be not empty</div>
-              <div *ngIf="userForm.get('username').hasError('minlength') && userForm.get('username').touched" i18n>Must be at least 3 characters long.</div>
+              <div *ngIf="userForm.get('username').hasError('required') && userForm.get('username').touched">{{'SIGNUP.ERROR.EMPTY'| translate}}</div>
+              <div *ngIf="userForm.get('username').hasError('minlength') && userForm.get('username').touched">{{'SIGNUP.ERROR.LENGTH'| translate}}</div>
             </mat-error>
           </mat-form-field>
         </p>
         <div formGroupName="passwords">
           <p>
             <mat-form-field class="example-full-width">
-              <input matInput type="password" placeholder="Password*" formControlName="password" i18n-placeholder>
+              <input matInput type="password" placeholder="{{'SIGNUP.PASSWORD'| translate}}*" formControlName="password">
               <mat-error>
                 <div *ngIf="userForm.get(['passwords','password']).hasError('required')
-                && userForm.get(['passwords','password']).touched" i18n>
-                  This field should be not empty
+                && userForm.get(['passwords','password']).touched">
+                  {{'SIGNUP.ERROR.EMPTY'| translate}}
                 </div>
                 <div *ngIf="userForm.get(['passwords','password']).hasError('minlength')
-                && userForm.get(['passwords','password']).touched" i18n>
-                  Must be at least 3 characters long.
+                && userForm.get(['passwords','password']).touched">
+                  {{'SIGNUP.ERROR.LENGTH'| translate}}
                 </div>
               </mat-error>
             </mat-form-field>
           </p>
           <p>
             <mat-form-field class="example-full-width">
-              <input matInput type="password" placeholder="Confirm password*" formControlName="confirm_password" i18n-placeholder>
+              <input matInput type="password" placeholder="{{'SIGNUP.PASSWORD_CONFIRM'| translate}}*" formControlName="confirm_password">
+              <mat-error>
+                <div *ngIf="userForm.get(['passwords','confirm_password']).hasError('required')
+              && userForm.get(['passwords','confirm_password']).touched">
+                  {{'SIGNUP.ERROR.EMPTY'| translate}}
+                </div>
+                <div *ngIf="userForm.get(['passwords','confirm_password']).hasError('MatchPassword')
+              && userForm.get(['passwords','confirm_password']).touched">
+                  {{'SIGNUP.ERROR.CONFIRM'| translate}}
+                </div>
+              </mat-error>
             </mat-form-field>
-            <mat-error>
-              <div *ngIf="userForm.get(['passwords','confirm_password']).hasError('required')
-              && userForm.get(['passwords','confirm_password']).touched" i18n>
-                This field should be not empty
-              </div>
-              <div *ngIf="userForm.get(['passwords','confirm_password']).hasError('MatchPassword')
-              && userForm.get(['passwords','confirm_password']).touched" i18n>
-                Password does not match
-              </div>
-            </mat-error>
           </p>
         </div>
         <mat-card-actions>
-          <button class="mat-button" color="warn" mat-raised-button routerLink="/login" i18n>Cancel</button>
-          <button class="mat-button" color="primary" mat-raised-button (click)="signUp()" type="submit" [disabled]="!userForm.valid" i18n>Sign up</button>
+          <button class="mat-button" color="warn" mat-raised-button routerLink="/login">{{'SIGNUP.BUTTON.CANCEL'| translate}}</button>
+          <button class="mat-button" color="primary" mat-raised-button (click)="signUp()" type="submit" [disabled]="!userForm.valid">{{'SIGNUP.BUTTON.CONFIRM'| translate}}</button>
         </mat-card-actions>
       </form>
     </mat-card-content>

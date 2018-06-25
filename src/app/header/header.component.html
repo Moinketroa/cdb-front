@@ -33,7 +33,7 @@
   </div>
   <div class="nav-center">
     <ul *ngIf="title">
-      <li>{{ this.title }}</li>
+      <li>{{ this.title | translate }}</li>
     </ul>
   </div>
   <div *ngIf="!isConnected()">

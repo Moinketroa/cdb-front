@@ -1,0 +1,37 @@
+{
+  "HOME": {
+    "SELECT": "Change language"
+  },
+  "LOGIN": {
+    "NAME": "Login",
+    "CONNEXION": "Connexion",
+    "USERNAME": {
+      "PLACEHOLDER": "Username",
+      "ERROR": "Username missing"
+    },
+    "PASSWORD": {
+      "PLACEHOLDER": "Password",
+      "ERROR": "Password missing"
+    },
+    "ERROR": "Wrong username or password. Try again",
+    "SIGN": {
+      "UP" : "No account ? Sign up",
+      "IN" : "Sign in"
+    }
+  },
+  "SIGNUP": {
+    "NAME": "Create a new account",
+    "USERNAME": "Username",
+    "PASSWORD": "Password",
+    "PASSWORD_CONFIRM": "Confirm password",
+    "BUTTON": {
+      "CONFIRM": "Sign up",
+      "CANCEL": "Cancel"
+    },
+    "ERROR": {
+      "LENGTH": "Must be at least 3 characters long.",
+      "EMPTY": "This field should be not empty",
+      "CONFIRM": "Password does not match"
+    }
+  }
+}

@@ -14,6 +14,9 @@ import {
   MatDialogModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule,
   MatIconModule, MatMenuModule, MatAutocompleteModule
 } from '@angular/material';
+import {HttpLoaderFactory} from '../app.module';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {HttpClient} from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -35,7 +38,14 @@ import {
     MatDatepickerModule,
     MatNativeDateModule,
     MatMenuModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   exports: [
     MatToolbarModule,
@@ -54,7 +64,8 @@ import {
     MatSelectModule,
     MatDatepickerModule,
     MatMenuModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    TranslateModule
   ],
   declarations: []
 })

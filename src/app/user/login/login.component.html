@@ -4,32 +4,33 @@
       <div mat-card-avatar><i class="material-icons">
         person
       </i></div>
-      <mat-card-title >Connexion</mat-card-title>
+      <mat-card-title ><span>{{ 'LOGIN.CONNEXION' | translate }}</span></mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <form [formGroup]="userForm">
         <p>
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Username" formControlName="username" i18n-placeholder>
+            <input matInput placeholder="{{'LOGIN.USERNAME.PLACEHOLDER' | translate}}" formControlName="username">
             <mat-error>
-              <div *ngIf="userForm.get('username').hasError('required') && userForm.get('username').touched" i18n>Username missing</div>
+              <div *ngIf="userForm.get('username').hasError('required') && userForm.get('username').touched">{{'LOGIN.USERNAME.ERROR' | translate}}</div>
             </mat-error>
           </mat-form-field>
         </p>
         <p>
           <mat-form-field class="example-full-width">
-            <input matInput type="password" placeholder="Password" formControlName="password" i18n-placeholder>
+            <input matInput type="password" placeholder="{{'LOGIN.PASSWORD.PLACEHOLDER' | translate}}" formControlName="password">
             <mat-error>
-              <div *ngIf="userForm.get('password').hasError('required') && userForm.get('password').touched" i18n>Password missing</div>
+              <div *ngIf="userForm.get('password').hasError('required') && userForm.get('password').touched">{{'LOGIN.PASSWORD.ERROR' | translate}}</div>
             </mat-error>
           </mat-form-field>
         </p>
+        <mat-error *ngIf="getErrorLogin">{{'LOGIN.ERROR' | translate}}</mat-error>
         <mat-card-actions>
-          <mat-error *ngIf="getErrorLogin">Wrong username or password. Try again</mat-error>
-          <button class="mat-button" mat-raised-button color="primary" [disabled]="!userForm.valid" (click)="login()" i18n>Sign in</button>
+
+          <button class="mat-button" mat-raised-button color="primary" [disabled]="!userForm.valid" (click)="login()">{{'LOGIN.SIGN.IN' | translate}}</button>
         </mat-card-actions>
       </form>
     </mat-card-content>
-    <a class="mat-card-subtitle" routerLink="/signup">No account ? Sign up</a>
+    <a class="mat-card-subtitle" routerLink="/signup">{{'LOGIN.SIGN.UP' | translate}}</a>
   </mat-card>
 </div>
