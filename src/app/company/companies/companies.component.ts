@@ -5,7 +5,8 @@ import {
   AfterViewChecked,
   Input,
   AfterContentInit,
-  AfterViewInit
+  AfterViewInit,
+  DoCheck
 } from '@angular/core';
 import { PageEvent, MatPaginator, MatFormField } from '@angular/material';
 import { Company } from '../company.model';
@@ -56,7 +57,7 @@ import { isNullOrUndefined } from 'util';
     ])
   ]
 })
-export class CompaniesComponent implements OnInit, AfterContentInit, AfterViewChecked {
+export class CompaniesComponent implements OnInit, AfterContentInit, AfterViewChecked, DoCheck {
   companies: Page<Company>;
   pageInfo: PageEvent;
   pageSizeOptions = [15, 20, 30];
@@ -79,13 +80,7 @@ export class CompaniesComponent implements OnInit, AfterContentInit, AfterViewCh
       this.isInFilterMode() ?
       `/company/search/${this.readSearchParameter()}/page/${pageInfo.pageIndex + 1}/limit/${pageInfo.pageSize}`
       : `/company/page/${pageInfo.pageIndex + 1}/limit/${pageInfo.pageSize}`
-    ).then(navigationWasDone => {
-      if (navigationWasDone) {
-        setTimeout(() => {
-          this.searchControl.setValue(this.readSearchParameter());
-        });
-      }
-    });
+    );
     this.loadContent(pageInfo.pageIndex + 1, pageInfo.pageSize);
     this.pageInfo = pageInfo;
   }
@@ -119,6 +114,12 @@ export class CompaniesComponent implements OnInit, AfterContentInit, AfterViewCh
     setTimeout(() => {
       this.appService.changeTitle('Companies');
     });
+  }
+
+  ngDoCheck() {
+    if (this.searchControl.value == null && this.isInFilterMode()) {
+      this.searchControl.setValue(this.readSearchParameter());
+    }
   }
 
   ngAfterViewChecked() {
