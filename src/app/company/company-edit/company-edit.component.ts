@@ -65,6 +65,8 @@ export class CompanyEditComponent implements OnInit {
           isSuccess =>
             isSuccess ? this.successSnackBar() : this.oupsieSnackBar()
         );
+        const id = this.route.snapshot.paramMap.get('id');
+        this.router.navigate(['/company/details/', id]).catch();
     }
   }
 

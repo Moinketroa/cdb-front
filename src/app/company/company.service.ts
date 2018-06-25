@@ -38,6 +38,7 @@ export class CompanyService {
   }
 
   update(company: Company): Observable<Company> {
+    console.log(company);
      return this.httpClient.put<Company>(`${this._baseUrl}?id=${ company.id }`, company);
   }
 
