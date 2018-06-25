@@ -9,6 +9,10 @@
 }
 .container {
   padding: 0 5%;
+  background: white;
+}
+::ng-deep .container {
+  background: #0000001a;
 }
 
 :host {
