@@ -1,34 +1,57 @@
 <div *ngIf="company">
-  <mat-card class="example-card">
-    <mat-card-header>
-      <mat-card-title>{{company.name}}</mat-card-title>
-      <mat-card-subtitle>&nbsp;</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image src="{{company.image}}" alt="">
-    <mat-card-content>
-      <p class="description">
-        Description : {{company.description}}
-      </p>
-      <p *ngIf="this.expanded">
-        Name - Introduced - Discontinued
-      </p>
-      <ul *ngIf="this.expanded">
-        <li *ngFor="let computer of company.computers">
-          {{computer.name}} - {{computer.introduced}} - {{computer.discontinued}}
-        </li>
-      </ul>
-    </mat-card-content>
-    <mat-card-actions *ngIf="this.expanded; else elseBlock">
-      <button mat-raised-button color="primary" (click)="cacherComputers()">Voir computers</button>
-      <a mat-raised-button [routerLink]="['/company/edit/', company.id]">Modifier</a>
-      <a mat-raised-button [routerLink]="['/company']">Annuler</a>
-    </mat-card-actions>
-    <ng-template #elseBlock>
+
+  <div class="gauche">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title>{{company.name}}</mat-card-title>
+        <mat-card-subtitle>&nbsp;</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <img mat-card-image src="{{company.image}}" alt="">
+        <p class="description">
+          Description : {{company.description}}
+        </p>
+      </mat-card-content>
       <mat-card-actions>
-        <button mat-raised-button color="primary" (click)="voirComputers()">Voir computers</button>
         <a mat-raised-button [routerLink]="['/company/edit/', company.id]">Modifier</a>
         <a mat-raised-button [routerLink]="['/company']">Annuler</a>
       </mat-card-actions>
-    </ng-template>
-  </mat-card>
+    </mat-card>
+  </div>
+
+  <div class="droite">
+    <mat-card class="example-card">
+
+      <mat-card-header>
+        <mat-card-title>Computers</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <table mat-table [dataSource]="company.computers" class="mat-elevation-z8">
+
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+
+          <!-- Weight Column -->
+          <ng-container matColumnDef="introduced">
+            <th mat-header-cell *matHeaderCellDef> Introduced </th>
+            <td mat-cell *matCellDef="let element"> {{element.introduced}} </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="discontinued">
+            <th mat-header-cell *matHeaderCellDef> Discontinued </th>
+            <td mat-cell *matCellDef="let element"> {{element.discontinued}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
 </div>

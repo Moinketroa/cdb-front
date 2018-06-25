@@ -1,0 +1,30 @@
+.example-form {
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.example-card {
+  width:100%;
+  margin: auto;
+  margin-top: 2em;
+}
+table {
+  width: 100%;
+}
+.gauche{
+  float:left;
+    width:60%;
+}
+.droite{
+  margin-left: 70%;
+}
+
+img {
+  height: 180px;
+  width: 180px;
+  border-radius: 50px;
+  background-size: cover;
+}

@@ -11,18 +11,12 @@ import { ActivatedRoute } from '@angular/router';
 export class CompanyDetailComponent implements OnInit {
 
   @Input() company: Company;
-  expanded: boolean;
+  displayedColumns = ['name', 'introduced', 'discontinued'];
 
   constructor(private companyService: CompanyService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.companyService.getById(this.route.snapshot.paramMap.get('id')).subscribe(comp => this.company = comp);
-  }
-  voirComputers() {
-    this.expanded = true;
-  }
-  cacherComputers() {
-    this.expanded = false;
   }
 
 }

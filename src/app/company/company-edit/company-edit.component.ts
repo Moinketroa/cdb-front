@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Company } from '../company.model';
 import { CompanyService } from '../company.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -12,6 +12,7 @@ import {
 import { AppService } from '../../app.service';
 import { componentRefresh } from '@angular/core/src/render3/instructions';
 import { ComputerService } from '../../computer/computer.service';
+import { Computer } from '../../computer/computer.model';
 
 @Component({
   selector: 'cdb-company-edit',
@@ -21,9 +22,8 @@ import { ComputerService } from '../../computer/computer.service';
 export class CompanyEditComponent implements OnInit {
   editForm: FormGroup;
   snackBarOptions: MatSnackBarConfig;
-  expanded: boolean;
   company: Company;
-
+  displayedColumns = ['name', 'introduced', 'discontinued', 'supprimer'];
   constructor(
     private companyService: CompanyService,
     private computerService: ComputerService,
@@ -65,13 +65,18 @@ export class CompanyEditComponent implements OnInit {
           isSuccess =>
             isSuccess ? this.successSnackBar() : this.oupsieSnackBar()
         );
-        const id = this.route.snapshot.paramMap.get('id');
-        this.router.navigate(['/company/details/', id]).catch();
+      this.router.navigate(['/company/details/', this.company.id]).catch();
     }
   }
 
   delete(id: number) {
-    this.computerService.delete(id).subscribe();
+    this.computerService
+      .delete(id)
+      .subscribe(
+        isSuccess =>
+          isSuccess ? this.successSnackBar() : this.oupsieSnackBar()
+      );
+    this.router.navigate(['/company/details/', this.company.id]).catch();
   }
 
   successSnackBar() {
@@ -85,12 +90,5 @@ export class CompanyEditComponent implements OnInit {
       ...this.snackBarOptions,
       panelClass: 'oupsieSnackBar'
     });
-  }
-
-  voirComputers() {
-    this.expanded = true;
-  }
-  cacherComputers() {
-    this.expanded = false;
   }
 }
