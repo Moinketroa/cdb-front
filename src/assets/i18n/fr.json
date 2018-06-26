@@ -54,5 +54,9 @@
     "PREVIOUS": "précédent",
     "LAST": "dernière page",
     "FIRST": "première page"
+  },
+  "LANGUAGE":{
+    "EN" : "Anglais",
+    "FR" : "Français"
   }
 }

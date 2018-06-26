@@ -10,25 +10,12 @@
       <button mat-menu-item routerLink="computer/">
         <span i18n>{{ 'HOME.DASHBOARD' | translate }}</span>
       </button>
-      <button mat-menu-item [matMenuTriggerFor]="computer">
+      <button mat-menu-item routerLink="computer">
         <span i18n>{{ 'HOME.COMPUTER.NAME' | translate }}</span>
       </button>
-      <button mat-menu-item [matMenuTriggerFor]="company">
+      <button mat-menu-item routerLink="company">
         <span i18n>{{ 'HOME.COMPANY.NAME' | translate }}</span>
       </button>
-    </mat-menu>
-
-    <mat-menu #computer="matMenu">
-      <button mat-menu-item routerLink="computer/add">
-        <span i18n>{{ 'HOME.COMPUTER.ADD' | translate }}</span>
-      </button>
-      <button mat-menu-item i18n routerLink="computer">{{ 'HOME.COMPUTER.GET' | translate }}</button>
-    </mat-menu>
-    <mat-menu #company="matMenu">
-      <button mat-menu-item routerLink="company/add">
-        <span i18n>{{ 'HOME.COMPANY.ADD' | translate }}</span>
-      </button>
-      <button mat-menu-item routerLink="company" i18n>{{ 'HOME.COMPANY.GET' | translate }}</button>
     </mat-menu>
   </div>
   <div class="nav-center">
