@@ -1,0 +1,66 @@
+{
+  "HOME": {
+    "SELECT": "Change language",
+    "DASHBOARD": "Dashboard",
+    "COMPUTER": {
+      "NAME": "Computer",
+      "ADD" : "Add a new computer",
+      "GET" : "Check all computers"
+    },
+    "COMPANY":{
+      "NAME": "Company",
+      "ADD" : "Add a new company",
+      "GET" : "Check all companies"
+    },
+    "LOGOUT" : "Logout"
+  },
+  "LOGIN": {
+    "NAME": "Login",
+    "CONNEXION": "Connexion",
+    "USERNAME": {
+      "PLACEHOLDER": "Username",
+      "ERROR": "Username missing"
+    },
+    "PASSWORD": {
+      "PLACEHOLDER": "Password",
+      "ERROR": "Password missing"
+    },
+    "ERROR": "Wrong username or password. Try again",
+    "SIGN": {
+      "UP" : "No account ? Sign up",
+      "IN" : "Sign in"
+    }
+  },
+  "SIGNUP": {
+    "NAME": "Create a new account",
+    "USERNAME": "Username",
+    "PASSWORD": "Password",
+    "PASSWORD_CONFIRM": "Confirm password",
+    "BUTTON": {
+      "CONFIRM": "Sign up",
+      "CANCEL": "Cancel"
+    },
+    "ERROR": {
+      "LENGTH": "Must be at least 3 characters long.",
+      "EMPTY": "This field should be not empty",
+      "CONFIRM": "Password does not match"
+    }
+  },
+  "PAGE":{
+    "NAME":"Name",
+    "ORDERBY": {
+      "NAME": "by name",
+      "DESC": "by name(desc)"
+    },
+    "ITEMS": "Elements per page:",
+    "OF": "of",
+    "NEXT": "next",
+    "PREVIOUS": "previous",
+    "LAST": "last page",
+    "FIRST": "first page"
+  },
+  "LANGUAGE":{
+    "EN" : "English",
+    "FR" : "French"
+  }
+}

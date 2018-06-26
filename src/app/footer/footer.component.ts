@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'cdb-footer',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  @Input() translate: TranslateService;
+
+  constructor() {}
 
   ngOnInit() {
+  }
+
+  scrollTop() {
+    const posYInit = window.pageYOffset;
+    const scrollToTop = window.setInterval(() => {
+      const pos = window.pageYOffset;
+      if (pos > 0) {
+        window.scrollTo(0, pos - 0.1 * posYInit);
+      } else {
+        window.clearInterval(scrollToTop);
+      }
+    }, 16);
   }
 
 }
