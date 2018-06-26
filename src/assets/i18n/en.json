@@ -48,6 +48,10 @@
   },
   "PAGE":{
     "NAME":"Name",
+    "ORDERBY": {
+      "NAME": "by name",
+      "DESC": "by name(desc)"
+    },
     "ITEMS": "Elements per page:",
     "OF": "of",
     "NEXT": "next",

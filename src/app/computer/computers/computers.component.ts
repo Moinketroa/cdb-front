@@ -57,6 +57,9 @@ export class ComputersComponent implements OnInit {
 
   ngOnInit() {
     this.loadContent(1, 20);
+    setTimeout(() => {
+      this.appService.changeTitle('Computers');
+    });
   }
 
   loadContent(page, limit) {
