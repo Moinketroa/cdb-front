@@ -2,16 +2,25 @@
   <div id="actionsBar">
 
     <form (ngSubmit)="submitSearch()">
-        <mat-form-field>
-          <input #searchInput type="text" placeholder="Name" aria-label="Name" matInput [formControl]="searchControl" [matAutocomplete]="auto">
-          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-            <mat-option *ngFor="let option of filteredCompanies$ | async" [value]="option">
-              {{ option.name }}
-            </mat-option>
-          </mat-autocomplete>
-          <mat-icon matSuffix [ngStyle]="{'cursor': 'pointer'}" (click)="submitSearch()">search</mat-icon>
-        </mat-form-field>
-      </form>
+      <mat-form-field>
+        <input #searchInput type="text" placeholder="Name" aria-label="Name" matInput [formControl]="searchControl" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let option of filteredCompanies$ | async" [value]="option">
+            {{ option.name }}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-icon matSuffix [ngStyle]="{'cursor': 'pointer'}" (click)="submitSearch()">search</mat-icon>
+      </mat-form-field>
+    </form>
+
+    <div>
+      <mat-form-field>
+        <mat-select [formControl]="sortControl" [(value)]="activeSort">
+          <mat-option value="{{ SORTS.BY_NAME }}">by Name</mat-option>
+          <mat-option value="{{ SORTS.BY_NAME_DESC }}">by Name (Desc)</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
 
     <mat-paginator #paginator *ngIf="pageInfo" [length]="companies.totalElements"
       [showFirstLastButtons]="true"
@@ -19,15 +28,6 @@
       [pageSizeOptions]="pageSizeOptions"
       (page)="pageEvent($event)">
     </mat-paginator>
-
-    <div>
-    <mat-form-field>
-      <mat-select [formControl]="sortControl" [(value)]="activeSort">
-        <mat-option value="{{ SORTS.BY_NAME }}">by Name</mat-option>
-        <mat-option value="{{ SORTS.BY_NAME_DESC }}">by Name (Desc)</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
 
   </div>
   <hr>

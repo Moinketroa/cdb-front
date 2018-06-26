@@ -76,7 +76,7 @@ export class CompaniesComponent implements OnInit, AfterContentInit, AfterViewCh
   filteredCompanies$: Observable<Company[]>;
 
 
-  transition = 'init';
+  transition: string;
 
   pageEvent(pageInfo: PageEvent) {
     if (pageInfo.pageSize !== this.pageInfo.pageSize) {
@@ -91,13 +91,20 @@ export class CompaniesComponent implements OnInit, AfterContentInit, AfterViewCh
       if (this.activeSort !== this.SORTS.BY_NAME) {
         url += `/${this.activeSort}`;
       }
-      if (pageInfo.pageIndex > 0 || pageInfo.pageSize !== this.pageSizeOptions[0]) {
-        url += `/page/${pageInfo.pageIndex + 1}/limit/${pageInfo.pageSize}`;
-      }
     } else {
-      url = `/company/page/${pageInfo.pageIndex + 1}/limit/${pageInfo.pageSize}`;
+      url = '/company';
+      if (this.activeSort !== this.SORTS.BY_NAME) {
+        url += `/order/${this.activeSort}`;
+      }
     }
-    this.router.navigateByUrl(url);
+    const addLimit = pageInfo.pageSize !== this.pageSizeOptions[0];
+    if (pageInfo.pageIndex > 0 || addLimit) {
+      url += `/page/${pageInfo.pageIndex + 1}`;
+      if (addLimit) {
+        url += `/limit/${pageInfo.pageSize}`;
+      }
+    }
+    this.router.navigateByUrl(url + `?transition=${this.transition}`);
     this.loadContent(pageInfo.pageIndex + 1, pageInfo.pageSize);
     this.pageInfo = pageInfo;
   }
@@ -135,6 +142,7 @@ export class CompaniesComponent implements OnInit, AfterContentInit, AfterViewCh
     if (this.pageSizeOptions.indexOf(limit) === -1) {
       limit = this.pageSizeOptions[0];
     }
+    this.transition = this.route.snapshot.queryParams['transition'] || 'init';
     this.loadContent(this.readPageParameter(), limit);
   }
 
