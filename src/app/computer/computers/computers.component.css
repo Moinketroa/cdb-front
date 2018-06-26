@@ -2,5 +2,25 @@
   display: flex;
   flex-flow: column wrap;
   float: left;
-  padding: 9px;
+  padding: 0px;
+}
+
+::ng-deep .mat-paginator-container {
+  justify-content: center !important;
+}
+.container {
+  padding: 0 5%;
+  background: white;
+}
+::ng-deep .container {
+  background: #0000001a;
+}
+
+:host {
+  align-self: flex-start;
+}
+
+#actionsBar > * {
+  display: inline-block !important;
+  margin: 10px 0 0 10px;
 }

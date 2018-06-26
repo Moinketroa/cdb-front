@@ -1,4 +1,4 @@
-<mat-card class="computer-card" *ngIf="computer">
+<mat-card class="computer-card" *ngIf="computer" routerLink="/computer/{{ computer.id }}">
   <mat-card-header>
     <div mat-card-avatar class="header-icon-image">
       <i class="material-icons">desktop_windows</i>
@@ -8,15 +8,15 @@
   <mat-card-content>
     <div class="card-content-line">
       <i class="material-icons">today</i>
-      <span>{{ computer.introduced }}</span>
+      <span>{{ computer.introduced | introducedDatePipe }}</span>
     </div>
     <div class="card-content-line">
       <i class="material-icons">event</i>
-      <span>{{ computer.discontinued }}</span>
+      <span>{{ computer.discontinued | discontinuedDatePipe }}</span>
     </div>
     <div class="card-content-line">
       <i class="material-icons">local_shipping</i>
-      <span>{{ computer.company }}</span>
+      <span>{{ computer.company | companyPipe }}</span>
     </div>
   </mat-card-content>
 </mat-card>

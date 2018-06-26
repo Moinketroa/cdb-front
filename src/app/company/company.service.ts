@@ -12,7 +12,7 @@ export class CompanyService {
 
   constructor(private httpClient: HttpClient) { }
 
-  get({page = 1, limit = 10}, order: string): Observable<any> {
+  get({page = 1, limit = 10}, order: string = 'BY_NAME'): Observable<any> {
     const options = { params: new HttpParams()
         .set('page', page.toString())
         .set('limit', limit.toString())
@@ -25,7 +25,7 @@ export class CompanyService {
         .set('page', page.toString())
         .set('limit', limit.toString())
         .set('search', search)
-        .set('order', order),
+        .set('order', order)
       };
     return this.httpClient.get(this._baseUrl, options);
   }

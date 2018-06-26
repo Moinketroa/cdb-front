@@ -8,7 +8,17 @@ import {Computer} from '../computer.model';
 })
 export class ComputerDetailComponent implements OnInit {
 
-  @Input() computer: Computer;
+  private _computer: Computer;
+
+  @Input()
+  set computer(computer: any) {
+    this._computer = new Computer(computer);
+  }
+
+  get computer(): any {
+    return this._computer;
+  }
+
   constructor() { }
 
   ngOnInit() {
