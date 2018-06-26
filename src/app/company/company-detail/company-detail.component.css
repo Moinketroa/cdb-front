@@ -12,14 +12,9 @@
   margin-top: 2em;
 }
 table {
+  margin-left: 5%;
+  margin-right: 5%;
   width: 100%;
-}
-.gauche{
-  float:left;
-    width:60%;
-}
-.droite{
-  margin-left: 70%;
 }
 
 img {
@@ -27,4 +22,9 @@ img {
   width: 180px;
   border-radius: 50px;
   background-size: cover;
+}
+
+:host {
+  width: 100%;
+  height: 100%;
 }
