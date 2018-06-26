@@ -51,7 +51,9 @@ export class ComputersComponent implements OnInit {
   constructor( private computerService: ComputerService,
                private router: Router,
                private route: ActivatedRoute,
-               private appService: AppService) { }
+               private appService: AppService) {
+    this.appService.changeTitle('HOME.COMPUTER.NAME');
+  }
 
   ngOnInit() {
     this.loadContent(1, 20);

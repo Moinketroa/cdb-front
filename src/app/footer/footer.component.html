@@ -1,4 +1,8 @@
-<mat-toolbar color="primary">
+<mat-toolbar class="footer" color="primary">
+  <button mat-icon-button (click)="scrollTop()">
+    <mat-icon class="material-icons"> expand_less
+    </mat-icon>
+  </button>
   <span class="footer-content">Computer Database - 2018</span>
   <select class="footer-lang" #langSelect (change)="translate.use(langSelect.value)">
     <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">

@@ -1,6 +1,18 @@
 {
   "HOME": {
-    "SELECT": "Changer la langue"
+    "SELECT": "Changer la langue",
+    "DASHBOARD": "Page principal",
+    "COMPUTER": {
+      "NAME": "Ordinateur",
+      "ADD" : "Ajouter un nouvel ordinateur",
+      "GET" : "Voir la liste"
+    },
+    "COMPANY":{
+      "NAME": "Compagnie",
+      "ADD" : "Ajouter une nouvelle compagnie",
+      "GET" : "Voir la liste"
+    },
+    "LOGOUT" : "Se déconnecter"
   },
   "LOGIN": {
     "NAME": "Page de connexion",

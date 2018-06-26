@@ -1,6 +1,18 @@
 {
   "HOME": {
-    "SELECT": "Change language"
+    "SELECT": "Change language",
+    "DASHBOARD": "Dashboard",
+    "COMPUTER": {
+      "NAME": "Computer",
+      "ADD" : "Add a new computer",
+      "GET" : "Check all computers"
+    },
+    "COMPANY":{
+      "NAME": "Company",
+      "ADD" : "Add a new company",
+      "GET" : "Check all companies"
+    },
+    "LOGOUT" : "Logout"
   },
   "LOGIN": {
     "NAME": "Login",

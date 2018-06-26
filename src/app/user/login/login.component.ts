@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit {
   constructor(private userService: UserService, private router: Router, private appService: AppService, private fb: FormBuilder) {
     if (this.checkTokenIsValid()) {
       this.router.navigate(['/computer']).catch();
-      this.appService.changeTitle('Computer');
     }
     this.createForm();
     this.appService.changeTitle('LOGIN.NAME');

@@ -22,10 +22,6 @@ export function gettoken() {
   return localStorage.getItem(UserService.token_key);
 }
 
-export function HttpLoaderFactory(httpClient: HttpClient) {
-  return new TranslateHttpLoader(httpClient);
-}
-
 const jwtConf: JwtModuleOptions = {
   config: {
     tokenGetter: gettoken,

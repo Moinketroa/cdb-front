@@ -8,27 +8,27 @@
     </button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item routerLink="computer/">
-        <span i18n>Dashboard</span>
+        <span i18n>{{ 'HOME.DASHBOARD' | translate }}</span>
       </button>
       <button mat-menu-item [matMenuTriggerFor]="computer">
-        <span i18n>Computer</span>
+        <span i18n>{{ 'HOME.COMPUTER.NAME' | translate }}</span>
       </button>
       <button mat-menu-item [matMenuTriggerFor]="company">
-        <span i18n>Company</span>
+        <span i18n>{{ 'HOME.COMPANY.NAME' | translate }}</span>
       </button>
     </mat-menu>
 
     <mat-menu #computer="matMenu">
       <button mat-menu-item routerLink="computer/add">
-        <span i18n>Add a new computer</span>
+        <span i18n>{{ 'HOME.COMPUTER.ADD' | translate }}</span>
       </button>
-      <button mat-menu-item i18n routerLink="computer">Check all computers</button>
+      <button mat-menu-item i18n routerLink="computer">{{ 'HOME.COMPUTER.GET' | translate }}</button>
     </mat-menu>
     <mat-menu #company="matMenu">
       <button mat-menu-item routerLink="company/add">
-        <span i18n>Add a new company</span>
+        <span i18n>{{ 'HOME.COMPANY.ADD' | translate }}</span>
       </button>
-      <button mat-menu-item routerLink="company" i18n>Check all companies</button>
+      <button mat-menu-item routerLink="company" i18n>{{ 'HOME.COMPANY.GET' | translate }}</button>
     </mat-menu>
   </div>
   <div class="nav-center">
@@ -42,7 +42,7 @@
         <mat-icon>
           <i class="material-icons">power_settings_new</i>
         </mat-icon>
-        <span i18n>Logout</span>
+        <span i18n>{{ 'HOME.LOGOUT' | translate }}</span>
       </button>
     </div>
   </div>
