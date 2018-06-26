@@ -3,12 +3,12 @@
     "SELECT": "Changer la langue",
     "DASHBOARD": "Page principal",
     "COMPUTER": {
-      "NAME": "Ordinateur",
+      "NAME": "Ordinateurs",
       "ADD" : "Ajouter un nouvel ordinateur",
       "GET" : "Voir la liste"
     },
     "COMPANY":{
-      "NAME": "Compagnie",
+      "NAME": "Compagnies",
       "ADD" : "Ajouter une nouvelle compagnie",
       "GET" : "Voir la liste"
     },
@@ -27,7 +27,7 @@
     },
     "ERROR": "Mauvais mot de passe ou nom de compte. Réessayer",
     "SIGN": {
-      "UP" : "S'enregristrer",
+      "UP" : "S'enregistrer",
       "IN" : "Se connecter"
     }
   },
@@ -36,21 +36,31 @@
     "USERNAME":"Nom compte",
     "PASSWORD":"Mot de passe",
     "PASSWORD_CONFIRM": "Confirmation du mot de passe",
-    "BUTTON": {
-      "CONFIRM": "S'enregistrer",
-      "CANCEL": "Annuler"
-    },
     "ERROR": {
       "LENGTH": "Plus de 3 caractères est requis",
       "EMPTY": "Ce champ ne doit pas être vide",
       "CONFIRM": "Le mot de passe ne correspond pas"
     }
   },
+  "BUTTON": {
+    "CONFIRM": "Valider",
+    "CANCEL": "Annuler"
+  },
+  "MESSAGE": {
+    "CONFIRM": "Etes vous sur de confirmer cette action ?",
+    "ERROR_LENGHT" : "La date de sortie doit etre avant la date de retrait"
+  },
   "PAGE":{
     "NAME":"Nom",
     "ORDERBY": {
       "NAME": "par nom",
-      "DESC": "par nom(décroissant)"
+      "DESC": "par nom(décroissant)",
+      "DATEINTRO": "par date de sortie",
+      "DATEINTRO_DESC": "par date de sortie(décroissant)",
+      "DATEDISC": "par date de retrait",
+      "DATEDISC_DESC": "par date de retrait(décroissant)",
+      "COMPANY": "par compagnie",
+      "COMPANY_DESC": "par compagnie(décroissant)"
     },
     "ITEMS": "Elements par page:",
     "OF": "à",
@@ -58,6 +68,29 @@
     "PREVIOUS": "précédent",
     "LAST": "dernière page",
     "FIRST": "première page"
+  },
+  "COMPUTER": {
+    "NAME": "Ordinateur",
+    "CNAME": "Nom de l'ordinateur",
+    "INTRO" : "Date de sortie",
+    "DISC" : "Date de retrait",
+    "COMPANY" : "Entreprise",
+    "ADD" : "Ajouter un nouvel ordinateur",
+    "GET" : "Voir les ordinateurs",
+    "DELETE": "Effacer",
+    "UPDATE": "Editer",
+    "NOCOMPANY": "Pas de compagnie",
+    "NODATEINTRO": "Pas de date de sortie",
+    "NODATEDISC": "Pas de date de retrait",
+    "GETINTRO": "Date de sortie :",
+    "GETDISC": "Date de retrait :"
+  },
+  "COMPANY":{
+    "NAME": "Compagnie",
+    "ADD" : "Ajouter une nouvelle compagnie",
+    "GET" : "Voir toutes compagnies",
+    "DELETE": "Effacer",
+    "UPDATE": "Editer"
   },
   "LANGUAGE":{
     "EN" : "Anglais",

@@ -21,9 +21,9 @@ import {FormControl} from '@angular/forms';
       transition('void => init', [
         style({
           opacity: 0,
-          transform: 'translateY(-100%)'
+          transform: 'translateY(-10%)'
         }),
-        animate('0.2s ease-in')
+        animate('0.4s ease-in')
       ]),
       state('right', style({ opacity: 1, transform: 'translateX(0)' })),
       transition('* => right', [
@@ -109,7 +109,7 @@ export class ComputersComponent implements OnInit, AfterContentInit, AfterViewCh
 
   ngAfterContentInit() {
     setTimeout(() => {
-      this.appService.changeTitle('Computers');
+      this.appService.changeTitle('HOME.COMPUTER.NAME');
     });
   }
 

@@ -39,7 +39,7 @@ export class ComputerFormComponent implements OnInit {
   @Input()
   set computer(computer: Computer) {
     this._computer = computer;
-    this._title = 'Form Computer';
+    this._title = 'COMPUTER.ADD';
     this.buildForm();
   }
 

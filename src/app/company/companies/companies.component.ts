@@ -146,7 +146,7 @@ export class CompaniesComponent implements OnInit, AfterContentInit, AfterViewCh
 
   ngAfterContentInit() {
     setTimeout(() => {
-      this.appService.changeTitle('Companies');
+      this.appService.changeTitle('HOME.COMPANY.NAME');
     });
   }
 
