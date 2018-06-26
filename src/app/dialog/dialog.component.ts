@@ -28,11 +28,15 @@ export class DialogComponent implements OnInit {
     return this._data instanceof Company;
   }
 
+  get isConfirmModal(): boolean {
+    return this._data === 'Confirm';
+  }
+
   onCancel() {
     this._dialogRef.close();
   }
 
-  onSubmit(model: Computer | Company) {
+  onSubmit(model: any) {
     this._dialogRef.close(model);
   }
 }

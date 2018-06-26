@@ -1,3 +1,7 @@
+<cdb-confirm-form *ngIf="isConfirmModal"
+                  (cancelEvent)="onCancel()"
+                  (submitEvent)="onSubmit($event)">
+</cdb-confirm-form>
 <cdb-computer-form *ngIf="isDataComputer"
                    [computer]="data"
                    (cancelEvent)="onCancel()"

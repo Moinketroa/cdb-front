@@ -3,3 +3,9 @@
     <cdb-computer-detail [@Animation]="transition" *ngFor=" let computer of computers.content " [computer] = "computer"></cdb-computer-detail>
   </div>
 </div>
+
+<div class="fab-buttons">
+<button mat-fab (click)="showDialog()">
+  <i class="material-icons">add</i>
+</button>
+</div>

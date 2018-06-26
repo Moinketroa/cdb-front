@@ -7,12 +7,13 @@ import {CompanyService} from '../../company/company.service';
 import {AppService} from '../../app.service';
 import {ComputerService} from '../computer.service';
 import {Company} from '../../company/company.model';
-import {PageEvent} from '@angular/material';
+import {MatDialog, MatDialogRef, PageEvent} from '@angular/material';
+import {DialogComponent} from '../../dialog/dialog.component';
 
 @Component({
   selector: 'cdb-computers',
   templateUrl: './computers.component.html',
-  styleUrls: ['./computers.component.css'],
+  styleUrls: ['./computers.component.scss'],
   animations: [
     trigger('Animation', [
       state('init', style({ opacity: 1, transform: 'translateX(0)' })),
@@ -48,10 +49,14 @@ export class ComputersComponent implements OnInit {
   pageInfo: PageEvent;
   transition = 'init';
 
+  private _addDialog: MatDialogRef<DialogComponent>;
+
   constructor( private computerService: ComputerService,
                private router: Router,
+               private _dialog: MatDialog,
                private route: ActivatedRoute,
-               private appService: AppService) { }
+               private appService: AppService) {
+  }
 
   ngOnInit() {
     this.loadContent(1, 20);
@@ -66,6 +71,26 @@ export class ComputersComponent implements OnInit {
         length: this.computers.totalElements
       };
     });
+  }
+
+  showDialog() {
+    // open modal
+    this._addDialog = this._dialog.open(DialogComponent, {
+      width: '40vw',
+      disableClose: true,
+      data: new Computer()
+    });
+
+    // subscribe to afterClosed observable to do process
+    this._addDialog.afterClosed()
+      .subscribe(
+        (computer: any) => {
+          if (computer) {
+            this.computerService.add(computer).subscribe(
+              id => this.router.navigate(['/computer/', id])
+            );
+          }
+        });
   }
 
 }

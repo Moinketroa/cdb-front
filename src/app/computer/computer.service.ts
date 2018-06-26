@@ -34,6 +34,7 @@ export class ComputerService {
   }
 
   add(computer: Computer): Observable<Computer> {
+    console.log(computer);
     return this.httpClient.post<Computer>(this._baseUrl, computer);
   }
 
