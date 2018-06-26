@@ -45,5 +45,14 @@
       "EMPTY": "Ce champ ne doit pas être vide",
       "CONFIRM": "Le mot de passe ne correspond pas"
     }
+  },
+  "PAGE":{
+    "NAME":"Nom",
+    "ITEMS": "Elements par page:",
+    "OF": "à",
+    "NEXT": "suivant",
+    "PREVIOUS": "précédent",
+    "LAST": "dernière page",
+    "FIRST": "première page"
   }
 }

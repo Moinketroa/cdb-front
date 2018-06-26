@@ -3,11 +3,9 @@ import {
   OnInit,
   ViewChild,
   AfterViewChecked,
-  Input,
   AfterContentInit,
-  AfterViewInit
 } from '@angular/core';
-import { PageEvent, MatPaginator, MatFormField } from '@angular/material';
+import {PageEvent, MatPaginator, MatPaginatorIntl} from '@angular/material';
 import { Company } from '../company.model';
 import { CompanyService } from '../company.service';
 import { Page } from '../../page.model';
@@ -20,7 +18,7 @@ import {
   trigger
 } from '@angular/animations';
 import { AppService } from '../../app.service';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { isNullOrUndefined } from 'util';
 @Component({

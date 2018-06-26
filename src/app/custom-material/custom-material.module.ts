@@ -12,11 +12,12 @@ import {
   MatSortModule,
   MatSnackBarModule,
   MatDialogModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule,
-  MatIconModule, MatMenuModule, MatAutocompleteModule
+  MatIconModule, MatMenuModule, MatAutocompleteModule, MatPaginatorIntl
 } from '@angular/material';
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {HttpClient} from '@angular/common/http';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {CustomMatPaginatorIntl} from '../customMatPaginatorIntl';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -50,6 +51,16 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         deps: [HttpClient]
       }
     })
+  ],
+  providers: [
+    {provide: MatPaginatorIntl,
+      useFactory: (translate) => {
+        const service = new CustomMatPaginatorIntl();
+        service.injectTranslateService(translate);
+        return service;
+      },
+      deps: [TranslateService]
+    }
   ],
   exports: [
     MatToolbarModule,

@@ -45,5 +45,14 @@
       "EMPTY": "This field should be not empty",
       "CONFIRM": "Password does not match"
     }
+  },
+  "PAGE":{
+    "NAME":"Name",
+    "ITEMS": "Elements per page:",
+    "OF": "of",
+    "NEXT": "next",
+    "PREVIOUS": "previous",
+    "LAST": "last page",
+    "FIRST": "first page"
   }
 }
