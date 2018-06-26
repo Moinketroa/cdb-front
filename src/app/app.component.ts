@@ -1,10 +1,11 @@
-import {Component} from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 import { AppService } from './app.service';
 import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'cdb-root',
   templateUrl: './app.component.html',
+  encapsulation: ViewEncapsulation.Emulated,
   styleUrls: ['./app.component.scss'],
   providers: [AppService]
 })
