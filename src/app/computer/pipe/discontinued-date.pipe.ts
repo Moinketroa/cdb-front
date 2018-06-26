@@ -7,7 +7,7 @@ export class DiscontinuedDatePipe implements PipeTransform {
 
   transform(discontinued: Date, args?: any): string {
     if (discontinued == null) {
-      return 'This computer is still in production or no discontinuation date were provided.';
+      return 'No discontinuation date';
     }
 
     let result = 'Discontinued in : ';

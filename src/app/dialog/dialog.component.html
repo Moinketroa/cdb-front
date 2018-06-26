@@ -7,10 +7,11 @@
                    (cancelEvent)="onCancel()"
                    (submitEvent)="onSubmit($event)">
 </cdb-computer-form>
-<p *ngIf="isDataCompany">
-  Dialog Company !
-  <button (click)="onCancel()">Close dialog</button>
-</p>
+<cdb-company-form *ngIf="isDataCompany"
+                  [company]="data"
+                  (cancelEvent)="onCancel()"
+                  (submitEvent)="onSubmit($event)">
+</cdb-company-form>
 
 
 
