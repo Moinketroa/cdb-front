@@ -58,7 +58,7 @@ export class ComputersComponent implements OnInit, AfterContentInit, AfterViewCh
     BY_DISCONTINUED: 'BY_DISCONTINUED_DATE',
     BY_DISCONTINUED_DESC: 'BY_DISCONTINUED_DATE_DESC'
   };
-
+  
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('searchInput') searchInput: ElementRef;
 
@@ -71,7 +71,9 @@ export class ComputersComponent implements OnInit, AfterContentInit, AfterViewCh
     private router: Router,
     private route: ActivatedRoute,
     private appService: AppService
-  ) {}
+  ) {
+    this.appService.changeTitle('HOME.COMPUTER.NAME');
+  }
 
   ngOnInit() {
     this.searchControl.valueChanges.subscribe( searchedKeywords => {

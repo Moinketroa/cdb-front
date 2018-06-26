@@ -1,4 +1,40 @@
-<mat-toolbar color="primary">
+<mat-toolbar class="footer" color="primary">
+  <button mat-icon-button (click)="scrollTop()">
+    <mat-icon class="material-icons"> expand_less
+    </mat-icon>
+  </button>
   <span class="footer-content">Computer Database - 2018</span>
+  <!--<select class="footer-lang" #langSelect (change)="translate.use(langSelect.value)">
+    <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">
+      <div *ngIf="lang === 'en'">
+        <img class="mat-icon" src="https://cdn0.iconfinder.com/data/icons/flags-of-the-world-2/128/england-3-512.png">
+      </div>
+      <div *ngIf="lang === 'fr'">
+        <img class="mat-icon" src="https://cdn2.iconfinder.com/data/icons/waving-world-flags/512/france-512.png">
+      </div>
+      <div *ngIf="lang !== 'en' && lang !== 'fr'">
+        {{ lang }}
+      </div>
+    </option>
+  </select>-->
+
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>
+      <img *ngIf="translate.currentLang === 'en'" class="mat-icon" src="https://cdn0.iconfinder.com/data/icons/flags-of-the-world-2/128/england-3-512.png">
+      <img *ngIf="translate.currentLang === 'fr'" class="mat-icon" src="https://cdn2.iconfinder.com/data/icons/waving-world-flags/512/france-512.png">
+      <i class="material-icons">more_vert</i>
+    </mat-icon>
+  </button>
+
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="translate.use('en')">
+      <img class="mat-icon" src="https://cdn0.iconfinder.com/data/icons/flags-of-the-world-2/128/england-3-512.png">
+      UK English <span class="subtitle">({{'LANGUAGE.EN' | translate}})</span>
+    </button>
+    <button mat-menu-item (click)="translate.use('fr')">
+      <img class="mat-icon" src="https://cdn2.iconfinder.com/data/icons/waving-world-flags/512/france-512.png">
+      Français <span class="subtitle">({{'LANGUAGE.FR' | translate}})</span>
+    </button>
+  </mat-menu>
 </mat-toolbar>
 

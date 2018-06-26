@@ -1,0 +1,66 @@
+{
+  "HOME": {
+    "SELECT": "Changer la langue",
+    "DASHBOARD": "Page principal",
+    "COMPUTER": {
+      "NAME": "Ordinateur",
+      "ADD" : "Ajouter un nouvel ordinateur",
+      "GET" : "Voir la liste"
+    },
+    "COMPANY":{
+      "NAME": "Compagnie",
+      "ADD" : "Ajouter une nouvelle compagnie",
+      "GET" : "Voir la liste"
+    },
+    "LOGOUT" : "Se déconnecter"
+  },
+  "LOGIN": {
+    "NAME": "Page de connexion",
+    "CONNEXION": "Se connecter",
+    "USERNAME": {
+      "PLACEHOLDER": "Nom compte",
+      "ERROR": "Le nom de compte est nécessaire"
+    },
+    "PASSWORD": {
+      "PLACEHOLDER": "Mot de passe",
+      "ERROR": "Il manque votre mot de passe"
+    },
+    "ERROR": "Mauvais mot de passe ou nom de compte. Réessayer",
+    "SIGN": {
+      "UP" : "S'enregristrer",
+      "IN" : "Se connecter"
+    }
+  },
+  "SIGNUP": {
+    "NAME": "Création d'un nouveau compte",
+    "USERNAME":"Nom compte",
+    "PASSWORD":"Mot de passe",
+    "PASSWORD_CONFIRM": "Confirmation du mot de passe",
+    "BUTTON": {
+      "CONFIRM": "S'enregistrer",
+      "CANCEL": "Annuler"
+    },
+    "ERROR": {
+      "LENGTH": "Plus de 3 caractères est requis",
+      "EMPTY": "Ce champ ne doit pas être vide",
+      "CONFIRM": "Le mot de passe ne correspond pas"
+    }
+  },
+  "PAGE":{
+    "NAME":"Nom",
+    "ORDERBY": {
+      "NAME": "par nom",
+      "DESC": "par nom(décroissant)"
+    },
+    "ITEMS": "Elements par page:",
+    "OF": "à",
+    "NEXT": "suivant",
+    "PREVIOUS": "précédent",
+    "LAST": "dernière page",
+    "FIRST": "première page"
+  },
+  "LANGUAGE":{
+    "EN" : "Anglais",
+    "FR" : "Français"
+  }
+}

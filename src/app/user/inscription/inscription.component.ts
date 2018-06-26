@@ -28,7 +28,7 @@ export class InscriptionComponent implements OnInit {
 
   constructor(private userService: UserService, private router: Router,  private fb: FormBuilder, private appService: AppService) {
     this.createForm();
-    this.appService.changeTitle('Signup');
+    this.appService.changeTitle('SIGNUP.NAME');
   }
 
   ngOnInit() {
