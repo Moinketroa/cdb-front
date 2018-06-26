@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Company } from '../company.model';
+import { CompanyService } from '../company.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'cdb-company-detail',
@@ -7,9 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompanyDetailComponent implements OnInit {
 
-  constructor() { }
+  @Input() company: Company;
+  displayedColumns = ['name', 'introduced', 'discontinued'];
+
+  constructor(private companyService: CompanyService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.companyService.getById(this.route.snapshot.paramMap.get('id')).subscribe(comp => this.company = comp);
   }
 
 }
