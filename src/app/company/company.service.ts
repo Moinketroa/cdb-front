@@ -12,18 +12,21 @@ export class CompanyService {
 
   constructor(private httpClient: HttpClient) { }
 
-  get({page = 1, limit = 10}): Observable<any> {
-    const options = { params: new HttpParams()
-        .set('page', page.toString())
-        .set('limit', limit.toString())};
-    return this.httpClient.get(this._baseUrl, options);
-  }
-
-  search({page = 1, limit = 10}, search: string): Observable<any> {
+  get({page = 1, limit = 10}, order: string): Observable<any> {
     const options = { params: new HttpParams()
         .set('page', page.toString())
         .set('limit', limit.toString())
-        .set('search', search)};
+        .set('order', order)};
+    return this.httpClient.get(this._baseUrl, options);
+  }
+
+  search({page = 1, limit = 10}, search: string, order: string): Observable<any> {
+    const options = { params: new HttpParams()
+        .set('page', page.toString())
+        .set('limit', limit.toString())
+        .set('search', search)
+        .set('order', order),
+      };
     return this.httpClient.get(this._baseUrl, options);
   }
 

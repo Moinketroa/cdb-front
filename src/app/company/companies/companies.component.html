@@ -20,13 +20,14 @@
       (page)="pageEvent($event)">
     </mat-paginator>
 
+    <div>
     <mat-form-field>
-      <mat-select [(value)]="activeSort">
-        <mat-option value="byName">by Name</mat-option>
-        <mat-option value="byLastIntroduced">by last Introduced</mat-option>
-        <mat-option value="byLastDiscontinued">by last Discontinued</mat-option>
+      <mat-select [formControl]="sortControl" [(value)]="activeSort">
+        <mat-option value="{{ SORTS.BY_NAME }}">by Name</mat-option>
+        <mat-option value="{{ SORTS.BY_NAME_DESC }}">by Name (Desc)</mat-option>
       </mat-select>
     </mat-form-field>
+  </div>
 
   </div>
   <hr>
