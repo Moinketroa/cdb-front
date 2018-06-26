@@ -38,6 +38,12 @@ const routes: Routes = [
   { path: 'company', component: CompaniesComponent, canActivate: [AuthGuardService]},
   { path: 'company/page/:page', component: CompaniesComponent, canActivate: [AuthGuardService]},
   { path: 'company/page/:page/limit/:limit', component: CompaniesComponent, canActivate: [AuthGuardService]},
+  { path: 'company/order/:sort', component: CompaniesComponent, canActivate: [AuthGuardService]},
+  { path: 'company/order/:sort/page/:page', component: CompaniesComponent, canActivate: [AuthGuardService]},
+  { path: 'company/order/:sort/page/:page/limit/:limit', component: CompaniesComponent, canActivate: [AuthGuardService]},
+  { path: 'company/search/:search/:sort', component: CompaniesComponent, canActivate: [AuthGuardService]},
+  { path: 'company/search/:search/:sort/page/:page', component: CompaniesComponent, canActivate: [AuthGuardService]},
+  { path: 'company/search/:search/:sort/page/:page/limit/:limit', component: CompaniesComponent, canActivate: [AuthGuardService]},
   { path: '**', redirectTo: 'login' },
 ];
 
