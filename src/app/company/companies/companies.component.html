@@ -1,9 +1,9 @@
-<div *ngIf="companies" class="container">
+<div class="container">
   <div id="actionsBar">
 
     <form (ngSubmit)="submitSearch()">
         <mat-form-field>
-          <input type="text" placeholder="Name" aria-label="Name" matInput [formControl]="searchControl" [matAutocomplete]="auto">
+          <input #searchInput type="text" placeholder="Name" aria-label="Name" matInput [formControl]="searchControl" [matAutocomplete]="auto">
           <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
             <mat-option *ngFor="let option of filteredCompanies$ | async" [value]="option">
               {{ option.name }}
@@ -20,7 +20,17 @@
       (page)="pageEvent($event)">
     </mat-paginator>
 
+    <mat-form-field>
+      <mat-select [(value)]="activeSort">
+        <mat-option value="byName">by Name</mat-option>
+        <mat-option value="byLastIntroduced">by last Introduced</mat-option>
+        <mat-option value="byLastDiscontinued">by last Discontinued</mat-option>
+      </mat-select>
+    </mat-form-field>
+
   </div>
   <hr>
-  <cdb-company [@Animation]="transition" *ngFor=" let company of companies.content " [company] = "company" class="company-cards"></cdb-company>
+  <div *ngIf="companies">
+    <cdb-company [@Animation]="transition" *ngFor=" let company of companies.content " [company] = "company" class="company-cards"></cdb-company>
+  </div>
 </div>

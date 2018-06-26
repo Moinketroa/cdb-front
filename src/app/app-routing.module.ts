@@ -36,6 +36,9 @@ const routes: Routes = [
   { path: 'company', component: CompaniesComponent, canActivate: [AuthGuardService]},
   { path: 'company/page/:page', component: CompaniesComponent, canActivate: [AuthGuardService]},
   { path: 'company/page/:page/limit/:limit', component: CompaniesComponent, canActivate: [AuthGuardService]},
+  { path: 'company/:sort/', component: CompaniesComponent, canActivate: [AuthGuardService]},
+  { path: 'company/:sort/page/:page', component: CompaniesComponent, canActivate: [AuthGuardService]},
+  { path: 'company/:sort/page/:page/limit/:limit', component: CompaniesComponent, canActivate: [AuthGuardService]},
   { path: '**', redirectTo: 'login' },
 ];
 
