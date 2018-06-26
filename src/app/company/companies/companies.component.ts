@@ -143,7 +143,7 @@ export class CompaniesComponent implements OnInit, AfterContentInit, AfterViewCh
         this.loadContent(1, this.pageInfo.pageSize, this.searchControl.value);
       } else if ( this.searchControl.value.id ) {
         this.router.navigateByUrl(
-          `/company/edit/${ this.searchControl.value.id }`
+          `/company/details/${ this.searchControl.value.id }`
         );
       }
     }

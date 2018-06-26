@@ -28,7 +28,9 @@ export class CompanyService {
   }
 
   getById(id: string): Observable<Company> {
-    return this.httpClient.get<Company>(`${this._baseUrl}/${ id }`);
+    const options = { params: new HttpParams()
+      .set('fetch', 'EAGER')};
+    return this.httpClient.get<Company>(`${this._baseUrl}/${ id }`, options);
   }
 
   add(company: Company): Observable<Company> {
@@ -36,10 +38,11 @@ export class CompanyService {
   }
 
   update(company: Company): Observable<Company> {
+    console.log(company);
      return this.httpClient.put<Company>(`${this._baseUrl}?id=${ company.id }`, company);
   }
 
-  delete(company: Company): Observable<Company> {
-     return this.httpClient.delete<Company>(`${this._baseUrl}/${ company.id }`);
+  delete(company: Company): Observable<Number> {
+     return this.httpClient.delete<Number>(`${this._baseUrl}/${ company.id }`);
   }
 }
