@@ -24,7 +24,12 @@ export class ComputerFormComponent implements OnInit {
   private _title: string;
   private _companies: Company[] = new Array();
 
-  constructor(private router: Router, private dateAdapter: DateAdapter<Date>, private formBuilder: FormBuilder, private companyService: CompanyService) {
+  constructor(
+    private router: Router,
+    private dateAdapter: DateAdapter<Date>,
+    private formBuilder: FormBuilder,
+    private companyService: CompanyService
+  ) {
     this.dateAdapter.setLocale('fr');
     companyService.get({page: 0, limit: 100}).subscribe(
       (page: any) => page.content.forEach(

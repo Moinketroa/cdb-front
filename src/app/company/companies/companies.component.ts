@@ -7,7 +7,7 @@ import {
   AfterViewInit,
   ElementRef
 } from '@angular/core';
-import {PageEvent, MatPaginator} from '@angular/material';
+import {PageEvent, MatPaginator, MatDialog, MatDialogRef} from '@angular/material';
 import { Company } from '../company.model';
 import { CompanyService } from '../company.service';
 import { Page } from '../../page.model';
@@ -23,6 +23,8 @@ import { AppService } from '../../app.service';
 import { FormControl } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { isNullOrUndefined } from 'util';
+import {DialogComponent} from '../../dialog/dialog.component';
+import {Computer} from '../../computer/computer.model';
 @Component({
   selector: 'cdb-companies',
   templateUrl: './companies.component.html',
@@ -73,6 +75,7 @@ export class CompaniesComponent implements OnInit, AfterContentInit, AfterViewCh
   sortControl: FormControl;
   filteredCompanies$: Observable<Company[]>;
 
+  private _addDialog: MatDialogRef<DialogComponent>;
 
   transition: string;
 
@@ -110,6 +113,7 @@ export class CompaniesComponent implements OnInit, AfterContentInit, AfterViewCh
   constructor(
     private companyService: CompanyService,
     private router: Router,
+    private _dialog: MatDialog,
     private route: ActivatedRoute,
     private appService: AppService
   ) {}
@@ -217,5 +221,25 @@ export class CompaniesComponent implements OnInit, AfterContentInit, AfterViewCh
         length: this.companies.totalElements
       };
     });
+  }
+
+  showDialog() {
+    // open modal
+    this._addDialog = this._dialog.open(DialogComponent, {
+      width: '40vw',
+      disableClose: true,
+      data: new Company()
+    });
+
+    // subscribe to afterClosed observable to do process
+    this._addDialog.afterClosed()
+      .subscribe(
+        (company: any) => {
+          if (company) {
+            this.companyService.add(company).subscribe(
+              id => this.router.navigate(['/company/details/', id])
+            );
+          }
+        });
   }
 }

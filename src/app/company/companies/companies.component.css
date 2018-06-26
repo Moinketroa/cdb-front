@@ -32,3 +32,9 @@
 .subtitle {
   font-size: smaller;
 }
+
+.fab-buttons {
+  position: fixed;
+  bottom: 90px;
+  right: 90px;
+}
