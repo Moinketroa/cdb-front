@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { User } from '../user.model';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/computer']).catch();
     }
     this.createForm();
-    this.appService.changeTitle('Login');
+    this.appService.changeTitle('LOGIN.NAME');
     this.getErrorLogin = false;
   }
 

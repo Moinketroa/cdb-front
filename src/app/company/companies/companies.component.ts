@@ -3,11 +3,11 @@ import {
   OnInit,
   ViewChild,
   AfterViewChecked,
-  Input,
   AfterContentInit,
-  AfterViewInit
+  AfterViewInit,
+  ElementRef
 } from '@angular/core';
-import { PageEvent, MatPaginator, MatFormField } from '@angular/material';
+import {PageEvent, MatPaginator} from '@angular/material';
 import { Company } from '../company.model';
 import { CompanyService } from '../company.service';
 import { Page } from '../../page.model';
@@ -20,7 +20,7 @@ import {
   trigger
 } from '@angular/animations';
 import { AppService } from '../../app.service';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { isNullOrUndefined } from 'util';
 @Component({
@@ -33,9 +33,9 @@ import { isNullOrUndefined } from 'util';
       transition('void => init', [
         style({
           opacity: 0,
-          transform: 'translateY(-100%)'
+          transform: 'translateY(-10%)'
         }),
-        animate('0.2s ease-in')
+        animate('0.3s ease-in')
       ]),
       state('right', style({ opacity: 1, transform: 'translateX(0)' })),
       transition('* => right', [
@@ -56,17 +56,25 @@ import { isNullOrUndefined } from 'util';
     ])
   ]
 })
-export class CompaniesComponent implements OnInit, AfterContentInit, AfterViewChecked {
+export class CompaniesComponent implements OnInit, AfterContentInit, AfterViewChecked, AfterViewInit {
   companies: Page<Company>;
   pageInfo: PageEvent;
-  pageSizeOptions = [15, 20, 30];
+  pageSizeOptions = [15, 50, 100];
+  activeSort: string;
+  readonly SORTS = {
+    BY_NAME: 'BY_NAME',
+    BY_NAME_DESC: 'BY_NAME_DESC'
+  };
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild('searchInput') searchInput: ElementRef;
 
   searchControl = new FormControl();
+  sortControl: FormControl;
   filteredCompanies$: Observable<Company[]>;
 
-  transition = 'init';
+
+  transition: string;
 
   pageEvent(pageInfo: PageEvent) {
     if (pageInfo.pageSize !== this.pageInfo.pageSize) {
@@ -75,17 +83,26 @@ export class CompaniesComponent implements OnInit, AfterContentInit, AfterViewCh
       this.transition =
         this.pageInfo.pageIndex > pageInfo.pageIndex ? 'left' : 'right';
     }
-    this.router.navigateByUrl(
-      this.isInFilterMode() ?
-      `/company/search/${this.readSearchParameter()}/page/${pageInfo.pageIndex + 1}/limit/${pageInfo.pageSize}`
-      : `/company/page/${pageInfo.pageIndex + 1}/limit/${pageInfo.pageSize}`
-    ).then(navigationWasDone => {
-      if (navigationWasDone) {
-        setTimeout(() => {
-          this.searchControl.setValue(this.readSearchParameter());
-        });
+    let url: string;
+    if (this.isInFilterMode()) {
+      url = `/company/search/${this.readSearchParameter()}`;
+      if (this.activeSort !== this.SORTS.BY_NAME) {
+        url += `/${this.activeSort}`;
       }
-    });
+    } else {
+      url = '/company';
+      if (this.activeSort !== this.SORTS.BY_NAME) {
+        url += `/order/${this.activeSort}`;
+      }
+    }
+    const addLimit = pageInfo.pageSize !== this.pageSizeOptions[0];
+    if (pageInfo.pageIndex > 0 || addLimit) {
+      url += `/page/${pageInfo.pageIndex + 1}`;
+      if (addLimit) {
+        url += `/limit/${pageInfo.pageSize}`;
+      }
+    }
+    this.router.navigateByUrl(url + `?transition=${this.transition}`);
     this.loadContent(pageInfo.pageIndex + 1, pageInfo.pageSize);
     this.pageInfo = pageInfo;
   }
@@ -100,7 +117,7 @@ export class CompaniesComponent implements OnInit, AfterContentInit, AfterViewCh
   ngOnInit() {
     this.searchControl.valueChanges.subscribe( searchedKeywords => {
       if ( !isNullOrUndefined(searchedKeywords) && searchedKeywords.length > 2) {
-        this.companyService.search({page: 1, limit: 5}, searchedKeywords)
+        this.companyService.search({page: 1, limit: 5}, searchedKeywords, this.activeSort)
         .subscribe(springDataPage => {
           this.filteredCompanies$ = of(new Page<Company>(springDataPage).content);
         });
@@ -108,10 +125,22 @@ export class CompaniesComponent implements OnInit, AfterContentInit, AfterViewCh
         this.filteredCompanies$ = undefined;
       }
     });
+    this.activeSort = this.route.snapshot.paramMap.get('sort');
+    if (isNullOrUndefined(this.activeSort) || Object.values(this.SORTS).indexOf(this.activeSort) === -1) {
+      this.activeSort = this.SORTS.BY_NAME;
+    }
+    this.sortControl = new FormControl(this.activeSort);
+    this.sortControl.valueChanges.subscribe( activatedSort => {
+      this.router.navigateByUrl('/company/' +
+      (this.isInFilterMode() ? `search/${this.readSearchParameter()}/` : 'order/') +
+      `${activatedSort}/page/1/limit/${this.pageInfo.pageSize}`);
+      this.loadContent(this.readPageParameter(), limit);
+    });
     let limit = +this.route.snapshot.paramMap.get('limit');
     if (this.pageSizeOptions.indexOf(limit) === -1) {
       limit = this.pageSizeOptions[0];
     }
+    this.transition = this.route.snapshot.queryParams['transition'] || 'init';
     this.loadContent(this.readPageParameter(), limit);
   }
 
@@ -119,6 +148,14 @@ export class CompaniesComponent implements OnInit, AfterContentInit, AfterViewCh
     setTimeout(() => {
       this.appService.changeTitle('Companies');
     });
+  }
+
+  ngAfterViewInit() {
+    if (!isNullOrUndefined(this.searchInput) && this.searchInput.nativeElement.value.length === 0 && this.isInFilterMode()) {
+      setTimeout(() => {
+        this.searchInput.nativeElement.value = this.readSearchParameter();
+      });
+    }
   }
 
   ngAfterViewChecked() {
@@ -170,8 +207,8 @@ export class CompaniesComponent implements OnInit, AfterContentInit, AfterViewCh
       searchedKeywords = this.readSearchParameter();
     }
     const usedService = this.isInFilterMode()
-    ? this.companyService.search({page, limit}, searchedKeywords)
-    : this.companyService.get({ page, limit });
+    ? this.companyService.search({page, limit}, searchedKeywords, this.activeSort)
+    : this.companyService.get({ page, limit }, this.activeSort);
     usedService.subscribe(springDataPage => {
       this.companies = new Page<Company>(springDataPage);
       this.pageInfo = {

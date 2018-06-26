@@ -1,6 +1,42 @@
-<div *ngIf="computers" class="container">
-  <div class="computer-cards">
-    <cdb-computer-detail [@Animation]="transition" *ngFor=" let computer of computers.content " [computer] = "computer"></cdb-computer-detail>
+<div class="container">
+  <div id="actionsBar">
+
+    <form (ngSubmit)="submitSearch()">
+      <mat-form-field>
+        <input #searchInput type="text" placeholder="Name" aria-label="Name" matInput [formControl]="searchControl" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let option of filteredComputers$ | async" [value]="option">
+            {{ option.name }}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-icon matSuffix [ngStyle]="{'cursor': 'pointer'}" type="submit">search</mat-icon>
+      </mat-form-field>
+    </form>
+
+    <mat-paginator #paginator *ngIf="pageInfo" [length]="computers.totalElements"
+                   [showFirstLastButtons]="true"
+                   [pageSize]="pageInfo.pageSize"
+                   [pageSizeOptions]="pageSizeOptions"
+                   (page)="pageEvent($event)">
+    </mat-paginator>
+
+    <div>
+      <mat-form-field>
+        <mat-select [formControl]="sortControl" [(value)]="activeSort">
+          <mat-option value="{{ SORTS.BY_NAME }}">by Name</mat-option>
+          <mat-option value="{{ SORTS.BY_NAME_DESC }}">by Name (Desc)</mat-option>
+          <mat-option value="{{ SORTS.BY_INTRODUCED }}">by Introduction Date</mat-option>
+          <mat-option value="{{ SORTS.BY_INTRODUCED_DESC }}">by Introduction Date (Desc)</mat-option>
+          <mat-option value="{{ SORTS.BY_DISCONTINUED }}">by Discontinuation Date</mat-option>
+          <mat-option value="{{ SORTS.BY_DISCONTINUED_DESC }}">by Discontinuation Date (Desc)</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+  </div>
+  <hr>
+  <div class="page" *ngIf="computers">
+    <cdb-computer-detail [@Animation]="transition" *ngFor=" let computer of computers.content " [computer] = "computer" class="computer-cards"></cdb-computer-detail>
   </div>
 </div>
 

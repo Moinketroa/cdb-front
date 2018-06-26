@@ -1,5 +1,3 @@
-import {Company} from './company/company.model';
-
 export class Page<T> {
   content: T[];
   totalPages: number;

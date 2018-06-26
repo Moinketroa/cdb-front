@@ -11,13 +11,16 @@ import {DiscontinuedDatePipe} from './pipe/discontinued-date.pipe';
 import {IntroducedDatePipe} from './pipe/introduced-date.pipe';
 import { CompanyPipe } from './pipe/company.pipe';
 import {DialogModule} from '../dialog/dialog.module';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     CustomMaterialModule,
     CustomUtilModule,
-    DialogModule
+    DialogModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     ComputerComponent,
