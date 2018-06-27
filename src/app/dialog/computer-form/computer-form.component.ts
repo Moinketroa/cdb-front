@@ -108,10 +108,24 @@ export class ComputerFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log('SUBMIT');
-    console.log(this._form.get('discontinued').value);
-    console.log(this._form.get('introduced').value);
-    console.log(this._form.value);
+    const introDate: Date = this._form.get('introduced').value;
+    const discoDate: Date = this._form.get('discontinued').value;
+
+    if (introDate.getHours() < 3) {
+      introDate.setHours(3);
+    }
+    if (discoDate.getHours() < 3) {
+      discoDate.setHours(3);
+    }
+
+    this._form.setValue({
+      id: this._form.get('id').value,
+      name: this._form.get('name').value,
+      introduced: introDate,
+      discontinued: discoDate,
+      companyId: this._form.get('companyId').value
+    });
+
     this.submitEvent.emit(this._form.value);
   }
 
