@@ -1,23 +1,19 @@
 <div *ngIf="company">
-
-  <div class="gauche">
-    <mat-card class="example-card">
+    <mat-card class="company-card">
       <mat-card-header>
-        <mat-card-title>Edition d'une entreprise</mat-card-title>
-        <!-- <mat-card-subtitle>id:
-        <span *ngIf="company">{{ company.id }}</span>
-      </mat-card-subtitle> -->
+        <mat-card-title>Company Edit</mat-card-title>
       </mat-card-header>
       <mat-card-content *ngIf="editForm">
         <form class="example-form" [formGroup]="editForm">
 
           <div class="form-group">
-            <mat-form-field class="example-full-width" appearance="outline">
+            <mat-form-field class="example-full-width" hintLabel="Max {{ nameMaxLength }} characters">
               <mat-label>Nom du fournisseur</mat-label>
-              <input matInput placeholder="Nom du fournisseur" name="name" formControlName="name" value="{{ company.name }}">
+              <input matInput #inputName [attr.maxlength]="nameMaxLength" placeholder="Nom du fournisseur" name="name" formControlName="name" value="{{ company.name }}">
+              <mat-hint align="end">{{ inputName.value?.length || 0 }}/{{ nameMaxLength }}</mat-hint>
             </mat-form-field>
           </div>
-          <img mat-card-image src="{{company.image}}" alt="" *ngIf="company.image">
+          <img mat-card-image src="{{image}}" alt="">
 
           <div class="form-group">
             <mat-form-field class="example-full-width">
@@ -26,8 +22,9 @@
           </div>
 
           <div class="form-group">
-            <mat-form-field class="example-full-width">
-              <textarea matInput placeholder="Description" class="form-control" formControlName="description" value="{{company.description}}"></textarea>
+            <mat-form-field class="example-full-width" hintLabel="Max {{ descMaxLength }} characters">
+              <textarea rows="10" matInput #inputDescription [attr.maxlength]="descMaxLength" placeholder="Description" class="form-control" formControlName="description" value="{{company.description}}"></textarea>
+              <mat-hint align="end">{{ inputDescription.value?.length || 0 }}/{{ descMaxLength }}</mat-hint>
             </mat-form-field>
           </div>
         </form>
@@ -38,41 +35,32 @@
       </mat-card-actions>
       <mat-spinner *ngIf="editForm==null"></mat-spinner>
 
-    </mat-card>
-  </div>
-  <div class="droite">
-
-    <mat-card class="example-card">
-
-      <mat-card-header>
-        <mat-card-title>Computers</mat-card-title>
-      </mat-card-header>
-
       <mat-card-content>
-        <table mat-table [dataSource]="company.computers" class="mat-elevation-z8">
+      </mat-card-content>
+        <table mat-table [dataSource]="company.computers">
 
           <!-- Name Column -->
           <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef> Name </th>
-            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            <th mat-header-cell *matHeaderCellDef class="cell-name"> Name </th>
+            <td mat-cell *matCellDef="let element" class="cell-name"> {{element.name}} </td>
           </ng-container>
 
           <!-- Weight Column -->
           <ng-container matColumnDef="introduced">
-            <th mat-header-cell *matHeaderCellDef> Introduced </th>
-            <td mat-cell *matCellDef="let element"> {{element.introduced}} </td>
+            <th mat-header-cell *matHeaderCellDef class="cell-intro"> Introduced </th>
+            <td mat-cell *matCellDef="let element" class="cell-intro"> {{element.introduced | introducedDatePipe:false}} </td>
           </ng-container>
 
           <!-- Symbol Column -->
           <ng-container matColumnDef="discontinued">
-            <th mat-header-cell *matHeaderCellDef> Discontinued </th>
-            <td mat-cell *matCellDef="let element"> {{element.discontinued}} </td>
+            <th mat-header-cell *matHeaderCellDef class="cell-disco"> Discontinued </th>
+            <td mat-cell *matCellDef="let element" class="cell-disco"> {{element.discontinued | discontinuedDatePipe:false}} </td>
           </ng-container>
 
           <!-- Symbol Column -->
           <ng-container matColumnDef="supprimer">
-            <th mat-header-cell *matHeaderCellDef> Supprimer </th>
-            <td mat-cell *matCellDef="let element">
+            <th mat-header-cell *matHeaderCellDef class="cell-action"> Supprimer </th>
+            <td mat-cell *matCellDef="let element" class="cell-action">
                 <button mat-raised-button color="primary" (click)="delete(element.id)">Supprimer</button>
             </td>
           </ng-container>
@@ -80,7 +68,5 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-      </mat-card-content>
     </mat-card>
-  </div>
 </div>

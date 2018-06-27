@@ -1,3 +1,6 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
 :root {
   --title-color: white;
 }
@@ -20,11 +23,11 @@ body {
 }
 
 .successSnackBar {
-  background: greenyellow !important;
-  color: #3f51b5 !important;
+  background: darkslategrey !important;
+  color: white !important;
 }
 .oupsieSnackBar {
-  background: #673ab7 !important;
+  background: darkred !important;
   color: white !important;
 }
 

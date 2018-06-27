@@ -24,6 +24,9 @@ export class CompanyEditComponent implements OnInit {
   snackBarOptions: MatSnackBarConfig;
   company: Company;
   displayedColumns = ['name', 'introduced', 'discontinued', 'supprimer'];
+  private _nameMaxLength = 250;
+  private _descMaxLength = 1000;
+
   constructor(
     private companyService: CompanyService,
     private computerService: ComputerService,
@@ -42,16 +45,32 @@ export class CompanyEditComponent implements OnInit {
     };
   }
 
+  get nameMaxLength(): number {
+    return this._nameMaxLength;
+  }
+
+  get descMaxLength(): number {
+    return this._descMaxLength;
+  }
+
+  get image(): string {
+    if (this.editForm.get('image').value != null) {
+      return this.editForm.get('image').value;
+    } else {
+      return 'http://demo.makitweb.com/broken_image/images/noimage.png';
+    }
+  }
+
   ngOnInit() {
     this.companyService
       .getById(this.route.snapshot.paramMap.get('id'))
       .subscribe(company => {
-        this.company = company;
+        this.company = new Company(company);
         this.editForm = new FormGroup({
-          name: new FormControl(this.company.name, Validators.required),
+          name: new FormControl(this.company.name, [Validators.required, Validators.maxLength(this._nameMaxLength)]),
           id: new FormControl(this.company.id, Validators.required),
-          description: new FormControl(this.company.description),
-          image: new FormControl(this.company.description)
+          description: new FormControl(this.company.description, Validators.maxLength(this._descMaxLength)),
+          image: new FormControl(this.company.image, Validators.pattern('https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)'))
         });
       });
   }
@@ -62,10 +81,10 @@ export class CompanyEditComponent implements OnInit {
       this.companyService
         .update(this.company)
         .subscribe(
-          isSuccess =>
-            isSuccess ? this.successSnackBar() : this.oupsieSnackBar()
-        );
-      this.router.navigate(['/company/details/', this.company.id]).catch();
+          isSuccess => {
+            this.router.navigate(['/company/details/', this.company.id]).catch();
+            isSuccess ? this.successSnackBar() : this.oupsieSnackBar();
+          });
     }
   }
 
@@ -73,10 +92,14 @@ export class CompanyEditComponent implements OnInit {
     this.computerService
       .delete(id)
       .subscribe(
-        isSuccess =>
-          isSuccess ? this.successSnackBar() : this.oupsieSnackBar()
-      );
-    this.router.navigate(['/company/details/', this.company.id]).catch();
+        isSuccess => {
+          if (isSuccess) {
+            this.successSnackBar();
+            this.ngOnInit();
+          } else {
+            this.oupsieSnackBar();
+          }
+        });
   }
 
   successSnackBar() {

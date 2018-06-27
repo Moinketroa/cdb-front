@@ -21,7 +21,7 @@ export class Company {
     this.name = name;
     this.description = description;
     this.image = image;
-    this.computers = computers;
+    this.computers = computers.map(_ => new Computer(_));
   }
 
 }

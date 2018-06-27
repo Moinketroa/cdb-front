@@ -20,7 +20,7 @@ export class CompanyDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.companyService.getById(this.route.snapshot.paramMap.get('id')).subscribe(comp => this.company = comp);
+    this.companyService.getById(this.route.snapshot.paramMap.get('id')).subscribe(comp => this.company = new Company(comp));
     console.log((window.innerWidth));
     this.breakpoint = (window.innerWidth <= 2000) ? 1 : 2;
   }
