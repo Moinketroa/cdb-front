@@ -13,13 +13,14 @@
           <input [matDatepicker]="introductionDatepicker" matInput class="form-control" formControlName="introduced" placeholder="{{ 'COMPUTER.INTRO' | translate }}">
           <mat-datepicker-toggle matSuffix [for]="introductionDatepicker"></mat-datepicker-toggle>
           <mat-datepicker #introductionDatepicker disabled="false"></mat-datepicker>
+          <mat-error>{{'MESSAGE.NO_INTRODUCED' | translate}}</mat-error>
         </mat-form-field>
 
         <mat-form-field>
           <input [matDatepicker]="discontinuedDatepicker" matInput class="form-control" formControlName="discontinued" placeholder="{{ 'COMPUTER.DISC' | translate }}">
           <mat-datepicker-toggle matSuffix [for]="discontinuedDatepicker"></mat-datepicker-toggle>
           <mat-datepicker ng-model-options="{ timezone: 'utc' }" #discontinuedDatepicker disabled="false"></mat-datepicker>
-          <mat-error>{{'MESSAGE.ERROR_LENGTH' | translate}}</mat-error>
+          <mat-error>{{'MESSAGE.DISCONTINUED_PRIOR' | translate}}</mat-error>
         </mat-form-field>
 
         <mat-form-field>

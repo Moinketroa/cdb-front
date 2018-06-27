@@ -50,7 +50,9 @@
   },
   "MESSAGE": {
     "CONFIRM": "Etes vous sur de confirmer cette action ?",
-    "ERROR_LENGTH" : "La date de sortie doit etre avant la date de retrait"
+    "ERROR_LENGTH" : "La date de sortie doit etre avant la date de retrait",
+    "DISCONTINUED_PRIOR" : "La date de sortie doit etre avant la date de retrait",
+    "NO_INTRODUCED" : "La date de sortie est obligatoire si une date de retrait est spécifiée"
   },
   "PAGE":{
     "NAME":"Nom",

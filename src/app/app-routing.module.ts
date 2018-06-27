@@ -39,7 +39,6 @@ const routes: Routes = [
   { path: 'company/add', component: CompanyAddComponent, canActivate: [AuthGuardService]},
   { path: 'company/details/:id', component: CompanyDetailComponent, canActivate: [AuthGuardService]},
   { path: 'company/edit/:id', component: CompanyEditComponent, canActivate: [AuthGuardService]},
-  { path: 'company/:id', component: CompanyComponent, canActivate: [AuthGuardService]},
   { path: 'company/search/:search', component: CompaniesComponent, canActivate: [AuthGuardService]},
   { path: 'company/search/:search/page/:page', component: CompaniesComponent, canActivate: [AuthGuardService]},
   { path: 'company/search/:search/page/:page/limit/:limit', component: CompaniesComponent, canActivate: [AuthGuardService]},

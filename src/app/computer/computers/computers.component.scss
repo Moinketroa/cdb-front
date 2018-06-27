@@ -10,7 +10,8 @@
 }
 .container {
   padding: 0 5%;
-  background: white;
+  background: rgba(255,255,255,0.7);
+  min-width: 90vmax;
 }
 ::ng-deep .container {
   background: #0000001a;
@@ -23,6 +24,10 @@
 #actionsBar > * {
   display: inline-block !important;
   margin: 10px 0 0 10px;
+}
+
+.mat-paginator {
+  background: rgba(255,255,255,0);
 }
 
 .fab-buttons {

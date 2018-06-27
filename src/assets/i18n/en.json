@@ -50,7 +50,9 @@
   },
   "MESSAGE": {
     "CONFIRM": "Are you sure you want to confirm this action ?",
-    "ERROR_LENGTH" : "The discontinuation date is prior to the introduction date"
+    "ERROR_LENGTH" : "The discontinuation date is prior to the introduction date",
+    "NO_INTRODUCED" : "Can't specify a discontinuation date without providing an introduction date",
+    "DISCONTINUED_PRIOR" : "The discontinuation date is prior to the introduction date"
   },
   "PAGE":{
     "NAME":"Name",
