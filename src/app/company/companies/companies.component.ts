@@ -28,7 +28,7 @@ import {Computer} from '../../computer/computer.model';
 @Component({
   selector: 'cdb-companies',
   templateUrl: './companies.component.html',
-  styleUrls: ['./companies.component.css'],
+  styleUrls: ['./companies.component.scss'],
   animations: [
     trigger('Animation', [
       state('init', style({ opacity: 1, transform: 'translateX(0)' })),

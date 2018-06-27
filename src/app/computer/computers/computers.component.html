@@ -13,13 +13,6 @@
       </mat-form-field>
     </form>
 
-    <mat-paginator #paginator *ngIf="pageInfo" [length]="computers.totalElements"
-                   [showFirstLastButtons]="true"
-                   [pageSize]="pageInfo.pageSize"
-                   [pageSizeOptions]="pageSizeOptions"
-                   (page)="pageEvent($event)">
-    </mat-paginator>
-
     <div>
       <mat-form-field>
         <mat-select [formControl]="sortControl" [(value)]="activeSort">
@@ -33,8 +26,14 @@
       </mat-form-field>
     </div>
 
+    <mat-paginator #paginator *ngIf="pageInfo" [length]="computers.totalElements"
+                   [showFirstLastButtons]="true"
+                   [pageSize]="pageInfo.pageSize"
+                   [pageSizeOptions]="pageSizeOptions"
+                   (page)="pageEvent($event)">
+    </mat-paginator>
+
   </div>
-  <hr>
   <div class="page" *ngIf="computers">
     <cdb-computer-detail [@Animation]="transition" *ngFor=" let computer of computers.content " [computer] = "computer" class="computer-cards"></cdb-computer-detail>
   </div>
