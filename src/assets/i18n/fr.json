@@ -44,11 +44,13 @@
   },
   "BUTTON": {
     "CONFIRM": "Valider",
-    "CANCEL": "Annuler"
+    "CANCEL": "Annuler",
+    "UPDATE": "Modifier",
+    "ADD": "Ajouter"
   },
   "MESSAGE": {
     "CONFIRM": "Etes vous sur de confirmer cette action ?",
-    "ERROR_LENGHT" : "La date de sortie doit etre avant la date de retrait"
+    "ERROR_LENGTH" : "La date de sortie doit etre avant la date de retrait"
   },
   "PAGE":{
     "NAME":"Nom",
@@ -87,10 +89,14 @@
   },
   "COMPANY":{
     "NAME": "Compagnie",
+    "INFO": "Description",
+    "CNAME": "Nom de la compagnie",
+    "IMG" : "URL de l'image",
     "ADD" : "Ajouter une nouvelle compagnie",
     "GET" : "Voir toutes compagnies",
     "DELETE": "Effacer",
-    "UPDATE": "Editer"
+    "UPDATE": "Editer",
+    "NOCOMPUTER": "Pas d'ordinateur pour cette compagnie"
   },
   "LANGUAGE":{
     "EN" : "Anglais",

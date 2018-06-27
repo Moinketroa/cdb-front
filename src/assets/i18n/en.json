@@ -44,11 +44,13 @@
   },
   "BUTTON": {
     "CONFIRM": "Submit",
-    "CANCEL": "Cancel"
+    "CANCEL": "Cancel",
+    "UPDATE": "Update",
+    "ADD": "Add"
   },
   "MESSAGE": {
     "CONFIRM": "Are you sure you want to confirm this action ?",
-    "ERROR_LENGHT" : "The discontinuation date is prior to the introduction date"
+    "ERROR_LENGTH" : "The discontinuation date is prior to the introduction date"
   },
   "PAGE":{
     "NAME":"Name",
@@ -87,10 +89,14 @@
   },
   "COMPANY":{
     "NAME": "Company",
+    "INFO": "Description",
+    "CNAME": "Company name",
+    "IMG" : "Picture URL",
     "ADD" : "Add a new company",
     "GET" : "Check all companies",
     "DELETE": "Delete",
-    "UPDATE": "Edit"
+    "UPDATE": "Edit",
+    "NOCOMPUTER": "No computer manufactured by this company"
   },
   "LANGUAGE":{
     "EN" : "English",

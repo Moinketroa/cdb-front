@@ -3,18 +3,18 @@
   <mat-card class="example-card">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>AJOUTER UNE COMPANY</mat-card-title>
+      <mat-card-title>{{'COMPANY.ADD' | translate}}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <!-- name-->
       <p>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="Name" [(ngModel)]="company.name">
+          <input matInput placeholder="{{'COMPANY.CNAME' | translate}}" [(ngModel)]="company.name">
         </mat-form-field>
       </p>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" (click)="ajouter()">Ajouter</button>
+      <button mat-raised-button color="primary" (click)="ajouter()">{{'BUTTON.ADD' | translate}}</button>
     </mat-card-actions>
   </mat-card>
 </div>

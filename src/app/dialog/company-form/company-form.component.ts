@@ -28,7 +28,7 @@ export class CompanyFormComponent implements OnInit {
     private dateAdapter: DateAdapter<Date>,
     private formBuilder: FormBuilder
   ) {
-    this._title = 'Add Company';
+    this._title = 'COMPANY.ADD';
   }
 
   ngOnInit() {

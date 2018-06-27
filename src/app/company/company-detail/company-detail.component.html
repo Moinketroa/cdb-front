@@ -10,31 +10,31 @@
     </p>
   </mat-card-content>
   <mat-card-actions>
-    <a mat-raised-button [routerLink]="['/company/edit/', company.id]" color="primary">Modifier</a>
-    <a mat-raised-button [routerLink]="['/company']">Annuler</a>
+    <a mat-raised-button [routerLink]="['/company/edit/', company.id]" color="primary">{{"BUTTON.UPDATE" | translate}}</a>
+    <a mat-raised-button [routerLink]="['/company']">{{"BUTTON.CANCEL" | translate}}</a>
   </mat-card-actions>
 
   <mat-card-content *ngIf="company.computers.length == 0">
     <p class="description">
-      No computer manufactured by this company
+      {{"COMPANY.NOCOMPUTER" | translate}}
     </p>
   </mat-card-content>
 
   <table mat-table [dataSource]="company.computers" *ngIf="company.computers.length != 0">
     <!-- Name Column -->
     <ng-container matColumnDef="name">
-      <th class="cell-name" mat-header-cell *matHeaderCellDef> Name </th>
+      <th class="cell-name" mat-header-cell *matHeaderCellDef> {{"COMPUTER.NAME" | translate}} </th>
       <td class="cell-name" mat-cell *matCellDef="let element"> {{element.name}} </td>
     </ng-container>
     <!-- Weight Column -->
     <ng-container matColumnDef="introduced">
-      <th class="cell-intro" mat-header-cell *matHeaderCellDef> Introduced </th>
-      <td class="cell-intro" mat-cell *matCellDef="let element"> {{element.introduced | introducedDatePipe:false}} </td>
+      <th class="cell-intro" mat-header-cell *matHeaderCellDef> {{"COMPUTER.INTRO" | translate}} </th>
+      <td class="cell-intro" mat-cell *matCellDef="let element"> {{element.introduced | introducedDatePipe | translate}} </td>
     </ng-container>
     <!-- Symbol Column -->
     <ng-container matColumnDef="discontinued">
-      <th class="cell-disco" mat-header-cell *matHeaderCellDef> Discontinued </th>
-      <td class="cell-disco" mat-cell *matCellDef="let element"> {{element.discontinued | discontinuedDatePipe:false}} </td>
+      <th class="cell-disco" mat-header-cell *matHeaderCellDef> {{"COMPUTER.DISC" | translate}} </th>
+      <td class="cell-disco" mat-cell *matCellDef="let element"> {{element.discontinued | discontinuedDatePipe | translate}} </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
