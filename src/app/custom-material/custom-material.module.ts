@@ -12,7 +12,7 @@ import {
   MatSortModule,
   MatSnackBarModule,
   MatDialogModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule,
-  MatIconModule, MatMenuModule, MatAutocompleteModule, MatPaginatorIntl
+  MatIconModule, MatMenuModule, MatAutocompleteModule, MatPaginatorIntl, MatGridListModule
 } from '@angular/material';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {HttpClient} from '@angular/common/http';
@@ -44,6 +44,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     MatNativeDateModule,
     MatMenuModule,
     MatAutocompleteModule,
+    MatGridListModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -80,6 +81,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     MatDatepickerModule,
     MatMenuModule,
     MatAutocompleteModule,
+    MatGridListModule,
     TranslateModule
   ],
   declarations: []

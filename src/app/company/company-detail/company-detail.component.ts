@@ -13,10 +13,20 @@ export class CompanyDetailComponent implements OnInit {
   @Input() company: Company;
   displayedColumns = ['name', 'introduced', 'discontinued'];
 
-  constructor(private companyService: CompanyService, private route: ActivatedRoute) { }
+  breakpoint: number;
 
-  ngOnInit() {
-    this.companyService.getById(this.route.snapshot.paramMap.get('id')).subscribe(comp => this.company = comp);
+  constructor(private companyService: CompanyService, private route: ActivatedRoute) {
+
   }
 
+  ngOnInit() {
+    this.companyService.getById(this.route.snapshot.paramMap.get('id')).subscribe(comp => this.company = new Company(comp));
+    console.log((window.innerWidth));
+    this.breakpoint = (window.innerWidth <= 2000) ? 1 : 2;
+  }
+
+  onResize(event) {
+    console.log(event.target.innerWidth);
+    this.breakpoint = (event.target.innerWidth <= 2000) ? 1 : 2;
+  }
 }

@@ -6,25 +6,47 @@
   width: 100%;
 }
 
-.example-card {
-  width:100%;
-  margin: auto;
-  margin-top: 2em;
-}
 table {
   width: 100%;
-}
-.gauche{
-  float:left;
-    width:60%;
-}
-.droite{
-  margin-left: 70%;
+  overflow: auto;
+  max-height: 10vh;
 }
 
 img {
-  height: 180px;
-  width: 180px;
+  height: 100%;
+  width: 100%;
   border-radius: 50px;
+  margin: auto;
   background-size: cover;
+}
+
+.company-card {
+  min-width: 20vw;
+  max-width: 40vw;
+  margin-bottom: 2%;
+  margin-top: 2%;
+}
+
+.description {
+  max_width: 100%;
+  overflow-wrap: break-word;
+}
+
+.cell-name {
+  padding-right: 1%;
+}
+
+.cell-intro {
+  padding-right: 1%;
+  padding-left: 1%;
+}
+
+.cell-disco {
+  padding-left: 1%;
+}
+
+.mat-card-actions {
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+  float: right;
 }

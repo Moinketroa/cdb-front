@@ -7,9 +7,9 @@ import { ComputersComponent } from './computers/computers.component';
 import { ComputerDetailComponent } from './computer-detail/computer-detail.component';
 import { ComputerAddComponent } from './computer-add/computer-add.component';
 import { ComputerEditComponent } from './computer-edit/computer-edit.component';
-import {DiscontinuedDatePipe} from './pipe/discontinued-date.pipe';
-import {IntroducedDatePipe} from './pipe/introduced-date.pipe';
-import { CompanyPipe } from './pipe/company.pipe';
+import {DiscontinuedDatePipe} from '../custom-util/pipe/discontinued-date.pipe';
+import {IntroducedDatePipe} from '../custom-util/pipe/introduced-date.pipe';
+import { CompanyPipe } from '../custom-util/pipe/company.pipe';
 import {DialogModule} from '../dialog/dialog.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
@@ -27,10 +27,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     ComputersComponent,
     ComputerDetailComponent,
     ComputerAddComponent,
-    ComputerEditComponent,
-    DiscontinuedDatePipe,
-    IntroducedDatePipe,
-    CompanyPipe
+    ComputerEditComponent
   ]
 })
 export class ComputerModule { }

@@ -9,25 +9,25 @@
   <mat-card-content>
     <div class="card-content-line">
       <i class="material-icons">today</i>
-      <span>{{ computer.introduced | introducedDatePipe }}</span>
+      <span>{{'COMPUTER.GETINTRO' | translate}} {{ computer.introduced | introducedDatePipe | translate }}</span>
     </div>
     <div class="card-content-line">
       <i class="material-icons">event</i>
-      <span>{{ computer.discontinued | discontinuedDatePipe }}</span>
+      <span>{{'COMPUTER.GETDISC' | translate}} {{ computer.discontinued | discontinuedDatePipe | translate }}</span>
     </div>
     <div class="card-content-line">
       <i class="material-icons">local_shipping</i>
-      <span>{{ computer.company | companyPipe }}</span>
+      <span>{{ computer.company | companyPipe | translate }}</span>
     </div>
   </mat-card-content>
   <mat-card-actions>
     <button mat-raised-button (click)="editDialog()" color="primary">
       <i class="material-icons">edit</i>
-      <span>EDIT</span>
+      <span>{{'COMPUTER.UPDATE' | translate}}</span>
     </button>
-    <button mat-raised-button color="primary">
+    <button mat-raised-button (click)="delete()" color="primary">
       <i class="material-icons">delete</i>
-      <span>DELETE</span>
+      <span>{{'COMPUTER.DELETE' | translate}}</span>
     </button>
   </mat-card-actions>
 </mat-card>

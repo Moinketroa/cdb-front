@@ -8,7 +8,7 @@ export class CompanyPipe implements PipeTransform {
 
   transform(company: Company, args?: any): String {
     if (company == null || company.name == null || company.name === '') {
-      return 'No company provided';
+      return 'COMPUTER.NOCOMPANY';
     } else {
       return company.name;
     }

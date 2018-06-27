@@ -8,15 +8,15 @@
   <mat-card-content>
     <div class="card-content-line">
       <i class="material-icons">today</i>
-      <span>{{ computer.introduced | introducedDatePipe }}</span>
+      <span>{{'COMPUTER.GETINTRO' | translate}} {{ computer.introduced | introducedDatePipe | translate }}</span>
     </div>
     <div class="card-content-line">
       <i class="material-icons">event</i>
-      <span>{{ computer.discontinued | discontinuedDatePipe }}</span>
+      <span>{{'COMPUTER.GETDISC' | translate}} {{ computer.discontinued | discontinuedDatePipe | translate }}</span>
     </div>
     <div class="card-content-line">
       <i class="material-icons">local_shipping</i>
-      <span>{{ computer.company | companyPipe }}</span>
+      <span>{{ computer.company | companyPipe | translate }}</span>
     </div>
   </mat-card-content>
 </mat-card>

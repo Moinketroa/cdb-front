@@ -30,7 +30,11 @@ const jwtConf: JwtModuleOptions = {
 };
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, FooterComponent],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    FooterComponent
+  ],
   imports: [
     BrowserModule,
     CustomUtilModule,

@@ -60,6 +60,11 @@ export class LoginComponent implements OnInit {
   private setSession(res) {
     localStorage.setItem(UserService.token_key, res.token);
     console.log(localStorage.getItem(UserService.token_key));
-    this.router.navigate(['/computer']).catch();
+
+    setTimeout(() => {
+      this
+        .router
+        .navigate(['/computer']);
+    }, 500);
   }
 }

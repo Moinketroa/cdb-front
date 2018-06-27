@@ -1,0 +1,7 @@
+<mat-card-content>
+  {{ 'MESSAGE.CONFIRM' | translate }}
+</mat-card-content>
+<mat-card-actions>
+  <button mat-raised-button color="primary" (click)="onSubmit()">{{ 'BUTTON.CONFIRM' | translate}}</button>
+  <button mat-raised-button (click)="onCancel()">{{ 'BUTTON.CANCEL' | translate}}</button>
+</mat-card-actions>

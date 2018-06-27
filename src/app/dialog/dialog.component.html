@@ -1,12 +1,17 @@
+<cdb-confirm-form *ngIf="isConfirmModal"
+                  (cancelEvent)="onCancel()"
+                  (submitEvent)="onSubmit($event)">
+</cdb-confirm-form>
 <cdb-computer-form *ngIf="isDataComputer"
                    [computer]="data"
                    (cancelEvent)="onCancel()"
                    (submitEvent)="onSubmit($event)">
 </cdb-computer-form>
-<p *ngIf="isDataCompany">
-  Dialog Company !
-  <button (click)="onCancel()">Close dialog</button>
-</p>
+<cdb-company-form *ngIf="isDataCompany"
+                  [company]="data"
+                  (cancelEvent)="onCancel()"
+                  (submitEvent)="onSubmit($event)">
+</cdb-company-form>
 
 
 

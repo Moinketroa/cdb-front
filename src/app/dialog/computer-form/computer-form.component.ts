@@ -24,11 +24,13 @@ export class ComputerFormComponent implements OnInit {
   private _title: string;
   private _companies: Company[] = new Array();
 
-  constructor(private router: Router, private dateAdapter: DateAdapter<Date>, private formBuilder: FormBuilder, private companyService: CompanyService) {
+  constructor(
+    private router: Router,
+    private dateAdapter: DateAdapter<Date>,
+    private formBuilder: FormBuilder,
+    private companyService: CompanyService
+  ) {
     this.dateAdapter.setLocale('fr');
-    this._title = 'Add Computer';
-    this._computer = new Computer();
-    this.buildEmptyForm();
     companyService.get({page: 0, limit: 100}).subscribe(
       (page: any) => page.content.forEach(
         (company: any, index: number) => this._companies[index] = new Company(company)
@@ -42,7 +44,7 @@ export class ComputerFormComponent implements OnInit {
   @Input()
   set computer(computer: Computer) {
     this._computer = computer;
-    this._title = 'Update Computer';
+    this._title = 'COMPUTER.ADD';
     this.buildForm();
   }
 
@@ -105,19 +107,11 @@ export class ComputerFormComponent implements OnInit {
     });
   }
 
-  buildEmptyForm(): void {
-    this._form = this.formBuilder.group({
-      name: ['', Validators.required],
-      introduced: [''],
-      discontinued: [''],
-      companyId: [0]
-    });
-  }
-
   onSubmit(): void {
-    console.log("SUBMIT");
+    console.log('SUBMIT');
     console.log(this._form.get('discontinued').value);
     console.log(this._form.get('introduced').value);
+    console.log(this._form.value);
     this.submitEvent.emit(this._form.value);
   }
 

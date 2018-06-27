@@ -3,12 +3,12 @@
     "SELECT": "Change language",
     "DASHBOARD": "Dashboard",
     "COMPUTER": {
-      "NAME": "Computer",
+      "NAME": "Computers",
       "ADD" : "Add a new computer",
       "GET" : "Check all computers"
     },
     "COMPANY":{
-      "NAME": "Company",
+      "NAME": "Companies",
       "ADD" : "Add a new company",
       "GET" : "Check all companies"
     },
@@ -36,21 +36,31 @@
     "USERNAME": "Username",
     "PASSWORD": "Password",
     "PASSWORD_CONFIRM": "Confirm password",
-    "BUTTON": {
-      "CONFIRM": "Sign up",
-      "CANCEL": "Cancel"
-    },
     "ERROR": {
       "LENGTH": "Must be at least 3 characters long.",
       "EMPTY": "This field should be not empty",
       "CONFIRM": "Password does not match"
     }
   },
+  "BUTTON": {
+    "CONFIRM": "Submit",
+    "CANCEL": "Cancel"
+  },
+  "MESSAGE": {
+    "CONFIRM": "Are you sure you want to confirm this action ?",
+    "ERROR_LENGHT" : "The discontinuation date is prior to the introduction date"
+  },
   "PAGE":{
     "NAME":"Name",
     "ORDERBY": {
-      "NAME": "by name",
-      "DESC": "by name(desc)"
+      "NAME": "by Name",
+      "DESC": "by Name(desc)",
+      "DATEINTRO": "by Introduced Date ",
+      "DATEINTRO_DESC": "by Introduced Date(desc)",
+      "DATEDISC": "by Discontinued Date",
+      "DATEDISC_DESC": "by Discontinued Date(desc)",
+      "COMPANY": "by Company",
+      "COMPANY_DESC": "by Company(desc)"
     },
     "ITEMS": "Elements per page:",
     "OF": "of",
@@ -58,6 +68,29 @@
     "PREVIOUS": "previous",
     "LAST": "last page",
     "FIRST": "first page"
+  },
+  "COMPUTER": {
+    "NAME": "Computer",
+    "CNAME": "Computer Name",
+    "INTRO" : "Introduction Date",
+    "DISC" : "Discontinuation Date",
+    "COMPANY" : "Manufacturer",
+    "ADD" : "Add a new computer",
+    "GET" : "Check all computers",
+    "DELETE": "Delete",
+    "UPDATE": "Edit",
+    "NOCOMPANY": "No company",
+    "NODATEINTRO": "No introduce date",
+    "NODATEDISC": "No discontinued date",
+    "GETINTRO": "First introduced in :",
+    "GETDISC": "Discontinued in :"
+  },
+  "COMPANY":{
+    "NAME": "Company",
+    "ADD" : "Add a new company",
+    "GET" : "Check all companies",
+    "DELETE": "Delete",
+    "UPDATE": "Edit"
   },
   "LANGUAGE":{
     "EN" : "English",

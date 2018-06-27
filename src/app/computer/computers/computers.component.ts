@@ -5,7 +5,8 @@ import {Page} from '../../page.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AppService} from '../../app.service';
 import {ComputerService} from '../computer.service';
-import {MatPaginator, PageEvent} from '@angular/material';
+import {MatDialog, MatDialogRef, PageEvent, MatPaginator} from '@angular/material';
+import {DialogComponent} from '../../dialog/dialog.component';
 import {isNullOrUndefined} from 'util';
 import {Observable, of} from 'rxjs';
 import {FormControl} from '@angular/forms';
@@ -13,27 +14,27 @@ import {FormControl} from '@angular/forms';
 @Component({
   selector: 'cdb-computers',
   templateUrl: './computers.component.html',
-  styleUrls: ['./computers.component.css'],
+  styleUrls: ['./computers.component.scss'],
   animations: [
     trigger('Animation', [
       state('init', style({ opacity: 1, transform: 'translateX(0)' })),
       transition('void => init', [
         style({
           opacity: 0,
-          transform: 'translateY(-100%)'
+          transform: 'translateY(-10%)'
         }),
-        animate('0.2s ease-in')
+        animate('0.4s ease-in')
       ]),
       state('right', style({ opacity: 1, transform: 'translateX(0)' })),
-      transition('* => right', [
+      transition('void => right', [
         style({
           opacity: 0,
-          transform: 'translateX(100%)'
+          transform: 'translateX(80%)'
         }),
         animate('0.2s ease-in')
       ]),
       state('left', style({ opacity: 1, transform: 'translateX(0)' })),
-      transition('* => left', [
+      transition('void => left', [
         style({
           opacity: 0,
           transform: 'translateX(-100%)'
@@ -58,10 +59,11 @@ export class ComputersComponent implements OnInit, AfterContentInit, AfterViewCh
     BY_DISCONTINUED: 'BY_DISCONTINUED_DATE',
     BY_DISCONTINUED_DESC: 'BY_DISCONTINUED_DATE_DESC'
   };
-  
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('searchInput') searchInput: ElementRef;
 
+  private _addDialog: MatDialogRef<DialogComponent>;
   searchControl = new FormControl();
   sortControl: FormControl;
   filteredComputers$: Observable<Computer[]>;
@@ -69,6 +71,7 @@ export class ComputersComponent implements OnInit, AfterContentInit, AfterViewCh
   constructor(
     private computerService: ComputerService,
     private router: Router,
+    private _dialog: MatDialog,
     private route: ActivatedRoute,
     private appService: AppService
   ) {
@@ -106,7 +109,7 @@ export class ComputersComponent implements OnInit, AfterContentInit, AfterViewCh
 
   ngAfterContentInit() {
     setTimeout(() => {
-      this.appService.changeTitle('Computers');
+      this.appService.changeTitle('HOME.COMPUTER.NAME');
     });
   }
 
@@ -129,6 +132,7 @@ export class ComputersComponent implements OnInit, AfterContentInit, AfterViewCh
   }
 
   pageEvent(pageInfo: PageEvent) {
+
     if (pageInfo.pageSize !== this.pageInfo.pageSize) {
       this.transition = 'init';
     } else {
@@ -202,5 +206,25 @@ export class ComputersComponent implements OnInit, AfterContentInit, AfterViewCh
         length: this.computers.totalElements
       };
     });
+  }
+
+  showDialog() {
+    // open modal
+    this._addDialog = this._dialog.open(DialogComponent, {
+      width: '40vw',
+      disableClose: true,
+      data: new Computer()
+    });
+
+    // subscribe to afterClosed observable to do process
+    this._addDialog.afterClosed()
+      .subscribe(
+        (computer: any) => {
+          if (computer) {
+            this.computerService.add(computer).subscribe(
+              id => this.router.navigate(['/computer/', id])
+            );
+          }
+        });
   }
 }

@@ -1,0 +1,27 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <mat-card-header>
+    <mat-card-title>{{ title }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="form-group">
+      <mat-form-field hintLabel="Max {{ nameMaxLength }} characters">
+        <input matInput #inputName [attr.maxlength]="nameMaxLength" class="form-control" formControlName="name" placeholder="Company Name">
+        <mat-hint align="end">{{ inputName.value?.length || 0 }}/{{ nameMaxLength }}</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput class="form-control" formControlName="image" placeholder="Picture URL">
+      </mat-form-field>
+
+      <mat-form-field hintLabel="Max {{ descMaxLength }} characters">
+        <textarea matInput #inputDescription [attr.maxlength]="descMaxLength" class="form-control" formControlName="description" placeholder="Description">
+        </textarea>
+        <mat-hint align="end">{{ inputDescription.value?.length || 0 }}/{{ descMaxLength }}</mat-hint>
+      </mat-form-field>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" [disabled]="form.invalid" type="submit">SUBMIT</button>
+    <button mat-raised-button (click)="onCancel()" type="button">CANCEL</button>
+  </mat-card-actions>
+</form>
