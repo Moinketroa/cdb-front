@@ -28,3 +28,7 @@ img {
   border-radius: 50px;
   background-size: cover;
 }
+
+::ng-deep .container {
+  background: initial;
+}
