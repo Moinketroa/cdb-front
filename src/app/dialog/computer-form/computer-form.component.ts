@@ -71,8 +71,15 @@ export class ComputerFormComponent implements OnInit {
   checkDates(formControl: FormControl) {
     const dataForm = formControl.parent;
 
-    if (!dataForm) {
+    if (!dataForm || dataForm.get('discontinued').value === null) {
       return null;
+    } else if (dataForm.get('introduced').value === null) {
+      dataForm.controls['introduced'].setErrors({absent: true});
+      return {
+        introduced: {
+          absent: true
+        }
+      };
     }
 
     const discontinuedForm = dataForm.get('discontinued');
@@ -111,10 +118,10 @@ export class ComputerFormComponent implements OnInit {
     const introDate: Date = this._form.get('introduced').value;
     const discoDate: Date = this._form.get('discontinued').value;
 
-    if (introDate.getHours() < 3) {
+    if (introDate !== null && introDate.getHours() < 3) {
       introDate.setHours(3);
     }
-    if (discoDate.getHours() < 3) {
+    if (discoDate !== null && discoDate.getHours() < 3) {
       discoDate.setHours(3);
     }
 
