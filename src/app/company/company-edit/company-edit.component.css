@@ -37,3 +37,9 @@ img {
 .cell-action {
   padding-left: 1%;
 }
+
+.mat-card-actions {
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+  float: right;
+}

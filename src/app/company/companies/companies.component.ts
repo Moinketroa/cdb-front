@@ -40,7 +40,7 @@ import {Computer} from '../../computer/computer.model';
         animate('0.3s ease-in')
       ]),
       state('right', style({ opacity: 1, transform: 'translateX(0)' })),
-      transition('* => right', [
+      transition('void => right', [
         style({
           opacity: 0,
           transform: 'translateX(100%)'
@@ -48,7 +48,7 @@ import {Computer} from '../../computer/computer.model';
         animate('0.2s ease-in')
       ]),
       state('left', style({ opacity: 1, transform: 'translateX(0)' })),
-      transition('* => left', [
+      transition('void => left', [
         style({
           opacity: 0,
           transform: 'translateX(-100%)'
@@ -150,7 +150,7 @@ export class CompaniesComponent implements OnInit, AfterContentInit, AfterViewCh
 
   ngAfterContentInit() {
     setTimeout(() => {
-      this.appService.changeTitle('Companies');
+      this.appService.changeTitle('HOME.COMPANY.NAME');
     });
   }
 

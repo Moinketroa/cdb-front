@@ -21,20 +21,20 @@ import {FormControl} from '@angular/forms';
       transition('void => init', [
         style({
           opacity: 0,
-          transform: 'translateY(-100%)'
+          transform: 'translateY(-10%)'
         }),
-        animate('0.2s ease-in')
+        animate('0.4s ease-in')
       ]),
       state('right', style({ opacity: 1, transform: 'translateX(0)' })),
-      transition('* => right', [
+      transition('void => right', [
         style({
           opacity: 0,
-          transform: 'translateX(100%)'
+          transform: 'translateX(80%)'
         }),
         animate('0.2s ease-in')
       ]),
       state('left', style({ opacity: 1, transform: 'translateX(0)' })),
-      transition('* => left', [
+      transition('void => left', [
         style({
           opacity: 0,
           transform: 'translateX(-100%)'
@@ -109,7 +109,7 @@ export class ComputersComponent implements OnInit, AfterContentInit, AfterViewCh
 
   ngAfterContentInit() {
     setTimeout(() => {
-      this.appService.changeTitle('Computers');
+      this.appService.changeTitle('HOME.COMPUTER.NAME');
     });
   }
 
@@ -132,6 +132,7 @@ export class ComputersComponent implements OnInit, AfterContentInit, AfterViewCh
   }
 
   pageEvent(pageInfo: PageEvent) {
+
     if (pageInfo.pageSize !== this.pageInfo.pageSize) {
       this.transition = 'init';
     } else {
